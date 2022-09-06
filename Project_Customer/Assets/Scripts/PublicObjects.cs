@@ -4,6 +4,5 @@ using UnityEngine;
 
 public class PublicObjects : MonoBehaviour
 {
-    public GameObject[] ground;
     public GameObject[] trash;
 }
