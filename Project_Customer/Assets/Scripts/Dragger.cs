@@ -10,11 +10,11 @@ public class Dragger : MonoBehaviour
 
     Vector3 previousGrabPosition;
 
-<<<<<<< Updated upstream
-=======
+
+
     public float MaxVelocity;
 
->>>>>>> Stashed changes
+
     private bool isReleased;
 
     float forceMultiplier = 3;
@@ -57,20 +57,21 @@ public class Dragger : MonoBehaviour
                 Input.mousePosition.y,
                 Camera.main.WorldToScreenPoint(selectedObject.transform.position).z);
             Vector3 worldPosition = Camera.main.ScreenToWorldPoint(position);
-<<<<<<< Updated upstream
+
             selectedObject.transform.position = new Vector3(worldPosition.x, 0f, worldPosition.z);
 
             Vector3 throwVector = selectedObject.transform.position - previousGrabPosition;
             float speed = throwVector.magnitude / Time.deltaTime;
             Vector3 throwVelocity = speed * throwVector.normalized;
             rb.velocity = throwVelocity;
-=======
+
             selectedObject.transform.position = new Vector3(worldPosition.x, 1, worldPosition.z);
 
-            Vector3 throwVector = selectedObject.transform.position - previousGrabPosition;
-            float speed = throwVector.magnitude / Time.deltaTime;
+            
+            throwVector = selectedObject.transform.position - previousGrabPosition;
+            speed = throwVector.magnitude / Time.deltaTime;
            
-            Vector3 throwVelocity = speed * throwVector.normalized;
+            throwVelocity = speed * throwVector.normalized;
                
             if (speed <= MaxVelocity)
             {
@@ -81,7 +82,7 @@ public class Dragger : MonoBehaviour
                 rb.velocity = MaxVelocity * throwVector.normalized;
             }
          
->>>>>>> Stashed changes
+
             selectedObject.GetComponent<Rigidbody>().useGravity = true;
 
             selectedObject = null;
@@ -96,16 +97,16 @@ public class Dragger : MonoBehaviour
                 Input.mousePosition.y,
                 Camera.main.WorldToScreenPoint(selectedObject.transform.position).z);
             Vector3 worldPosition = Camera.main.ScreenToWorldPoint(position);
-<<<<<<< Updated upstream
+
             selectedObject.transform.position = new Vector3(worldPosition.x, 0.25f, worldPosition.z);
-=======
+
             selectedObject.transform.position = new Vector3(worldPosition.x, 1, worldPosition.z);
->>>>>>> Stashed changes
+
             selectedObject.GetComponent<Rigidbody>().useGravity = false;
         }
     }
 
-<<<<<<< Updated upstream
+
 
     void FireObject(Vector3 Force)
     {
@@ -117,8 +118,8 @@ public class Dragger : MonoBehaviour
    
     }
 
-=======
->>>>>>> Stashed changes
+    
+
     private RaycastHit CastRay()
     {
         Vector3 screenMousePosFar = new Vector3(
