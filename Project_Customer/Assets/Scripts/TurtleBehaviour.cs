@@ -18,12 +18,12 @@ public class TurtleBehaviour : MonoBehaviour
     void Start()
     {
         objectRigidBody = GetComponent<Rigidbody>();
+        StartCoroutine(ChangeDirection());
     }
     // Update is called once per frame
     void Update()
     {
-        Movement();
-        StartCoroutine(ChangeDirection());
+        Movement(); 
     }
 
     IEnumerator ChangeDirection()
