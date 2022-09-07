@@ -10,7 +10,7 @@ public class Dragger : MonoBehaviour
 
     Vector3 previousGrabPosition;
 
-
+    public int GrabHeight = 3;
 
     public float MaxVelocity;
 
@@ -80,7 +80,7 @@ public class Dragger : MonoBehaviour
             Vector3 throwVelocity = speed * throwVector.normalized;
             rb.velocity = throwVelocity;
 
-            selectedObject.transform.position = new Vector3(worldPosition.x, 1, worldPosition.z);
+            selectedObject.transform.position = new Vector3(worldPosition.x, GrabHeight, worldPosition.z);
 
             
             throwVector = selectedObject.transform.position - previousGrabPosition;
@@ -115,7 +115,7 @@ public class Dragger : MonoBehaviour
 
             selectedObject.transform.position = new Vector3(worldPosition.x, 0.25f, worldPosition.z);
 
-            selectedObject.transform.position = new Vector3(worldPosition.x, 1, worldPosition.z);
+            selectedObject.transform.position = new Vector3(worldPosition.x, GrabHeight, worldPosition.z);
 
             selectedObject.GetComponent<Rigidbody>().useGravity = false;
         }

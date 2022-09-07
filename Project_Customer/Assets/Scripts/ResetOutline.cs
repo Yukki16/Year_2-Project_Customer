@@ -4,15 +4,15 @@ using UnityEngine;
 
 public class ResetOutline : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    Outline outline;
+
+    private void Start()
     {
-        
+        outline = GetComponent<Outline>();
     }
 
-    // Update is called once per frame
     void Update()
     {
-        
+        outline.OutlineWidth = 0;
     }
 }
