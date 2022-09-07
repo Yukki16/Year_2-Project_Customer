@@ -24,17 +24,32 @@ public class Dragger : MonoBehaviour
         lastMousePos = Input.mousePosition;
     }
 
+    void EnableOutline(GameObject trashObject)
+    {
+        if (trashObject == null)
+            return;
+
+        if (!trashObject.CompareTag("draggable"))
+            return;
+        
+        trashObject.gameObject.GetComponent<Outline>().OutlineWidth = 3;
+        
+        
+    }
+
     private void Update()
     {
 
         lastMousePos = Input.mousePosition;
 
+        RaycastHit hit = CastRay();
+        if (hit.collider != null)
+        EnableOutline(hit.collider.gameObject);
+
         if (Input.GetMouseButtonDown(0))
         {
             if(selectedObject == null)
             {
-                RaycastHit hit = CastRay();
-
                 if(hit.collider != null)
                 {
                     if (!hit.collider.CompareTag("draggable"))
