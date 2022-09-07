@@ -41,4 +41,12 @@ public class TurtleBehaviour : MonoBehaviour
 
         objectRigidBody.AddForce(forceVector + directionVector);
     }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if(other.tag == "Unspawn")
+        {
+            Destroy(this.gameObject);
+        }
+    }
 }
