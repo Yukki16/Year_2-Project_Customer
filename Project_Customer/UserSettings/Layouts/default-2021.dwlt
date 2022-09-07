@@ -323,7 +323,7 @@ MonoBehaviour:
   m_ViewMode: 1
   m_StartGridSize: 64
   m_LastFolders:
-  - Assets
+  - Assets/Objects/Prefabs
   m_LastFoldersGridSize: -1
   m_LastProjectPath: C:\Users\ruben\Documents\GitHub\Year_2-Project_Customer\Project_Customer
   m_LockTracker:
