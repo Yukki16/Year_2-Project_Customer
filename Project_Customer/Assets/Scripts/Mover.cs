@@ -4,12 +4,16 @@ using UnityEngine.AI;
 public class Mover : MonoBehaviour
 {
     [SerializeField] Transform target;
+    [SerializeField] GameObject targetPrefab;
     NavMeshAgent navMeshAgent;
-
 
     private void Start()
     {
+        GameObject physicalTarget = Instantiate(targetPrefab);
+        physicalTarget.transform.position = new Vector3(transform.position.x * 50, transform.position.y, transform.position.z);
         navMeshAgent = GetComponent<NavMeshAgent>();
+        target = physicalTarget.transform;
+
     }
 
     public void MoveTo(Vector3 destination)
@@ -27,8 +31,7 @@ public class Mover : MonoBehaviour
     {
         Vector3 velocity = navMeshAgent.velocity;
         Vector3 localVelocity = transform.InverseTransformDirection(velocity);
-        float speed = localVelocity.z;
-        GetComponent<Animator>().SetFloat("forwardSpeed", speed);
+        MoveTo(target.transform.position);
     }
     void Update()
     {
