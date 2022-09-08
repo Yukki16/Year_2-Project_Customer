@@ -3,16 +3,27 @@ using UnityEngine.AI;
 
 public class Mover : MonoBehaviour
 {
+    [SerializeField] GameObject playArea;
     [SerializeField] Transform target;
-    [SerializeField] GameObject targetPrefab;
+    GameObject targetObj;
     NavMeshAgent navMeshAgent;
 
     private void Start()
     {
-        GameObject physicalTarget = Instantiate(targetPrefab);
-        physicalTarget.transform.position = new Vector3(transform.position.x * 50, transform.position.y, transform.position.z);
+
+        targetObj = new GameObject();
+        targetObj.transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.z);
+
         navMeshAgent = GetComponent<NavMeshAgent>();
-        target = physicalTarget.transform;
+        target = targetObj.transform;
+
+    }
+
+    void SpawnTarget()
+    {
+        targetObj = new GameObject();
+        targetObj.transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.z);
+
 
     }
 
