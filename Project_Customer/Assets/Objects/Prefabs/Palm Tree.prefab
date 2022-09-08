@@ -93,7 +93,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1790011264334781986}
   - component: {fileID: 9030723280752634790}
-  - component: {fileID: -5703413296945639175}
   m_Layer: 0
   m_Name: Palm Tree
   m_TagString: Untagged
@@ -163,48 +162,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!205 &-5703413296945639175
-LODGroup:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1413203868349564056}
-  serializedVersion: 2
-  m_LocalReferencePoint: {x: -0.12740356, y: 2.4022763, z: -0.48791307}
-  m_Size: 4.807277
-  m_FadeMode: 0
-  m_AnimateCrossFading: 0
-  m_LastLODIsBillboard: 0
-  m_LODs:
-  - screenRelativeHeight: 0.6
-    fadeTransitionWidth: 0
-    renderers:
-    - renderer: {fileID: 9030723280752634790}
-    - renderer: {fileID: 6042163513028418022}
-    - renderer: {fileID: 7786130088721646574}
-    - renderer: {fileID: 8447925060293519280}
-    - renderer: {fileID: 6035614022065974647}
-    - renderer: {fileID: 4595968926101433712}
-  - screenRelativeHeight: 0.3
-    fadeTransitionWidth: 0
-    renderers:
-    - renderer: {fileID: 9030723280752634790}
-    - renderer: {fileID: 6042163513028418022}
-    - renderer: {fileID: 7786130088721646574}
-    - renderer: {fileID: 8447925060293519280}
-    - renderer: {fileID: 6035614022065974647}
-    - renderer: {fileID: 4595968926101433712}
-  - screenRelativeHeight: 0.1
-    fadeTransitionWidth: 0
-    renderers:
-    - renderer: {fileID: 9030723280752634790}
-    - renderer: {fileID: 6042163513028418022}
-    - renderer: {fileID: 7786130088721646574}
-    - renderer: {fileID: 8447925060293519280}
-    - renderer: {fileID: 6035614022065974647}
-    - renderer: {fileID: 4595968926101433712}
-  m_Enabled: 1
 --- !u!1 &1903834286304451515
 GameObject:
   m_ObjectHideFlags: 0

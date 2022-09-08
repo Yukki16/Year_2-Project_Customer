@@ -3,34 +3,22 @@ using UnityEngine.AI;
 
 public class Mover : MonoBehaviour
 {
-    private Terrain playArea;
     private Transform target;
     GameObject targetObj;
     NavMeshAgent navMeshAgent;
 
+    public void SetTarget(Transform targetTransform)
+    {
+        target = targetTransform;
+    }
+
     private void Start()
     {
-
         targetObj = new GameObject();
         targetObj.transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.z);
 
         navMeshAgent = GetComponent<NavMeshAgent>();
         target = targetObj.transform;
-
-        playArea = Terrain.activeTerrain;
-
-    }
-
-    void SpawnTarget()
-    {
-        //targetObj = new GameObject();
-        //targetObj.transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.z);
-
-        if (transform.position.x < playArea.transform.position.x + playArea.terrainData.size.x / 2)
-        {
-            //spawn target on the right when starting location is on the left 
-
-        }
     }
 
     public void MoveTo(Vector3 destination)
@@ -52,7 +40,6 @@ public class Mover : MonoBehaviour
     }
     void Update()
     {
-        SpawnTarget();
         UpdateAnimator();
     }
 }

@@ -12,12 +12,7 @@ public class Dragger : MonoBehaviour
 
     public int GrabHeight = 3;
 
-    public float MaxVelocity;
-
-
-    private bool isReleased;
-
-    float forceMultiplier = 3;
+    public float MaxVelocity;   
 
     private void Start()
     {
@@ -120,20 +115,6 @@ public class Dragger : MonoBehaviour
             selectedObject.GetComponent<Rigidbody>().useGravity = false;
         }
     }
-
-
-
-    void FireObject(Vector3 Force)
-    {
-       
-
-        Debug.Log(Input.GetAxis("Mouse X"));
-
-        selectedObject.GetComponent<Rigidbody>().AddForce(new Vector3(Input.GetAxis("Mouse X"), Input.GetAxis("Mouse Y"), 0) * forceMultiplier);
-   
-    }
-
-    
 
     private RaycastHit CastRay()
     {
