@@ -5,16 +5,35 @@ using UnityEngine;
 public class SpawnHumans : MonoBehaviour
 {
     [SerializeField] GameObject HumanPrefab;
-    private List<Transform> spawnPoints;
+    private List<GameObject> spawnPoints;
+    private Terrain playArea;
+    public int MinHeightFromFinish = 10;
+    public int MaxHeightFromFinish = 40;
 
     private void Start()
     {
-        foreach (Transform child in this.gameObject.transform)
+       
+
+        //StartCoroutine(spawnHumans());
+
+        playArea = Terrain.activeTerrain;
+
+        SpawnHumanSpawns();
+    }
+
+    void SpawnHumanSpawns()
+    {
+
+        //spawn spawns on the left 
+        for (int i = 0; i < 10; i++)
         {
-            spawnPoints.Add(child);
+            GameObject humanSpawn = new GameObject();
+            humanSpawn.transform.position = new Vector3(playArea.transform.position.x, 
+            Random.Range(playArea.terrainData.size.z - MinHeightFromFinish,
+            playArea.terrainData.size.z - MaxHeightFromFinish), playArea.terrainData.size.z);
+            spawnPoints.Add(humanSpawn);
         }
 
-        StartCoroutine(spawnHumans());
     }
 
     IEnumerator spawnHumans()
