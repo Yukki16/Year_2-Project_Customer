@@ -5,7 +5,7 @@ using UnityEngine;
 public class SpawnHumans : MonoBehaviour
 {
     [SerializeField] GameObject HumanPrefab;
-    GameObject leftSpawnPoints, rightSpawnPoints, humans;
+    GameObject leftSpawnPoints, rightSpawnPoints, humans, targets;
         
     private List<GameObject> spawnPoints;
     private Terrain playArea;
@@ -17,10 +17,12 @@ public class SpawnHumans : MonoBehaviour
     {
         spawnPoints = new List<GameObject>();
 
-        //StartCoroutine(spawnHumans());
-
         humans = new GameObject(name: "Humans");
         humans.transform.SetParent(gameObject.transform);
+
+        targets = new GameObject(name: "HumanTargets");
+        targets.transform.SetParent(gameObject.transform);
+        targets.tag = "HumanTargets";
 
         //instantiate spawn objects
         leftSpawnPoints = new GameObject(name: "LeftSpawnPoints");

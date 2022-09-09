@@ -6,6 +6,8 @@ public class TurtleBehaviour : MonoBehaviour
 {
     Rigidbody objectRigidBody = null;
 
+    private Terrain playArea;
+
     [SerializeField] private float forwardSpeed = 1;
 
     [SerializeField] private float sidewaySpeed = 100;
@@ -14,39 +16,77 @@ public class TurtleBehaviour : MonoBehaviour
 
     private float directionReduction = 0.98f;
 
-    // Start is called before the first frame update
+    private float offset;
+
+    Mover mover;
+
+    Vector3 targetObjPosition;
+
+    private GameObject turtleSpawnerParent;
+
+    GameObject targetObj;
+
     void Start()
     {
-        objectRigidBody = GetComponent<Rigidbody>();
-        StartCoroutine(ChangeDirection());
-    }
-    // Update is called once per frame
-    void Update()
-    {
-        Movement(); 
-    }
-
-    IEnumerator ChangeDirection()
-    {
-        yield return new WaitForSeconds(4);
-        directionVector = new Vector3(1f, 0, 0);
-        int randomValue = Random.Range(-1, 2);
-        directionVector *= randomValue;
-        StartCoroutine(ChangeDirection());
-    }
-    private void Movement()
-    {
-        Vector3 forceVector = Time.deltaTime * forwardSpeed * transform.forward;
-        directionVector *= directionReduction * sidewaySpeed * Time.deltaTime;
-
-        objectRigidBody.AddForce(forceVector + directionVector);
+        targetObj = new GameObject();
+        turtleSpawnerParent = GameObject.FindGameObjectWithTag("TurtleTargets");
+        mover = GetComponent<Mover>();
+        playArea = Terrain.activeTerrain;
+        StartCoroutine(WiggleTarget());
+        SpawnTarget();
     }
 
-    private void OnTriggerEnter(Collider other)
+    void SetTargetObjPosition(Vector3 position)
     {
-        if(other.tag == "Unspawn")
+        targetObj.transform.position = position;
+    }
+
+    void SpawnTarget()
+    {
+        targetObj.transform.SetParent(turtleSpawnerParent.transform);
+        targetObjPosition = new Vector3(transform.position.x, transform.position.y, playArea.terrainData.size.z);
+        targetObj.transform.position = targetObjPosition;
+        mover.SetTarget(targetObj.transform);
+    }
+
+    void DestroyOnTarget()
+    {
+        if (Vector3.Distance(transform.position, targetObj.transform.position) < 5)
         {
-            Destroy(this.gameObject);
+            Destroy(targetObj);
+            Destroy(gameObject);
         }
     }
+
+    IEnumerator WiggleTarget()
+    {
+        int direction = Random.Range(0, 3);
+        switch (direction)
+        {
+            case 1:
+                offset = Random.Range(3, 6);
+                break;
+
+            case 2:
+                offset = Random.Range(-3, -6);
+                break;
+
+        }
+
+        targetObjPosition.x += offset;
+
+        SetTargetObjPosition(targetObjPosition);
+
+        yield return new WaitForSeconds(Random.Range(2, 4));
+
+        StartCoroutine(WiggleTarget());
+    }
+
+
+    void Update()
+    {
+        DestroyOnTarget();
+    }
+
+
 }

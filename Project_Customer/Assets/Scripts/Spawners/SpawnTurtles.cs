@@ -4,30 +4,53 @@ using UnityEngine;
 
 public class SpawnTurtles : MonoBehaviour
 {
-    [SerializeField]
-    private List<Transform> spawnPoints;
-    [SerializeField]
-    private GameObject turtlePrefab;
+    private List<GameObject> spawnPoints;
 
+    private Terrain playArea;
+
+    GameObject turtles;
+
+    [SerializeField] private GameObject turtlePrefab;
+    [SerializeField] private GameObject eggPrefab;
+
+    public int EggSpawnDistance = 15;
+    public int EggSpawnTimer = 15;
+
+    GameObject TurtleSpawnEggs;
 
     private void Start()
     {
-        foreach(Transform child in this.gameObject.transform)
-        {
-            spawnPoints.Add(child);
-        }
+        turtles = new GameObject(name: "Turtles");
+        turtles.transform.SetParent(gameObject.transform);
+
+        playArea = Terrain.activeTerrain;
+
+        spawnPoints = new List<GameObject>();
+
+        TurtleSpawnEggs = new GameObject();
+        TurtleSpawnEggs.transform.SetParent(transform);
+
+ 
+        StartCoroutine(SpawnSpawners());
         StartCoroutine(spawnTurtles());
+    }
+
+    IEnumerator SpawnSpawners()
+    {
+        GameObject newEgg = Instantiate(eggPrefab, TurtleSpawnEggs.transform);
+        newEgg.transform.position = new Vector3(playArea.terrainData.size.x / 2 + (Random.Range(-EggSpawnDistance, EggSpawnDistance)), 0.15f, 3);
+        spawnPoints.Add(newEgg);
+        yield return new WaitForSeconds(EggSpawnTimer);
+        StartCoroutine(SpawnSpawners());
     }
 
     IEnumerator spawnTurtles()
     {
-        GameObject newTurtle = Instantiate(turtlePrefab, spawnPoints[Random.Range(0, spawnPoints.Count - 1)].transform);
-        newTurtle.transform.parent = null;
+        foreach (var spawner in spawnPoints)
+        {
+            GameObject newTurtle = Instantiate(turtlePrefab, spawner.transform);
+        }
         yield return new WaitForSeconds(Random.Range(5, 10));
         StartCoroutine(spawnTurtles());
-    }
-    void Update()
-    {
-          
     }
 }

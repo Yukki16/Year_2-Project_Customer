@@ -22,15 +22,17 @@ public class HumanBehaviour : MonoBehaviour
         //if target is to the left 
         if (transform.position.x < playArea.transform.position.x + playArea.terrainData.size.x / 2)
         {
-            targetObj = new GameObject();
+            targetObj = new GameObject(name: "HumanTarget");
             targetObj.transform.position = new Vector3(playArea.terrainData.size.x, transform.position.y, transform.position.z);
+            targetObj.transform.parent = GameObject.FindGameObjectWithTag("HumanTargets").transform;
         }
 
         //if target is to the right 
         if (transform.position.x > playArea.transform.position.x + playArea.terrainData.size.x / 2)
         {
-            targetObj = new GameObject();
+            targetObj = new GameObject(name: "HumanTarget");
             targetObj.transform.position = new Vector3(playArea.transform.position.x, transform.position.y, transform.position.z);
+            targetObj.transform.parent = GameObject.FindGameObjectWithTag("HumanTargets").transform;
         }
 
         GetComponent<Mover>().SetTarget(targetObj.transform);
@@ -49,6 +51,7 @@ public class HumanBehaviour : MonoBehaviour
     {
         if (Vector3.Distance(transform.position, targetObj.transform.position) < 5)
         {
+            Destroy(targetObj);
             Destroy(gameObject);
         }
     }

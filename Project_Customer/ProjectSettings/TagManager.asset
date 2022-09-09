@@ -8,6 +8,7 @@ TagManager:
   - bin
   - TrashParent
   - PlayArea
+  - HumanTargets
   layers:
   - Default
   - TransparentFX
