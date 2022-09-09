@@ -4,12 +4,13 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - draggable
   - bin
   - TrashParent
   - PlayArea
   - HumanTargets
   - TurtleTargets
+  - Turtle
+  - Draggable
   layers:
   - Default
   - TransparentFX

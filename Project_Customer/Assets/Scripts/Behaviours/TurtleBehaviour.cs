@@ -41,7 +41,7 @@ public class TurtleBehaviour : MonoBehaviour
 
     void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.tag == "draggable")
+        if (collision.gameObject.tag == "Draggable")
         {
             Destroy(gameObject);
         }
@@ -51,9 +51,14 @@ public class TurtleBehaviour : MonoBehaviour
     {
         if (Vector3.Distance(transform.position, targetObj.transform.position) < 5)
         {
-            Destroy(targetObj);
-            Destroy(gameObject);
+            DestroyTurtle();
         }
+    }
+
+    public void DestroyTurtle()
+    {
+        Destroy(targetObj);
+        Destroy(gameObject);
     }
 
     IEnumerator WiggleTarget()

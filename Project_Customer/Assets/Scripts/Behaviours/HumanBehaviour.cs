@@ -15,7 +15,7 @@ public class HumanBehaviour : MonoBehaviour
         trashParent = GameObject.FindGameObjectWithTag("TrashParent");
         SpawnTarget();
         StartCoroutine(spawnTrash());
-    }
+    }   
 
     void SpawnTarget()
     {

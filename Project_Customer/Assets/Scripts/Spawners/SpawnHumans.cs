@@ -10,7 +10,7 @@ public class SpawnHumans : MonoBehaviour
     private List<GameObject> spawnPoints;
     private Terrain playArea;
     public int MinHeightFromBottom = 10;
-    public int MaxHeightFromBottom = 40;
+    public int MaxHeightFromBottom = 30;
     public int SpawnsPerSide = 5;
 
     private void Start()

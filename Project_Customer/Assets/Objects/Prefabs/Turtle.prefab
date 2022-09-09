@@ -14,10 +14,10 @@ GameObject:
   - component: {fileID: 7310082439657145049}
   - component: {fileID: 3432034093500873449}
   - component: {fileID: -725952473632018110}
-  - component: {fileID: 7549926129438670123}
+  - component: {fileID: -9008797223453745526}
   m_Layer: 0
   m_Name: Turtle
-  m_TagString: Untagged
+  m_TagString: Turtle
   m_Icon: {fileID: 3936346786652291628, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -142,8 +142,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5d9eba1573cb2034980f9d593d61faaf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!64 &7549926129438670123
-MeshCollider:
+--- !u!65 &-9008797223453745526
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -152,10 +152,9 @@ MeshCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: -8687930037020855540, guid: 090dfbb90cb3f8344994350060e7b936, type: 3}
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &6374266124182850598
 PrefabInstance:
   m_ObjectHideFlags: 0

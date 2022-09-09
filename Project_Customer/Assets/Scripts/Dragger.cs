@@ -12,7 +12,9 @@ public class Dragger : MonoBehaviour
 
     public int GrabHeight = 3;
 
-    public float MaxVelocity;   
+    public float MaxVelocity;
+
+    public int MinThrowVelocity = 20;
 
     private void Start()
     {
@@ -24,7 +26,7 @@ public class Dragger : MonoBehaviour
         if (trashObject == null)
             return;
 
-        if (!trashObject.CompareTag("draggable"))
+        if (!trashObject.CompareTag("Draggable"))
             return;
         
         trashObject.gameObject.GetComponent<Outline>().OutlineWidth = 3;
@@ -47,7 +49,7 @@ public class Dragger : MonoBehaviour
             {
                 if(hit.collider != null)
                 {
-                    if (!hit.collider.CompareTag("draggable"))
+                    if (!hit.collider.CompareTag("Draggable"))
                     {
                         return;
                     }
@@ -87,9 +89,10 @@ public class Dragger : MonoBehaviour
             {
                 rb.velocity = throwVelocity;
             }
-            else
+            
+            if (speed <= MinThrowVelocity)
             {
-                rb.velocity = MaxVelocity * throwVector.normalized;
+                rb.velocity = Vector3.zero;
             }
          
 
