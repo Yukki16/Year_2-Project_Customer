@@ -13,6 +13,9 @@ public class SpawnTurtles : MonoBehaviour
     [SerializeField] private GameObject turtlePrefab;
     [SerializeField] private GameObject eggPrefab;
 
+
+    public int turtleSpawnMinTime = 10;
+    public int turtleSpawnMaxTime = 10;
     public int EggSpawnDistance = 15;
     public int EggSpawnTimer = 15;
 
@@ -50,7 +53,7 @@ public class SpawnTurtles : MonoBehaviour
         {
             GameObject newTurtle = Instantiate(turtlePrefab, spawner.transform);
         }
-        yield return new WaitForSeconds(Random.Range(5, 10));
+        yield return new WaitForSeconds(Random.Range(turtleSpawnMinTime, turtleSpawnMaxTime));
         StartCoroutine(spawnTurtles());
     }
 }
