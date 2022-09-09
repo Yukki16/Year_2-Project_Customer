@@ -10,6 +10,8 @@ public class SpawnTurtles : MonoBehaviour
 
     GameObject turtles;
 
+    GameObject targets;
+
     [SerializeField] private GameObject turtlePrefab;
     [SerializeField] private GameObject eggPrefab;
 
@@ -25,6 +27,10 @@ public class SpawnTurtles : MonoBehaviour
     {
         turtles = new GameObject(name: "Turtles");
         turtles.transform.SetParent(gameObject.transform);
+
+        targets = new GameObject(name: "TurtleTargets");
+        targets.transform.SetParent(gameObject.transform);
+        targets.tag = "TurtleTargets";
 
         playArea = Terrain.activeTerrain;
 
