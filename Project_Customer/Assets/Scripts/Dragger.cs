@@ -51,7 +51,7 @@ public class Dragger : MonoBehaviour
                     {
                         return;
                     }
-                    selectedObject = hit.collider.gameObject;
+                    selectedObject = hit.collider.gameObject;              
                     Cursor.visible = false;
                 }
             }

@@ -4,17 +4,7 @@ using UnityEngine;
 
 public class TurtleBehaviour : MonoBehaviour
 {
-    Rigidbody objectRigidBody = null;
-
     private Terrain playArea;
-
-    [SerializeField] private float forwardSpeed = 1;
-
-    [SerializeField] private float sidewaySpeed = 100;
-
-    private Vector3 directionVector = new Vector3(0,0,0);
-
-    private float directionReduction = 0.98f;
 
     private float offset;
 
@@ -47,6 +37,14 @@ public class TurtleBehaviour : MonoBehaviour
         targetObjPosition = new Vector3(transform.position.x, transform.position.y, playArea.terrainData.size.z);
         targetObj.transform.position = targetObjPosition;
         mover.SetTarget(targetObj.transform);
+    }
+
+    void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.tag == "draggable")
+        {
+            Destroy(gameObject);
+        }
     }
 
     void DestroyOnTarget()

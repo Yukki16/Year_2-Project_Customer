@@ -9,6 +9,7 @@ TagManager:
   - TrashParent
   - PlayArea
   - HumanTargets
+  - TurtleTargets
   layers:
   - Default
   - TransparentFX
