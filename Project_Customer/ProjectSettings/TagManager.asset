@@ -10,6 +10,9 @@ TagManager:
   - PlayArea
   - HumanTargets
   - TurtleTargets
+  - SeagulTargets
+  - SeagulSpawner
+  - Turtle
   layers:
   - Default
   - TransparentFX
