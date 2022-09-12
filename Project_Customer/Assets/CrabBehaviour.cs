@@ -6,8 +6,6 @@ public class CrabBehaviour : MonoBehaviour
 {
     private void OnTriggerEnter (Collider collision)
     {
-        Debug.Log("crabDetect");
-
         if (collision.gameObject.tag is "Turtle")
         {
             Destroy(gameObject); 

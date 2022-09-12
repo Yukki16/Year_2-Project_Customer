@@ -21,6 +21,7 @@ public class SpawnTurtles : MonoBehaviour
     public int turtleSpawnMinTime = 10;
     public int turtleSpawnMaxTime = 10;
     public int EggSeperationDistance = 5;
+    public float TurtleSizeScale = 3.5f;
     public int MaxEggsTotal = 6;
     public int EggSpawnTimer = 1;
 
@@ -83,6 +84,7 @@ public class SpawnTurtles : MonoBehaviour
         foreach (var spawner in spawnPoints)
         {
             GameObject newTurtle = Instantiate(turtlePrefab, spawner.transform);
+            newTurtle.transform.localScale = new Vector3(TurtleSizeScale, TurtleSizeScale, TurtleSizeScale);
         }
         yield return new WaitForSeconds(Random.Range(turtleSpawnMinTime, turtleSpawnMaxTime));
         StartCoroutine(spawnTurtles());
