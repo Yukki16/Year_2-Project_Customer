@@ -4,16 +4,17 @@ using UnityEngine;
 
 public class CrabBehaviour : MonoBehaviour
 {
-
-    private void OnCollisionEnter(Collision collision)
+    private void OnTriggerEnter (Collider collision)
     {
-        if (collision.gameObject.tag == "Turtle")
+        Debug.Log("crabDetect");
+
+        if (collision.gameObject.tag is "Turtle")
         {
-            Debug.Log("crabDetect");
+            Destroy(gameObject); 
             collision.gameObject.GetComponent<TurtleBehaviour>().DestroyTurtle();
         } 
 
-        if (collision.gameObject.tag == "Draggable")
+        if (collision.gameObject.tag is "Draggable")
         {
             Destroy(collision.gameObject);
             Destroy(gameObject);

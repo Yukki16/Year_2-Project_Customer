@@ -16,6 +16,12 @@ public class TurtleBehaviour : MonoBehaviour
 
     GameObject targetObj;
 
+    private int direction = 1;
+
+    public int MinWobbleDistance = 5;
+    public int MaxWobbleDistance = 10;
+    public int WobbleSwitchTimer;
+
     void Start()
     {
         targetObj = new GameObject();
@@ -41,7 +47,7 @@ public class TurtleBehaviour : MonoBehaviour
 
     void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.tag == "Draggable")
+        if (collision.gameObject.tag is "Draggable")
         {
             Destroy(gameObject);
         }
@@ -63,15 +69,16 @@ public class TurtleBehaviour : MonoBehaviour
 
     IEnumerator WiggleTarget()
     {
-        int direction = Random.Range(0, 3);
         switch (direction)
         {
             case 1:
-                offset = Random.Range(3, 6);
+                offset = Random.Range(MinWobbleDistance, MaxWobbleDistance);
+                direction = 2;
                 break;
 
-            case 2:
-                offset = Random.Range(-3, -6);
+            case 2:               
+                offset = Random.Range(-MinWobbleDistance, -MaxWobbleDistance);
+                direction = 1;
                 break;
 
         }
@@ -80,7 +87,7 @@ public class TurtleBehaviour : MonoBehaviour
 
         SetTargetObjPosition(targetObjPosition);
 
-        yield return new WaitForSeconds(Random.Range(2, 4));
+        yield return new WaitForSeconds(WobbleSwitchTimer);
 
         StartCoroutine(WiggleTarget());
     }
