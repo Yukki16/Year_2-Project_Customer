@@ -58,6 +58,7 @@ public class SpawnTurtles : MonoBehaviour
         foreach (var spawner in spawnPoints)
         {
             GameObject newTurtle = Instantiate(turtlePrefab, spawner.transform);
+            newTurtle.tag = "Turtle";
         }
         yield return new WaitForSeconds(Random.Range(turtleSpawnMinTime, turtleSpawnMaxTime));
         StartCoroutine(spawnTurtles());

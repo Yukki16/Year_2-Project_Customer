@@ -117,7 +117,7 @@ NavMeshSettings:
     cellSize: 0.083333336
     manualTileSize: 0
     tileSize: 256
-    accuratePlacement: 0
+    accuratePlacement: 1
     maxJobWorkers: 0
     preserveTilesOutsideBounds: 0
     debug:
@@ -197,6 +197,54 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 1790011264334781986, guid: 9752cb60c79a37342bd73769e3ae79dc, type: 3}
   m_PrefabInstance: {fileID: 137788229}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &146852830
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 146852831}
+  - component: {fileID: 146852832}
+  m_Layer: 0
+  m_Name: SeagulSpawner
+  m_TagString: SeagulSpawner
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &146852831
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 146852830}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1422450180}
+  - {fileID: 795215335}
+  m_Father: {fileID: 0}
+  m_RootOrder: 8
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &146852832
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 146852830}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3628519a39bce284985d9ee8d6b5b2d6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  seagulSpawnPoz: {fileID: 795215335}
+  seagulPrefab: {fileID: 4820878501984669603, guid: f00715d9897e3824bbf64b9ac562c37e, type: 3}
 --- !u!1 &193156537
 GameObject:
   m_ObjectHideFlags: 0
@@ -642,6 +690,37 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 1790011264334781986, guid: 9752cb60c79a37342bd73769e3ae79dc, type: 3}
   m_PrefabInstance: {fileID: 631976556}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &795215334
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 795215335}
+  m_Layer: 0
+  m_Name: SeagulSpawnPoz
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &795215335
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 795215334}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 25, y: 0.15, z: 23}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 146852831}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &906547266
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -655,7 +734,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1790011264334781986, guid: 9752cb60c79a37342bd73769e3ae79dc, type: 3}
       propertyPath: m_RootOrder
-      value: 4
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 1790011264334781986, guid: 9752cb60c79a37342bd73769e3ae79dc, type: 3}
       propertyPath: m_LocalScale.x
@@ -790,8 +869,8 @@ Transform:
   - {fileID: 193156541}
   - {fileID: 1140646363}
   - {fileID: 1428364171}
-  - {fileID: 139204351}
   - {fileID: 1766599102}
+  - {fileID: 139204351}
   - {fileID: 631976557}
   - {fileID: 1805717890}
   - {fileID: 1393043946}
@@ -970,6 +1049,37 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 1790011264334781986, guid: 9752cb60c79a37342bd73769e3ae79dc, type: 3}
   m_PrefabInstance: {fileID: 1393043945}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1422450179
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1422450180}
+  m_Layer: 0
+  m_Name: SeagulTargets
+  m_TagString: SeagulTargets
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1422450180
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1422450179}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 146852831}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &1428364171 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1790011264334781986, guid: 9752cb60c79a37342bd73769e3ae79dc, type: 3}
@@ -1082,6 +1192,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   turtlePrefab: {fileID: 2307961997217634821, guid: f70826291a1e2ac46a6c07b248e51833, type: 3}
   eggPrefab: {fileID: 8367163511152904413, guid: fc3aa6bee2df1634d9a3d13b06ec8f11, type: 3}
+  turtleSpawnMinTime: 10
+  turtleSpawnMaxTime: 10
   EggSpawnDistance: 15
   EggSpawnTimer: 15
 --- !u!4 &1660498963
