@@ -1,15 +1,13 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Seagull : MonoBehaviour
 {
     #region fields
-    public enum SeagullState { Patrol, Detect, Pursue, Pickup, Exit };
+    public enum SeagullState { Patrol, Detect, Pursue, Pickup, TurtleExit, TrashExit };
 
     public SeagullState currentState;
 
-    public Vector3 startingVector; 
+    public Vector3 startingVector;
     private Vector3 lastPosition;
 
     private float timeCounter;
@@ -35,7 +33,7 @@ public class Seagull : MonoBehaviour
     private Transform forward;
     private Terrain playArea;
     private GameObject[] turtles;
-    private GameObject exitTarget;
+    private GameObject trashTarget;
     private GameObject closestTurtle;
     private Animator animator;
     #endregion
@@ -58,6 +56,54 @@ public class Seagull : MonoBehaviour
         }
     }
 
+    void Update()
+    {
+
+        if (closestTurtle == null)
+        {
+            currentState = SeagullState.Patrol;
+        }
+
+        switch (currentState)
+        {
+            case SeagullState.TurtleExit:
+                CarryAway();
+                break;
+
+            case SeagullState.TrashExit:
+                TrashCancel();
+                break;
+
+            case SeagullState.Patrol:
+                CircleLoop();
+                break;
+
+            case SeagullState.Pursue:
+                MoveToTurtle();
+                break;
+
+            case SeagullState.Detect:
+                Detection();
+                break;
+        }
+
+        DetectAreaExit();
+        TargetTurtle();
+        ShrinkRadius();
+    }
+
+    void OnCollisionEnter(Collision collision)
+    {
+        if (currentState != SeagullState.Pursue)
+            return;
+
+        if (collision.gameObject.tag is "Draggable")
+        {
+            trashTarget = collision.gameObject;
+            currentState = SeagullState.TrashExit;
+        }
+    }
+
     private void CircularMotion()
     {
         timeCounter += Time.deltaTime * speed;
@@ -77,7 +123,7 @@ public class Seagull : MonoBehaviour
         }
 
         if (!hasShrank)
-        width -= 0.02f;
+            width -= 0.02f;
     }
 
     private void RotateForward()
@@ -96,7 +142,7 @@ public class Seagull : MonoBehaviour
         if (!hasShrank) return;
         if (foundTurtle) return;
 
-        if(targetTimer <= TimeBeforeTarget)
+        if (targetTimer <= TimeBeforeTarget)
         {
             targetTimer += Time.deltaTime;
             return;
@@ -109,11 +155,11 @@ public class Seagull : MonoBehaviour
 
         foreach (var turtle in turtles)
         {
-            closestTurtle = turtles[0]; 
+            closestTurtle = turtles[0];
 
             if (Vector3.Distance(transform.position, closestTurtle.transform.position) < Vector3.Distance(transform.position, turtle.transform.position))
             {
-                closestTurtle = turtle;               
+                closestTurtle = turtle;
             }
         }
 
@@ -123,27 +169,30 @@ public class Seagull : MonoBehaviour
         currentState = SeagullState.Detect;
     }
 
+
+    private void TrashCancel()
+    {
+        GameObject.FindGameObjectWithTag("DraggableParent").GetComponent<Dragger>().DisableSelected();
+        animator.SetTrigger("Pickup");
+        trashTarget.transform.position = transform.position;
+        MoveFowardUp();
+    }
+
     private void CarryAway()
     {
-        currentState = SeagullState.Exit;
+        animator.SetTrigger("Pickup");
+        TurtleTaken = true;
+        closestTurtle.GetComponent<TurtleBehaviour>().DisableOutline();
+        closestTurtle.GetComponent<TurtleBehaviour>().DisableTurtle();
+        closestTurtle.transform.position = transform.position;
+        MoveFowardUp();
+    }
 
-        if (exitTarget == null)
-        {
-            exitTarget = new GameObject();
-            exitTarget.transform.position = new Vector3(transform.position.x * 5, transform.position.y, transform.position.z *-5);
-        }
-        else
-        {
-            TurtleTaken = true;
-            closestTurtle.GetComponent<TurtleBehaviour>().DisableOutline();
-            closestTurtle.GetComponent<TurtleBehaviour>().DisableTurtle();
-            closestTurtle.transform.position = transform.position;
-            exitTarget.transform.position = new Vector3(exitTarget.transform.position.x, targetYModifier, exitTarget.transform.position.z);;
-            visualTransfom.LookAt(exitTarget.transform);
-            transform.position = Vector3.MoveTowards(transform.position, exitTarget.transform.position, 0.1f * speed / 2);
-            if (targetYModifier < 500)
-            targetYModifier += 0.5f;
-        }
+    private void MoveFowardUp()
+    {
+        transform.position += new Vector3(visualTransfom.forward.x, targetYModifier, visualTransfom.forward.y) * Time.deltaTime * 25;
+        if (targetYModifier < 100)
+            targetYModifier += 0.005f;
     }
 
     private void MoveToTurtle()
@@ -154,14 +203,13 @@ public class Seagull : MonoBehaviour
 
         if (Vector3.Distance(transform.position, closestTurtle.transform.position) < DistanceToPickUp)
         {
-            animator.SetTrigger("Pickup");
-            currentState = SeagullState.Exit;
+            currentState = SeagullState.TurtleExit;
         }
     }
 
     private void DetectAreaExit()
     {
-        if (transform.position.x >= playArea.terrainData.size.x || transform.position.x <= playArea.transform.position.x)
+        if (transform.position.x >= playArea.terrainData.size.x || transform.position.x <= playArea.transform.position.x || transform.position.y > 50)
         {
             DestroySeagull();
         }
@@ -188,40 +236,4 @@ public class Seagull : MonoBehaviour
         }
 
     }
-
-    void Update()
-    {
-
-        if (closestTurtle == null)
-        {
-            currentState = SeagullState.Patrol;
-        }
-
-        switch (currentState)
-        {
-            case SeagullState.Exit:
-                CarryAway();
-                break;
-
-            case SeagullState.Patrol:
-                CircleLoop();
-                break;
-
-            case SeagullState.Pursue:
-                MoveToTurtle();
-                break;
-
-            case SeagullState.Detect:
-                Detection();
-                break;
-
-
-        }
-
-        DetectAreaExit();
-        TargetTurtle();
-        ShrinkRadius();
-    }
-
-
 }

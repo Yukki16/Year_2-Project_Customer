@@ -29,9 +29,13 @@ public class Dragger : MonoBehaviour
         if (!trashObject.CompareTag("Draggable"))
             return;
         
-        trashObject.gameObject.GetComponent<Outline>().OutlineWidth = 3;
-        
-        
+        trashObject.gameObject.GetComponent<Outline>().OutlineWidth = 3;   
+    }
+
+    public void DisableSelected()
+    {
+        Cursor.visible = true;
+        selectedObject = null;
     }
 
     private void Update()
