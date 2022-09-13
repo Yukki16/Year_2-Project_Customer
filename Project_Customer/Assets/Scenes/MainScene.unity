@@ -1317,7 +1317,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7739681470740738552, guid: 59a79638e401da64f93373e822956a39, type: 3}
       propertyPath: PickupSpeed
-      value: 3
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 7739681470740738552, guid: 59a79638e401da64f93373e822956a39, type: 3}
       propertyPath: currentState
@@ -1329,7 +1329,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7739681470740738552, guid: 59a79638e401da64f93373e822956a39, type: 3}
       propertyPath: TimeBeforeTarget
-      value: 4
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7739681470740738552, guid: 59a79638e401da64f93373e822956a39, type: 3}
       propertyPath: startingDistance
