@@ -41,7 +41,7 @@ public class Dragger : MonoBehaviour
 
         RaycastHit hit = CastRay();
         if (hit.collider != null)
-        EnableOutline(hit.collider.gameObject);
+        //EnableOutline(hit.collider.gameObject);
 
         if (Input.GetMouseButtonDown(0))
         {

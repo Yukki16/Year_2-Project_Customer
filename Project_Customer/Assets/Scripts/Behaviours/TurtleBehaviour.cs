@@ -22,10 +22,13 @@ public class TurtleBehaviour : MonoBehaviour
     public int MaxWobbleDistance = 10;
     public int WobbleSwitchTimer;
 
+    Outline outline;
+
     void Start()
     {
         targetObj = new GameObject();
         turtleSpawnerParent = GameObject.FindGameObjectWithTag("TurtleTargets");
+        outline = GetComponent<Outline>();
         mover = GetComponent<Mover>();
         playArea = Terrain.activeTerrain;
         StartCoroutine(WiggleTarget());
@@ -65,6 +68,21 @@ public class TurtleBehaviour : MonoBehaviour
     {
         Destroy(targetObj);
         Destroy(gameObject);
+    }
+
+    public void EnableOutline()
+    {
+        outline.OutlineWidth = 2;
+    }
+
+    public void DisableOutline()
+    {
+        outline.OutlineWidth = 0;
+    }
+
+    public void DisableTurtle()
+    {
+        mover.StopAgent();
     }
 
     IEnumerator WiggleTarget()
