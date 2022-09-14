@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1851255838284836504}
   - component: {fileID: 4487239669269679102}
-  - component: {fileID: 6137632229594995972}
+  - component: {fileID: 6323773556790831546}
   m_Layer: 0
   m_Name: Seagull
   m_TagString: Untagged
@@ -49,14 +49,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentState: 2
   startingVector: {x: 50, y: 10, z: 15}
-  TimeBeforeTarget: 1
+  TimeBeforeTarget: 3
   DistanceToPickUp: 0.5
   speed: 1.4
   width: 10
   startingDistance: 50
   PickupSpeed: 8
---- !u!64 &6137632229594995972
-MeshCollider:
+--- !u!65 &6323773556790831546
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -65,10 +65,9 @@ MeshCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 6243110012316504331, guid: 0d20c42de0c0c2548899493108e4aaa1, type: 3}
+  serializedVersion: 2
+  m_Size: {x: 0.42656058, y: 0.3566053, z: 1}
+  m_Center: {x: -0.031511717, y: 0.17916316, z: 0}
 --- !u!1 &2613527299094841980
 GameObject:
   m_ObjectHideFlags: 0
@@ -94,7 +93,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2613527299094841980}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.25, y: 0, z: 0}
+  m_LocalPosition: {x: 0.17, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -233,6 +232,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Visual
       objectReference: {fileID: 0}
+    - target: {fileID: 1700407500487310238, guid: 0d20c42de0c0c2548899493108e4aaa1, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: b69df38bd402871439b824ff5e5b15cb, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0d20c42de0c0c2548899493108e4aaa1, type: 3}
 --- !u!1 &5035432693596799193 stripped

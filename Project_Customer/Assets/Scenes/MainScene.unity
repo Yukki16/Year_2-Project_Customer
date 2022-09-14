@@ -152,7 +152,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2817e7b6d5d33f94482354a48500fa7b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CrabPrefab: {fileID: 9072391844839530602, guid: 300032dd0b669174eb0c97f60ea45c34, type: 3}
+  CrabPrefab: {fileID: 2648057164794756449, guid: 300032dd0b669174eb0c97f60ea45c34, type: 3}
   MaxDistanceFromCenter: 20
   MinHeightFromBottom: 30
   MaxHeightFromBottom: 40
@@ -269,7 +269,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 178471287}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 56.9696, y: -4.124172, z: 35.898308}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
