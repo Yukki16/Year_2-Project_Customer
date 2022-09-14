@@ -95,6 +95,8 @@ public class Dragger : MonoBehaviour
 
             selectedObject.GetComponent<Rigidbody>().useGravity = true;
 
+            selectedObject.GetComponent<LineRenderer>().enabled = false;
+
             selectedObject = null;
             Cursor.visible = true;
         }
@@ -113,9 +115,41 @@ public class Dragger : MonoBehaviour
             selectedObject.transform.position = new Vector3(worldPosition.x, GrabHeight, worldPosition.z);
 
             selectedObject.GetComponent<Rigidbody>().useGravity = false;
+
+            AddLineRay();
+            UpdateLine();
         }
     }
 
+    private void UpdateLine()
+    {
+        selectedObject.GetComponent<LineRenderer>().SetPosition(0, selectedObject.transform.position);
+        selectedObject.GetComponent<LineRenderer>().SetPosition(1, new Vector3(selectedObject.transform.position.x, selectedObject.transform.position.y - 5, selectedObject.transform.position.z));
+    }
+    private void AddLineRay()
+    {
+        //Adds the line renderer to the object
+        if (!selectedObject.TryGetComponent(typeof(LineRenderer), out Component component))
+        {
+            selectedObject.AddComponent<LineRenderer>();
+            Debug.Log("Added the linerenderer");
+
+            selectedObject.GetComponent<LineRenderer>().useWorldSpace = true;
+            //Adds the 2 points of the line so it renders
+            selectedObject.GetComponent<LineRenderer>().SetPosition(0, selectedObject.transform.position);
+            //Debug.Log(selectedObject.GetComponent<Renderer>().bounds.center);
+            //Debug.Log(selectedObject.transform.position);
+            selectedObject.GetComponent<LineRenderer>().SetPosition(1, new Vector3(selectedObject.transform.position.x, selectedObject.transform.position.y - 5, selectedObject.transform.position.z));
+            selectedObject.GetComponent<LineRenderer>().startWidth = 0.1f;
+            selectedObject.GetComponent<LineRenderer>().endWidth = 0.1f;
+
+            selectedObject.GetComponent<LineRenderer>().alignment = LineAlignment.View;
+        }
+        else
+        {
+            selectedObject.GetComponent<LineRenderer>().enabled = true;
+        }
+    }
     private RaycastHit CastRay()
     {
         Vector3 screenMousePosFar = new Vector3(
@@ -135,6 +169,7 @@ public class Dragger : MonoBehaviour
 
         return hit;
     }
+
 
 }
 
