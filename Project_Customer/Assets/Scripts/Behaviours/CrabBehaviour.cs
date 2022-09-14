@@ -10,6 +10,7 @@ public class CrabBehaviour : MonoBehaviour
 
     #endregion
 
+    //Particle effects 
     private void OnTriggerEnter (Collider collision)
     {
         if (collision.gameObject.tag is "Turtle")

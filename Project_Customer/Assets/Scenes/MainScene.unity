@@ -2290,6 +2290,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2977536016786132257, guid: 8279c79eb718cc54b82dbd7a35033f2f, type: 3}
+      propertyPath: lineColor.b
+      value: 0.14489143
+      objectReference: {fileID: 0}
+    - target: {fileID: 2977536016786132257, guid: 8279c79eb718cc54b82dbd7a35033f2f, type: 3}
+      propertyPath: lineColor.g
+      value: 0.14489143
+      objectReference: {fileID: 0}
+    - target: {fileID: 2977536016786132257, guid: 8279c79eb718cc54b82dbd7a35033f2f, type: 3}
+      propertyPath: lineColor.r
+      value: 0.8301887
+      objectReference: {fileID: 0}
     - target: {fileID: 2977536016786132286, guid: 8279c79eb718cc54b82dbd7a35033f2f, type: 3}
       propertyPath: m_Name
       value: Draggables
