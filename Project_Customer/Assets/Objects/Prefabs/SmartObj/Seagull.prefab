@@ -47,7 +47,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f0bd840a0f9df9e4caaddb9d2c6f2150, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentState: 2
   startingVector: {x: 50, y: 10, z: 15}
   TimeBeforeTarget: 3
   DistanceToPickUp: 0.5
@@ -55,6 +54,8 @@ MonoBehaviour:
   width: 10
   startingDistance: 50
   PickupSpeed: 8
+  ClosestTurtle: 0
+  RandomTurtle: 1
 --- !u!65 &6323773556790831546
 BoxCollider:
   m_ObjectHideFlags: 0

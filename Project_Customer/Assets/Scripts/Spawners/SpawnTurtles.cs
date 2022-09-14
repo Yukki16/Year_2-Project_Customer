@@ -6,6 +6,7 @@ public class SpawnTurtles : MonoBehaviour
 {
     #region fields
     private List<GameObject> spawnPoints;
+    private List<GameObject> turtleList;
 
     private Terrain playArea;
 
@@ -40,6 +41,7 @@ public class SpawnTurtles : MonoBehaviour
         playArea = Terrain.activeTerrain;
 
         spawnPoints = new List<GameObject>();
+        turtleList = new List<GameObject>();
 
         TurtleSpawnEggs = new GameObject();
         TurtleSpawnEggs.transform.SetParent(transform);
@@ -47,6 +49,11 @@ public class SpawnTurtles : MonoBehaviour
  
         StartCoroutine(SpawnSpawners());
         StartCoroutine(spawnTurtles());
+    }
+
+    public List<GameObject> GetTurtles()
+    {
+        return turtleList;
     }
 
     IEnumerator SpawnSpawners()
@@ -81,12 +88,14 @@ public class SpawnTurtles : MonoBehaviour
 
     IEnumerator spawnTurtles()
     {
+        yield return new WaitForSeconds(Random.Range(turtleSpawnMinTime, turtleSpawnMaxTime));
+
         foreach (var spawner in spawnPoints)
         {
             GameObject newTurtle = Instantiate(turtlePrefab, spawner.transform);
             newTurtle.transform.localScale = new Vector3(TurtleSizeScale, TurtleSizeScale, TurtleSizeScale);
+            turtleList.Add(newTurtle);
         }
-        yield return new WaitForSeconds(Random.Range(turtleSpawnMinTime, turtleSpawnMaxTime));
         StartCoroutine(spawnTurtles());
     }
 }

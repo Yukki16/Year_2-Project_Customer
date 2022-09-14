@@ -18,6 +18,9 @@ public class TurtleBehaviour : MonoBehaviour
 
     private int direction = 1;
 
+    int EndDistanceFromTop = 10;
+
+
     public int MinWobbleDistance = 5;
     public int MaxWobbleDistance = 10;
     public int WobbleSwitchTimer;
@@ -43,7 +46,7 @@ public class TurtleBehaviour : MonoBehaviour
     void SpawnTarget()
     {
         targetObj.transform.SetParent(turtleSpawnerParent.transform);
-        targetObjPosition = new Vector3(transform.position.x, transform.position.y, playArea.terrainData.size.z);
+        targetObjPosition = new Vector3(transform.position.x, transform.position.y, playArea.terrainData.size.z - EndDistanceFromTop);
         targetObj.transform.position = targetObjPosition;
         mover.SetTarget(targetObj.transform);
     }
@@ -55,6 +58,7 @@ public class TurtleBehaviour : MonoBehaviour
             Destroy(gameObject);
         }
     }
+
 
     void DestroyOnTarget()
     {

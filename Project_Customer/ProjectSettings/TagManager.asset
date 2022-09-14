@@ -12,6 +12,7 @@ TagManager:
   - Turtle
   - Draggable
   - DraggableParent
+  - TurtleSpawner
   layers:
   - Default
   - TransparentFX

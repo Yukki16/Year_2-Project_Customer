@@ -1,4 +1,6 @@
 using UnityEngine;
+using System.Collections;
+using System.Collections.Generic;
 
 public class Seagull : MonoBehaviour
 {
@@ -25,21 +27,27 @@ public class Seagull : MonoBehaviour
 
     public int PickupSpeed = 1;
 
+    public bool ClosestTurtle;
+    public bool RandomTurtle;
+
     private bool foundTurtle;
     private bool hasShrank;
     private bool TurtleTaken;
 
     private Transform visualTransfom;
-    private Transform forward;
     private Terrain playArea;
     private GameObject[] turtles;
     private GameObject trashTarget;
     private GameObject targetTurtle;
     private Animator animator;
+    private List<GameObject> turtleList;
+    
     #endregion
 
     void Start()
     {
+        turtleList = GameObject.FindGameObjectWithTag("TurtleSpawner").GetComponent<SpawnTurtles>().GetTurtles();
+
         playArea = Terrain.activeTerrain;
 
         widthCopy = width;
@@ -61,6 +69,11 @@ public class Seagull : MonoBehaviour
         if (targetTurtle == null)
         {
             currentState = SeagullState.Patrol;
+        }
+
+        if (ClosestTurtle && RandomTurtle)
+        {
+            ClosestTurtle = false;
         }
 
         switch (currentState)
@@ -86,6 +99,7 @@ public class Seagull : MonoBehaviour
                 break;
         }
 
+        DetectTurtleLoss();
         DetectAreaExit();
         TargetTurtle();
         ShrinkRadius();
@@ -149,31 +163,73 @@ public class Seagull : MonoBehaviour
         if (!hasShrank) return;
         if (foundTurtle) return;
 
+
         if (targetTimer <= TimeBeforeTarget)
         {
             targetTimer += Time.deltaTime;
             return;
         }
 
-        if (turtles == null)
-        {
-            turtles = GameObject.FindGameObjectsWithTag("Turtle");
-        }
+        if (RandomTurtle)
+        targetTurtle = ReturnRandomTurtle();
 
-        foreach (var turtle in turtles)
-        {
-            targetTurtle = turtles[0];
+        if (ClosestTurtle)
+        targetTurtle = ReturnClosestTurtle();
 
-            if (Vector3.Distance(transform.position, targetTurtle.transform.position) < Vector3.Distance(transform.position, turtle.transform.position))
-            {
-                targetTurtle = turtle;
-            }
+        if (targetTurtle == null)
+        {
+            if (RandomTurtle)
+                targetTurtle = ReturnRandomTurtle();
+
+            if (ClosestTurtle)
+                targetTurtle = ReturnClosestTurtle();
         }
 
         targetTurtle.gameObject.GetComponent<TurtleBehaviour>().EnableOutline();
         foundTurtle = true;
-
         currentState = SeagullState.Detect;
+    }
+
+    //Returns a random turtle from available list
+    private GameObject ReturnRandomTurtle()
+    {
+        return turtleList[Random.Range(0, turtleList.Count - 1)];
+    }
+
+    //Returns the turtle closest to the seagull
+    private GameObject ReturnClosestTurtle()
+    {
+        targetTurtle = turtleList[0];
+
+        float lowestDist = Mathf.Infinity;
+
+        for (int i = 0; i < turtleList.Count; i++)
+        {
+            float dist = Vector3.Distance(turtleList[i].transform.position, transform.position);
+
+            if (dist < lowestDist)
+            {
+                lowestDist = dist;
+                targetTurtle = turtleList[i];
+            }
+        }
+
+        return targetTurtle;
+
+    }
+
+    private void RemoveFromTurtles(GameObject turtle)
+    {
+            
+    }
+
+    void DetectTurtleLoss()
+    {
+        if (!foundTurtle) return;
+        if (targetTurtle == null)
+        {
+            DestroySeagull();
+        }
     }
   
     //Called when trash is presented to the seagull before it can take targeted turtle
@@ -193,14 +249,14 @@ public class Seagull : MonoBehaviour
         TurtleTaken = true;
         targetTurtle.GetComponent<TurtleBehaviour>().DisableOutline();
         targetTurtle.GetComponent<TurtleBehaviour>().DisableTurtle();
-        targetTurtle.transform.position = transform.position;
+        targetTurtle.transform.position = new Vector3(transform.position.x, transform.position.y + 1, transform.position.z);
         MoveFowardUp();
     }
 
     //Called as an exit cinematic after picking up an object
     private void MoveFowardUp()
     {
-        //visualTransfom.rotation = Quaternion.LookRotation()
+        //visualTransfom.rotation = Quaternion.Euler(new Vector3(0, 0, 0));
         
         transform.position += new Vector3(visualTransfom.forward.x, targetYModifier, visualTransfom.forward.z) * Time.deltaTime * 25;
         if (targetYModifier < 100)
@@ -210,6 +266,7 @@ public class Seagull : MonoBehaviour
     //Called after detection
     private void MoveToTurtle()
     {
+
         visualTransfom.LookAt(targetTurtle.transform);
 
         transform.position = Vector3.MoveTowards(transform.position, targetTurtle.transform.position, 0.01f * PickupSpeed);
@@ -234,6 +291,7 @@ public class Seagull : MonoBehaviour
     {
         if (TurtleTaken)
         {
+            if (targetTurtle != null)
             targetTurtle.GetComponent<TurtleBehaviour>().DestroyTurtle();
         }
         Object.Destroy(gameObject);
@@ -242,6 +300,7 @@ public class Seagull : MonoBehaviour
     //Called after patrol (circling) as a pre warning animation before the seagull's pursuit
     private void Detection()
     {
+        RemoveFromTurtles(targetTurtle);
         visualTransfom.LookAt(targetTurtle.transform);
         animator.SetTrigger("Detect");
         detectionTimer += Time.deltaTime;
@@ -250,8 +309,8 @@ public class Seagull : MonoBehaviour
             animator.SetTrigger("Pursue");
             currentState = SeagullState.Pursue;
         }
-
     }
+
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.red;

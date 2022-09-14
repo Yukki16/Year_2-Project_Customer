@@ -143,6 +143,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5d9eba1573cb2034980f9d593d61faaf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  EndDistanceFromTop: 10
   MinWobbleDistance: 5
   MaxWobbleDistance: 10
   WobbleSwitchTimer: 2
