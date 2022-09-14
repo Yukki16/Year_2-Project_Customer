@@ -3,9 +3,9 @@ using UnityEngine;
 public class Seagull : MonoBehaviour
 {
     #region fields
-    public enum SeagullState { Patrol, Detect, Pursue, Pickup, TurtleExit, TrashExit };
+    private enum SeagullState { Patrol, Detect, Pursue, Pickup, TurtleExit, TrashExit };
 
-    public SeagullState currentState;
+    private SeagullState currentState;
 
     public Vector3 startingVector;
     private Vector3 lastPosition;
@@ -34,7 +34,7 @@ public class Seagull : MonoBehaviour
     private Terrain playArea;
     private GameObject[] turtles;
     private GameObject trashTarget;
-    private GameObject closestTurtle;
+    private GameObject targetTurtle;
     private Animator animator;
     #endregion
 
@@ -58,8 +58,7 @@ public class Seagull : MonoBehaviour
 
     void Update()
     {
-
-        if (closestTurtle == null)
+        if (targetTurtle == null)
         {
             currentState = SeagullState.Patrol;
         }
@@ -92,6 +91,9 @@ public class Seagull : MonoBehaviour
         ShrinkRadius();
     }
 
+    #region methods
+
+    //Checks whether the seagull is eligible and detects a draggable object's collider
     void OnCollisionEnter(Collision collision)
     {
         if (currentState != SeagullState.Pursue)
@@ -104,6 +106,7 @@ public class Seagull : MonoBehaviour
         }
     }
 
+    //Rotates the seagull in a circular motion around a specific area
     private void CircularMotion()
     {
         timeCounter += Time.deltaTime * speed;
@@ -115,6 +118,7 @@ public class Seagull : MonoBehaviour
         transform.position = new Vector3(x, y, z);
     }
 
+    //Shrinks the seagulls flying radius as an entry method to the game
     private void ShrinkRadius()
     {
         if (width <= widthCopy)
@@ -126,17 +130,20 @@ public class Seagull : MonoBehaviour
             width -= 0.02f;
     }
 
+    //Points the seagull toward a specific point
     private void RotateForward()
     {
         transform.LookAt(startingVector);
     }
 
+    //Rotates the seagull in a circular motion around a specific area and points it forward
     private void CircleLoop()
     {
         RotateForward();
         CircularMotion();
     }
 
+    //Checks whether the seagull is eligible, then targets the closest turtle once the targetting timer has reached the threshold.
     private void TargetTurtle()
     {
         if (!hasShrank) return;
@@ -155,58 +162,65 @@ public class Seagull : MonoBehaviour
 
         foreach (var turtle in turtles)
         {
-            closestTurtle = turtles[0];
+            targetTurtle = turtles[0];
 
-            if (Vector3.Distance(transform.position, closestTurtle.transform.position) < Vector3.Distance(transform.position, turtle.transform.position))
+            if (Vector3.Distance(transform.position, targetTurtle.transform.position) < Vector3.Distance(transform.position, turtle.transform.position))
             {
-                closestTurtle = turtle;
+                targetTurtle = turtle;
             }
         }
 
-        closestTurtle.gameObject.GetComponent<TurtleBehaviour>().EnableOutline();
+        targetTurtle.gameObject.GetComponent<TurtleBehaviour>().EnableOutline();
         foundTurtle = true;
 
         currentState = SeagullState.Detect;
     }
-
-
+  
+    //Called when trash is presented to the seagull before it can take targeted turtle
     private void TrashCancel()
     {
+        targetTurtle.gameObject.GetComponent<TurtleBehaviour>().DisableOutline();
         GameObject.FindGameObjectWithTag("DraggableParent").GetComponent<Dragger>().DisableSelected();
         animator.SetTrigger("Pickup");
         trashTarget.transform.position = transform.position;
         MoveFowardUp();
     }
 
+    //Called when seagull reaches target turtle on pursuit
     private void CarryAway()
     {
         animator.SetTrigger("Pickup");
         TurtleTaken = true;
-        closestTurtle.GetComponent<TurtleBehaviour>().DisableOutline();
-        closestTurtle.GetComponent<TurtleBehaviour>().DisableTurtle();
-        closestTurtle.transform.position = transform.position;
+        targetTurtle.GetComponent<TurtleBehaviour>().DisableOutline();
+        targetTurtle.GetComponent<TurtleBehaviour>().DisableTurtle();
+        targetTurtle.transform.position = transform.position;
         MoveFowardUp();
     }
 
+    //Called as an exit cinematic after picking up an object
     private void MoveFowardUp()
     {
-        transform.position += new Vector3(visualTransfom.forward.x, targetYModifier, visualTransfom.forward.y) * Time.deltaTime * 25;
+        //visualTransfom.rotation = Quaternion.LookRotation()
+        
+        transform.position += new Vector3(visualTransfom.forward.x, targetYModifier, visualTransfom.forward.z) * Time.deltaTime * 25;
         if (targetYModifier < 100)
             targetYModifier += 0.005f;
     }
 
+    //Called after detection
     private void MoveToTurtle()
     {
-        visualTransfom.LookAt(closestTurtle.transform);
+        visualTransfom.LookAt(targetTurtle.transform);
 
-        transform.position = Vector3.MoveTowards(transform.position, closestTurtle.transform.position, 0.01f * PickupSpeed);
+        transform.position = Vector3.MoveTowards(transform.position, targetTurtle.transform.position, 0.01f * PickupSpeed);
 
-        if (Vector3.Distance(transform.position, closestTurtle.transform.position) < DistanceToPickUp)
+        if (Vector3.Distance(transform.position, targetTurtle.transform.position) < DistanceToPickUp)
         {
             currentState = SeagullState.TurtleExit;
         }
     }
 
+    //Checks the world area's bounds
     private void DetectAreaExit()
     {
         if (transform.position.x >= playArea.terrainData.size.x || transform.position.x <= playArea.transform.position.x || transform.position.y > 50)
@@ -215,18 +229,20 @@ public class Seagull : MonoBehaviour
         }
     }
 
+    //Despawns the seagull along with any carried object
     private void DestroySeagull()
     {
         if (TurtleTaken)
         {
-            closestTurtle.GetComponent<TurtleBehaviour>().DestroyTurtle();
+            targetTurtle.GetComponent<TurtleBehaviour>().DestroyTurtle();
         }
         Object.Destroy(gameObject);
     }
 
+    //Called after patrol (circling) as a pre warning animation before the seagull's pursuit
     private void Detection()
     {
-        visualTransfom.LookAt(closestTurtle.transform);
+        visualTransfom.LookAt(targetTurtle.transform);
         animator.SetTrigger("Detect");
         detectionTimer += Time.deltaTime;
         if (detectionTimer >= detectDuration)
@@ -236,4 +252,11 @@ public class Seagull : MonoBehaviour
         }
 
     }
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawRay(visualTransfom.position, visualTransfom.forward * 10);
+    }
+
+    #endregion
 }
