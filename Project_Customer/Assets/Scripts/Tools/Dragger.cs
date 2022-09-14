@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Dragger : MonoBehaviour 
+public class Dragger : MonoBehaviour
 {
     private GameObject selectedObject;
 
@@ -16,6 +16,10 @@ public class Dragger : MonoBehaviour
 
     public int MinThrowVelocity = 20;
 
+
+    public Color lineColor;
+    private LineRenderer lrOfTrash;
+
     private void Start()
     {
         lastMousePos = Input.mousePosition;
@@ -28,8 +32,8 @@ public class Dragger : MonoBehaviour
 
         if (!trashObject.CompareTag("Draggable"))
             return;
-        
-        trashObject.gameObject.GetComponent<Outline>().OutlineWidth = 3;   
+
+        trashObject.gameObject.GetComponent<Outline>().OutlineWidth = 3;
     }
 
     public void DisableSelected()
@@ -45,23 +49,23 @@ public class Dragger : MonoBehaviour
 
         RaycastHit hit = CastRay();
         if (hit.collider != null)
-        //EnableOutline(hit.collider.gameObject);
+            //EnableOutline(hit.collider.gameObject);
 
-        if (Input.GetMouseButtonDown(0))
-        {
-            if(selectedObject == null)
+            if (Input.GetMouseButtonDown(0))
             {
-                if(hit.collider != null)
+                if (selectedObject == null)
                 {
-                    if (!hit.collider.CompareTag("Draggable"))
+                    if (hit.collider != null)
                     {
-                        return;
+                        if (!hit.collider.CompareTag("Draggable"))
+                        {
+                            return;
+                        }
+                        selectedObject = hit.collider.gameObject;
+                        Cursor.visible = false;
                     }
-                    selectedObject = hit.collider.gameObject;              
-                    Cursor.visible = false;
                 }
             }
-        }
 
         //TODO create methods for scripts below
 
@@ -83,22 +87,22 @@ public class Dragger : MonoBehaviour
 
             selectedObject.transform.position = new Vector3(worldPosition.x, GrabHeight, worldPosition.z);
 
-            
+
             throwVector = selectedObject.transform.position - previousGrabPosition;
             speed = throwVector.magnitude / Time.deltaTime;
-           
+
             throwVelocity = speed * throwVector.normalized;
-               
+
             if (speed <= MaxVelocity)
             {
                 rb.velocity = throwVelocity;
             }
-            
+
             if (speed <= MinThrowVelocity)
             {
                 rb.velocity = Vector3.zero;
             }
-         
+
 
             selectedObject.GetComponent<Rigidbody>().useGravity = true;
 
@@ -130,31 +134,39 @@ public class Dragger : MonoBehaviour
 
     private void UpdateLine()
     {
-        selectedObject.GetComponent<LineRenderer>().SetPosition(0, selectedObject.transform.position);
-        selectedObject.GetComponent<LineRenderer>().SetPosition(1, new Vector3(selectedObject.transform.position.x, selectedObject.transform.position.y - 5, selectedObject.transform.position.z));
+        lrOfTrash.SetPosition(0, selectedObject.transform.position);
+        lrOfTrash.SetPosition(1, new Vector3(selectedObject.transform.position.x, selectedObject.transform.position.y - 5, selectedObject.transform.position.z));
     }
     private void AddLineRay()
     {
         //Adds the line renderer to the object
         if (!selectedObject.TryGetComponent(typeof(LineRenderer), out Component component))
         {
-            selectedObject.AddComponent<LineRenderer>();
+            lrOfTrash = selectedObject.AddComponent<LineRenderer>();
+            lrOfTrash.material = new Material(Shader.Find("Legacy Shaders/Particles/Alpha Blended Premultiply"));
+
             Debug.Log("Added the linerenderer");
 
-            selectedObject.GetComponent<LineRenderer>().useWorldSpace = true;
+            lrOfTrash.useWorldSpace = true;
             //Adds the 2 points of the line so it renders
-            selectedObject.GetComponent<LineRenderer>().SetPosition(0, selectedObject.transform.position);
+            lrOfTrash.SetPosition(0, selectedObject.transform.position);
             //Debug.Log(selectedObject.GetComponent<Renderer>().bounds.center);
             //Debug.Log(selectedObject.transform.position);
-            selectedObject.GetComponent<LineRenderer>().SetPosition(1, new Vector3(selectedObject.transform.position.x, selectedObject.transform.position.y - 5, selectedObject.transform.position.z));
-            selectedObject.GetComponent<LineRenderer>().startWidth = 0.1f;
-            selectedObject.GetComponent<LineRenderer>().endWidth = 0.1f;
+            lrOfTrash.SetPosition(1, new Vector3(selectedObject.transform.position.x, selectedObject.transform.position.y - 5, selectedObject.transform.position.z));
+            lrOfTrash.startWidth = 0.1f;
+            lrOfTrash.endWidth = 0.1f;
 
-            selectedObject.GetComponent<LineRenderer>().alignment = LineAlignment.View;
+            lrOfTrash.alignment = LineAlignment.View;
+            Gradient gradient = new Gradient();
+            gradient.SetKeys(
+                new GradientColorKey[] { new GradientColorKey(lineColor, 0.0f), new GradientColorKey(lineColor, 1.0f) },
+                new GradientAlphaKey[] { new GradientAlphaKey(1f, 0.0f), new GradientAlphaKey(1f, 1.0f) }
+            );
+            lrOfTrash.colorGradient = gradient;
         }
         else
         {
-            selectedObject.GetComponent<LineRenderer>().enabled = true;
+            lrOfTrash.enabled = true;
         }
     }
     private RaycastHit CastRay()
@@ -179,4 +191,3 @@ public class Dragger : MonoBehaviour
 
 
 }
-
