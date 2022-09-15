@@ -5,8 +5,14 @@ using UnityEngine;
 public class CrabBehaviour : MonoBehaviour
 {
     #region Fields
-    //private enum CrabState
+    private enum CrabState
+    {
+        Moving,
+        Stationary,
+        CapturedTurtle
+    }
 
+    private CrabState currentState = CrabState.Stationary;
 
     #endregion
 
@@ -25,6 +31,14 @@ public class CrabBehaviour : MonoBehaviour
             Destroy(gameObject);
         }
 
+    }
+
+    IEnumerator CrabMovement()
+    {
+        if(currentState == CrabState.Stationary)
+        {
+            
+        }
     }
 
 }

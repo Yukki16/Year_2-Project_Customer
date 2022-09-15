@@ -19,6 +19,7 @@ public class Dragger : MonoBehaviour
 
     public Color lineColor;
     private LineRenderer lrOfTrash;
+    [SerializeField] private Material lrShader;
 
     private void Start()
     {
@@ -143,7 +144,7 @@ public class Dragger : MonoBehaviour
         if (!selectedObject.TryGetComponent(typeof(LineRenderer), out Component component))
         {
             lrOfTrash = selectedObject.AddComponent<LineRenderer>();
-            lrOfTrash.material = new Material(Shader.Find("Legacy Shaders/Particles/Alpha Blended Premultiply"));
+            lrOfTrash.material = lrShader;
 
             Debug.Log("Added the linerenderer");
 
