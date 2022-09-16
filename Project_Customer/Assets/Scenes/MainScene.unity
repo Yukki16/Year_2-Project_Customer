@@ -1463,7 +1463,7 @@ MonoBehaviour:
   turtleSpawnMaxTime: 10
   EggSeperationDistance: 5
   TurtleSizeScale: 3
-  MaxEggsTotal: 5
+  MaxEggsTotal: 4
   EggSpawnTimer: 2
 --- !u!4 &1660498963
 Transform:

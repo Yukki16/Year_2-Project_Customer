@@ -143,7 +143,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5d9eba1573cb2034980f9d593d61faaf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  EndDistanceFromTop: 10
   MinWobbleDistance: 5
   MaxWobbleDistance: 10
   WobbleSwitchTimer: 2
@@ -155,7 +154,7 @@ MeshCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2307961997217634821}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 4
   m_Convex: 1
