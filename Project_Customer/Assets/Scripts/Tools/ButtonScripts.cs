@@ -7,7 +7,10 @@ public class ButtonScripts : MonoBehaviour
 {
     #region fields
 
-    [SerializeField] private Canvas pauseCanvas;
+    [SerializeField] private Canvas pauseCanvas = null;
+    [SerializeField] private Canvas settingsCanvas = null;
+
+    private Canvas previousCanvas = null;
 
     private bool paused = false;
     #endregion
@@ -17,6 +20,10 @@ public class ButtonScripts : MonoBehaviour
         if(Input.GetKeyDown(KeyCode.Escape))
         {
             pauseCanvas.gameObject.SetActive(!paused);
+            if(paused)
+            {
+                settingsCanvas.gameObject.SetActive(!paused);
+            }
             paused = !paused;
             StartCoroutine(PauseGame());
         }
@@ -46,5 +53,31 @@ public class ButtonScripts : MonoBehaviour
         }
 
         yield return null;
+    }
+    
+    public void ExitToMenu()
+    {
+        SceneManager.LoadScene(0);
+    }
+    public void Play()
+    {
+        SceneManager.LoadScene(1);
+    }
+
+    public void QuitGame()
+    {
+        Application.Quit();
+    }
+
+    public void Options(Canvas canvas)
+    {
+        settingsCanvas.gameObject.SetActive(true);
+        previousCanvas = canvas;
+        previousCanvas.gameObject.SetActive(false);
+    }
+    public void Back()
+    {
+        settingsCanvas.gameObject.SetActive(false);
+        previousCanvas.gameObject.SetActive(true);
     }
 }
