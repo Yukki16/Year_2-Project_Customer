@@ -189,6 +189,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: TheTurtle
       objectReference: {fileID: 0}
+    - target: {fileID: 1397159672076180424, guid: f040300e73aba524d9e216d03efdb2ab, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1740753393920131442, guid: f040300e73aba524d9e216d03efdb2ab, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -244,6 +248,14 @@ PrefabInstance:
     - target: {fileID: 1740753393920131442, guid: f040300e73aba524d9e216d03efdb2ab, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2323821544446083703, guid: f040300e73aba524d9e216d03efdb2ab, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7849247640720858726, guid: f040300e73aba524d9e216d03efdb2ab, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 9010316042452115318, guid: f040300e73aba524d9e216d03efdb2ab, type: 3}
       propertyPath: m_Controller

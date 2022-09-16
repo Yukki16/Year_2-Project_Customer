@@ -1,11 +1,8 @@
 fileFormatVersion: 2
-guid: f9e078e5cee573946adf84da5d8e9d0a
+guid: 3dbe88ce4e390c844bdeb63d2f6c2828
 ModelImporter:
   serializedVersion: 21300
-  internalIDToNameTable:
-  - first:
-      74: 1744531011993418394
-    second: Shell|Shell|Shell|Shell|Shell|IcosphereAction
+  internalIDToNameTable: []
   externalObjects: {}
   materials:
     materialImportMode: 2
@@ -35,7 +32,7 @@ ModelImporter:
     extraExposedTransformPaths: []
     extraUserProperties: []
     clipAnimations: []
-    isReadable: 1
+    isReadable: 0
   meshes:
     lODScreenPercentages: []
     globalScale: 1

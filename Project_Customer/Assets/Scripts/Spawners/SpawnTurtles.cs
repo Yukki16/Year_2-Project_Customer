@@ -19,12 +19,12 @@ public class SpawnTurtles : MonoBehaviour
 
     private int spawnEggStep, leftEggs = 1, rightEggs;
 
-    public int turtleSpawnMinTime = 10;
-    public int turtleSpawnMaxTime = 10;
+    public int turtleSpawnTimeMin = 8;
+    public int turtleSpawnTimeMax = 14;
     public int EggSeperationDistance = 5;
     public float TurtleSizeScale = 3.5f;
     public int MaxEggsTotal = 6;
-    public int EggSpawnTimer = 1;
+    public int EggSpawnTimer;
 
     GameObject TurtleSpawnEggs;
     #endregion
@@ -48,7 +48,6 @@ public class SpawnTurtles : MonoBehaviour
 
  
         StartCoroutine(SpawnSpawners());
-        StartCoroutine(spawnTurtles());
     }
 
     public List<GameObject> GetTurtles()
@@ -56,9 +55,21 @@ public class SpawnTurtles : MonoBehaviour
         return turtleList;
     }
 
+    public void AddTurtle(GameObject turtle)
+    {
+        turtleList.Add(turtle);
+    }
+
+    public GameObject GetTurtlePrefab()
+    {
+        return turtlePrefab;
+    }
+
     IEnumerator SpawnSpawners()
     {
         GameObject newEgg = Instantiate(eggPrefab, TurtleSpawnEggs.transform);
+
+
 
         if (spawnEggStep % 2 == 0)
         {
@@ -84,18 +95,5 @@ public class SpawnTurtles : MonoBehaviour
         spawnEggStep++;
         StartCoroutine(SpawnSpawners());
 
-    }
-
-    IEnumerator spawnTurtles()
-    {
-        yield return new WaitForSeconds(Random.Range(turtleSpawnMinTime, turtleSpawnMaxTime));
-
-        foreach (var spawner in spawnPoints)
-        {
-            GameObject newTurtle = Instantiate(turtlePrefab, spawner.transform);
-            newTurtle.transform.localScale = new Vector3(TurtleSizeScale, TurtleSizeScale, TurtleSizeScale);
-            turtleList.Add(newTurtle);
-        }
-        StartCoroutine(spawnTurtles());
-    }
+    }  
 }

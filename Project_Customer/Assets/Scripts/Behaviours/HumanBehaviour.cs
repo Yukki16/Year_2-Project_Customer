@@ -12,7 +12,7 @@ public class HumanBehaviour : MonoBehaviour
     private void Start()
     {
         playArea = Terrain.activeTerrain;
-        trashParent = GameObject.FindGameObjectWithTag("TrashParent");
+        trashParent = GameObject.FindGameObjectWithTag("DraggableParent");
         SpawnTarget();
         StartCoroutine(spawnTrash());
     }   
@@ -42,7 +42,7 @@ public class HumanBehaviour : MonoBehaviour
     {
         GameObject newTrash = Instantiate(trashPrefab, gameObject.transform);
         newTrash.transform.parent = trashParent.transform;
-        newTrash.transform.localScale = new Vector3(1, 1, 1);
+        newTrash.transform.localScale *= 0.3f;
         yield return new WaitForSeconds(Random.Range(1, 5));
         StartCoroutine(spawnTrash());
     }

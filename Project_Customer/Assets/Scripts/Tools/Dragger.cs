@@ -39,6 +39,7 @@ public class Dragger : MonoBehaviour
     public void DisableSelected()
     {
         Cursor.visible = true;
+        lrOfTrash.enabled = false;
         selectedObject = null;
     }
 
@@ -137,6 +138,7 @@ public class Dragger : MonoBehaviour
         lrOfTrash.SetPosition(0, selectedObject.transform.position);
         lrOfTrash.SetPosition(1, new Vector3(selectedObject.transform.position.x, selectedObject.transform.position.y - 5, selectedObject.transform.position.z));
     }
+
     private void AddLineRay()
     {
         //Adds the line renderer to the object
