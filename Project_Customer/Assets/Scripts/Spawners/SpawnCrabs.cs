@@ -4,9 +4,14 @@ using UnityEngine;
 
 public class SpawnCrabs : MonoBehaviour
 {
+
     [SerializeField] GameObject CrabPrefab;
+
     private Terrain playArea;
+
     GameObject crabs;
+    private GameObject targets;
+
     public int MaxDistanceFromCenter = 20;
     public int MinHeightFromBottom = 32;
     public int MaxHeightFromBottom = 42;
@@ -17,6 +22,10 @@ public class SpawnCrabs : MonoBehaviour
         playArea = Terrain.activeTerrain;
         crabs = new GameObject(name: "Crabs");
         crabs.transform.SetParent(gameObject.transform);
+
+        targets = new GameObject(name: "CrabTargets");
+        targets.transform.SetParent(gameObject.transform);
+        targets.tag = "CrabTargets";
         StartCoroutine(spawnCrabs());   
     }
 
