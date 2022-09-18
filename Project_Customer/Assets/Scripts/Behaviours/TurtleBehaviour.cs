@@ -18,7 +18,7 @@ public class TurtleBehaviour : MonoBehaviour
 
     private int direction = 1;
 
-    int EndDistanceFromTop = 10;
+    int EndDistanceFromTop = 15;
 
 
     public int MinWobbleDistance = 5;
@@ -62,14 +62,20 @@ public class TurtleBehaviour : MonoBehaviour
 
     void DestroyOnTarget()
     {
-        if (Vector3.Distance(transform.position, targetObj.transform.position) < 5)
+        if (Vector3.Distance(transform.position, targetObj.transform.position) < 1)
         {
             DestroyTurtle();
         }
     }
 
+    private void RemoveFromList()
+    {
+        GameObject.FindGameObjectWithTag("TurtleSpawner").GetComponent<SpawnTurtles>().GetTurtles().Remove(gameObject);
+    }
+
     public void DestroyTurtle()
     {
+        RemoveFromList();
         Destroy(targetObj);
         Destroy(gameObject);
     }

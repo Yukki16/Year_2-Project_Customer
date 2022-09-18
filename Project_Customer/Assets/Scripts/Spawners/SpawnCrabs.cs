@@ -34,13 +34,8 @@ public class SpawnCrabs : MonoBehaviour
         yield return new WaitForSeconds(CrabSpawnTimer);
         GameObject newCrab = Instantiate(CrabPrefab, position: new Vector3(playArea.terrainData.size.x / 2 + Random.Range(-MaxDistanceFromCenter, MaxDistanceFromCenter),
         playArea.transform.position.y, Random.Range(playArea.transform.position.z + MinHeightFromBottom,
-        playArea.transform.position.z + MaxHeightFromBottom)), rotation: new Quaternion(0, 0, 0, 0));
+        playArea.transform.position.z + MaxHeightFromBottom)), rotation: Quaternion.Euler(new Vector3(0, Random.Range(0, 360), 0)));
         newCrab.transform.parent = crabs.transform;
         StartCoroutine(spawnCrabs());
-    }
-
-    void Update()
-    {
-        
     }
 }
