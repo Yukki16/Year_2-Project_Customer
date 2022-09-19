@@ -156,7 +156,7 @@ MonoBehaviour:
   MaxDistanceFromCenter: 10
   MinHeightFromBottom: 30
   MaxHeightFromBottom: 40
-  CrabSpawnTimer: 10
+  CrabSpawnTimer: 15
 --- !u!4 &39442581
 Transform:
   m_ObjectHideFlags: 0
@@ -1464,7 +1464,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SeagullPrefab: {fileID: 1367735071303644194, guid: 2bcda78c6b1995940bf1fdac6db76e58, type: 3}
-  SeagullSpawnTimer: 10
+  SeagullSpawnTimer: 15
   EnableSpawning: 1
   SpawnSeagull: 0
 --- !u!1001 &887218070
@@ -1582,7 +1582,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   HumanPrefab: {fileID: 7350167776047048822, guid: b29294773dbc8e2438f736a65a321af6, type: 3}
   MinHeightFromBottom: 25
-  MaxHeightFromBottom: 35
+  MaxHeightFromBottom: 30
   SpawnsPerSide: 5
 --- !u!1 &1065122916
 GameObject:

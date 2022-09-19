@@ -51,10 +51,9 @@ public class CrabBehaviour : MonoBehaviour
     {
         animator.SetTrigger("DetectTurtle");
         TurtleBehaviour tb = collision.gameObject.GetComponent<TurtleBehaviour>();
-        tb.transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.z);
-        tb.animator.SetTrigger("CrabDeath");
-        tb.DisableTurtle();
-        tb.RemoveFromList();
+        tb.animator.SetTrigger("CrabDeath");    
+
+        tb.StartCoroutine(tb.MoveTowards(transform.position));
 
         //wait until excecution animation is played
         yield return new WaitForSeconds(1.90f);

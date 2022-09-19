@@ -98,6 +98,13 @@ public class TurtleBehaviour : MonoBehaviour
         mover.Cancel();
     }
 
+    //TODO
+    public IEnumerator MoveTowards(Vector3 position)
+    {
+        Vector3.MoveTowards(transform.position, position, 1);
+        yield return transform.position == position;
+    }
+
     IEnumerator WiggleTarget()
     {
         switch (direction)
