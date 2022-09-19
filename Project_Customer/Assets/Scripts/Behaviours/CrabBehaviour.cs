@@ -13,6 +13,8 @@ public class CrabBehaviour : MonoBehaviour
 
     private ParticleSystem particles;
 
+    private Animator animator;
+
     private MeshCollider mc;
 
     #endregion
@@ -20,7 +22,8 @@ public class CrabBehaviour : MonoBehaviour
     void Start()
     {
         particles = GetComponentInChildren<ParticleSystem>();
-        particles.Stop();
+        animator = GetComponentInChildren<Animator>();
+        //particles.Stop();
         currentState = CrabState.Stationary;
         playArea = Terrain.activeTerrain;
     }
@@ -30,15 +33,33 @@ public class CrabBehaviour : MonoBehaviour
     {
         if (collision.gameObject.tag is "Turtle")
         {
-            Destroy(gameObject); 
-            collision.gameObject.GetComponent<TurtleBehaviour>().DestroyTurtle();
-        } 
+            animator.SetTrigger("DetectTurtle");
+            //Destroy(gameObject); 
+            StartCoroutine(DetectTurtle(collision));
+
+        }
 
         if (collision.gameObject.tag is "Draggable")
         {
             Destroy(collision.gameObject);
             Destroy(gameObject);
         }
+
+    }
+
+    IEnumerator DetectTurtle(Collider collision)
+    {
+        animator.SetTrigger("DetectTurtle");
+        TurtleBehaviour tb = collision.gameObject.GetComponent<TurtleBehaviour>();
+        tb.transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.z);
+        tb.animator.SetTrigger("CrabDeath");
+        tb.DisableTurtle();
+        tb.RemoveFromList();
+
+        //wait until excecution animation is played
+        yield return new WaitForSeconds(1.90f);
+        tb.DestroyTurtle();
+        Destroy(gameObject); 
 
     }
 }

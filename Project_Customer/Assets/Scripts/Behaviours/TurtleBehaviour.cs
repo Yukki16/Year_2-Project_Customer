@@ -16,6 +16,8 @@ public class TurtleBehaviour : MonoBehaviour
 
     GameObject targetObj;
 
+    public Animator animator;
+
     private int direction = 1;
 
     int EndDistanceFromTop = 15;
@@ -29,6 +31,7 @@ public class TurtleBehaviour : MonoBehaviour
 
     void Start()
     {
+        animator = GetComponentInChildren<Animator>();
         targetObj = new GameObject();
         turtleSpawnerParent = GameObject.FindGameObjectWithTag("TurtleTargets");
         outline = GetComponent<Outline>();
@@ -68,7 +71,7 @@ public class TurtleBehaviour : MonoBehaviour
         }
     }
 
-    private void RemoveFromList()
+    public void RemoveFromList()
     {
         GameObject.FindGameObjectWithTag("TurtleSpawner").GetComponent<SpawnTurtles>().GetTurtles().Remove(gameObject);
     }
@@ -92,7 +95,7 @@ public class TurtleBehaviour : MonoBehaviour
 
     public void DisableTurtle()
     {
-        mover.StopAgent();
+        mover.Cancel();
     }
 
     IEnumerator WiggleTarget()
