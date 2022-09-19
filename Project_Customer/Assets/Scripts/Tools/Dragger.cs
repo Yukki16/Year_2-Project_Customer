@@ -46,13 +46,11 @@ public class Dragger : MonoBehaviour
 
     private void Update()
     {
-
         lastMousePos = Input.mousePosition;
 
         RaycastHit hit = CastRay();
         if (hit.collider != null)
             //EnableOutline(hit.collider.gameObject);
-
             if (Input.GetMouseButtonDown(0))
             {
                 if (selectedObject == null)
@@ -63,6 +61,7 @@ public class Dragger : MonoBehaviour
                         {
                             return;
                         }
+                        hit.collider.GetComponent<TrashBehaviour>().DisableBinCollection();
                         selectedObject = hit.collider.gameObject;
                         Cursor.visible = false;
                     }
@@ -73,6 +72,8 @@ public class Dragger : MonoBehaviour
 
         if (Input.GetMouseButtonUp(0) && selectedObject != null)
         {
+            selectedObject.GetComponent<TrashBehaviour>().EnableBinCollection();
+
             Rigidbody rb = selectedObject.GetComponent<Rigidbody>();
 
             Vector3 position = new Vector3(Input.mousePosition.x,
@@ -82,28 +83,27 @@ public class Dragger : MonoBehaviour
 
             selectedObject.transform.position = new Vector3(worldPosition.x, 0f, worldPosition.z);
 
-            Vector3 throwVector = selectedObject.transform.position - previousGrabPosition;
-            float speed = throwVector.magnitude / Time.deltaTime;
-            Vector3 throwVelocity = speed * throwVector.normalized;
-            rb.velocity = throwVelocity;
+            //Vector3 throwVector = selectedObject.transform.position - previousGrabPosition;
+            //float speed = throwVector.magnitude / Time.deltaTime;
+            //Vector3 throwVelocity = speed * throwVector.normalized;
+            //rb.velocity = throwVelocity;
 
             selectedObject.transform.position = new Vector3(worldPosition.x, GrabHeight, worldPosition.z);
 
 
-            throwVector = selectedObject.transform.position - previousGrabPosition;
-            speed = throwVector.magnitude / Time.deltaTime;
+            //throwVector = selectedObject.transform.position - previousGrabPosition;
+            //speed = throwVector.magnitude / Time.deltaTime;
 
-            throwVelocity = speed * throwVector.normalized;
+            //throwVelocity = speed * throwVector.normalized;
 
-            if (speed <= MaxVelocity)
-            {
-                rb.velocity = throwVelocity;
-            }
+            //if (speed <= MaxVelocity)
+            //{
+            //    rb.velocity = throwVelocity;
+            //}
 
-            if (speed <= MinThrowVelocity)
-            {
-                rb.velocity = Vector3.zero;
-            }
+           
+            rb.velocity = Vector3.zero;
+            
 
 
             selectedObject.GetComponent<Rigidbody>().useGravity = true;

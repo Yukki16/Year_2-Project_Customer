@@ -125,7 +125,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d8e406295bbe8cb47b2b22938e8fa748, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  trashPrefab: {fileID: 1722861487965274120, guid: 08805071e794b054c9f822a11c75a5a9, type: 3}
+  trashPrefab: {fileID: 6812620011374146146, guid: ee433ad743b66894b8e642aa0a6f8dc2, type: 3}
+  TargetDistanceFromBorder: 25
 --- !u!64 &8020316974250553109
 MeshCollider:
   m_ObjectHideFlags: 0

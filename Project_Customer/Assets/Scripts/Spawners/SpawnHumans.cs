@@ -9,10 +9,11 @@ public class SpawnHumans : MonoBehaviour
         
     private List<GameObject> spawnPoints;
     private Terrain playArea;
+    public int DistanceFromBorder = 25;
     public int MinHeightFromBottom = 10;
     public int MaxHeightFromBottom = 30;
     public int SpawnsPerSide = 5;
-
+    
     private void Start()
     {
         spawnPoints = new List<GameObject>();
@@ -44,7 +45,7 @@ public class SpawnHumans : MonoBehaviour
         for (int i = 0; i < SpawnsPerSide; i++)
         {
             GameObject humanSpawn = new GameObject();
-            humanSpawn.transform.position = new Vector3(playArea.transform.position.x, 
+            humanSpawn.transform.position = new Vector3(playArea.transform.position.x + DistanceFromBorder, 
             playArea.transform.position.y, Random.Range(playArea.transform.position.z + MinHeightFromBottom,
             playArea.transform.position.z + MaxHeightFromBottom));
             spawnPoints.Add(humanSpawn);
@@ -55,7 +56,7 @@ public class SpawnHumans : MonoBehaviour
         for (int i = 0; i < SpawnsPerSide; i++)
         {
             GameObject humanSpawn = new GameObject();
-            humanSpawn.transform.position = new Vector3(playArea.terrainData.size.x,
+            humanSpawn.transform.position = new Vector3(playArea.terrainData.size.x - DistanceFromBorder,
             playArea.transform.position.y, Random.Range(playArea.transform.position.z + MinHeightFromBottom,
             playArea.transform.position.z + MaxHeightFromBottom));
             spawnPoints.Add(humanSpawn);
