@@ -102,7 +102,11 @@ public class TurtleBehaviour : MonoBehaviour
     public IEnumerator MoveTowards(Vector3 position)
     {
         Vector3.MoveTowards(transform.position, position, 1);
-        yield return transform.position == position;
+
+        Debug.Log("Moving");
+
+        StartCoroutine(MoveTowards(position));
+yield return null;
     }
 
     IEnumerator WiggleTarget()
