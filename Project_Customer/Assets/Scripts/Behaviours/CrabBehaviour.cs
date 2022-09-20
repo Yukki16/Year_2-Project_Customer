@@ -56,8 +56,9 @@ public class CrabBehaviour : MonoBehaviour
         tb.StartCoroutine(tb.MoveTowards(transform.position));
 
         //wait until excecution animation is played
-        yield return new WaitForSeconds(1.90f);
+        yield return new WaitForSeconds(1.03f);
         tb.DestroyTurtle();
+        yield return new WaitForSeconds(0.53f);
         Destroy(gameObject); 
 
     }

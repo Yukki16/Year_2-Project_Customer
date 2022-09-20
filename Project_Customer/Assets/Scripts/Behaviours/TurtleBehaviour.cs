@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class TurtleBehaviour : MonoBehaviour
 {
@@ -28,6 +29,7 @@ public class TurtleBehaviour : MonoBehaviour
     public int WobbleSwitchTimer;
 
     Outline outline;
+    private bool excecution;
 
     void Start()
     {
@@ -65,7 +67,12 @@ public class TurtleBehaviour : MonoBehaviour
 
     void DestroyOnTarget()
     {
-        if (Vector3.Distance(transform.position, targetObj.transform.position) < 1)
+        if (Vector3.Distance(transform.position, targetObj.transform.position) < 1 && excecution)
+        {
+            DisableTurtle();
+        }
+
+        if (Vector3.Distance(transform.position, targetObj.transform.position) < 1 && !excecution)
         {
             DestroyTurtle();
         }
@@ -101,16 +108,17 @@ public class TurtleBehaviour : MonoBehaviour
     //TODO
     public IEnumerator MoveTowards(Vector3 position)
     {
-        Vector3.MoveTowards(transform.position, position, 1);
-
-        Debug.Log("Moving");
-
-        StartCoroutine(MoveTowards(position));
-yield return null;
+        excecution = true;
+        GetComponent<NavMeshAgent>().speed = 5;
+        targetObj.transform.position = position;
+        yield return null;
     }
 
     IEnumerator WiggleTarget()
     {
+        if (excecution)
+             yield return null ;
+
         switch (direction)
         {
             case 1:
