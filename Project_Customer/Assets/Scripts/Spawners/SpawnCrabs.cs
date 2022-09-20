@@ -17,6 +17,8 @@ public class SpawnCrabs : MonoBehaviour
 
     void Start()
     {
+        masterFlow = FindObjectOfType<MasterFlow>();
+
         playArea = Terrain.activeTerrain;
         crabs = new GameObject(name: "Crabs");
         crabs.transform.SetParent(gameObject.transform);
@@ -24,12 +26,13 @@ public class SpawnCrabs : MonoBehaviour
         targets = new GameObject(name: "CrabTargets");
         targets.transform.SetParent(gameObject.transform);
         targets.tag = "CrabTargets";
+            
         StartCoroutine(spawnCrabs());   
     }
 
     IEnumerator spawnCrabs()
     {        
-        yield return new WaitForSeconds(CrabSpawnTimer);
+        yield return new WaitForSeconds(masterFlow.GetCrabSpawnRate());
         GameObject newCrab = Instantiate(CrabPrefab, position: new Vector3(playArea.terrainData.size.x / 2 + Random.Range(-MaxDistanceFromCenter, MaxDistanceFromCenter),
         playArea.transform.position.y, Random.Range(playArea.transform.position.z + MinHeightFromBottom,
         playArea.transform.position.z + MaxHeightFromBottom)), rotation: Quaternion.Euler(new Vector3(0, Random.Range(0, 360), 0)));
@@ -37,3 +40,4 @@ public class SpawnCrabs : MonoBehaviour
         StartCoroutine(spawnCrabs());
     }
 }
+    

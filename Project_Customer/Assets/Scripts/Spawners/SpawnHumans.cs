@@ -6,10 +6,10 @@ public class SpawnHumans : MonoBehaviour
 {
     [SerializeField] GameObject HumanPrefab;
     GameObject leftSpawnPoints, rightSpawnPoints, humans, targets;
-        
+
+    MasterFlow masterFlow;
     private List<GameObject> spawnPoints;
     private Terrain playArea;
-    public int HumanSpawnTimer = 8;
     public int DistanceFromBorder = 25;
     public int MinHeightFromBottom = 10;
     public int MaxHeightFromBottom = 30;
@@ -17,6 +17,8 @@ public class SpawnHumans : MonoBehaviour
     
     private void Start()
     {
+        masterFlow = FindObjectOfType<MasterFlow>();
+
         spawnPoints = new List<GameObject>();
 
         humans = new GameObject(name: "Humans");
@@ -69,7 +71,7 @@ public class SpawnHumans : MonoBehaviour
     {
         GameObject newHuman = Instantiate(HumanPrefab, spawnPoints[Random.Range(0, spawnPoints.Count - 1)].transform);
         newHuman.transform.parent = humans.transform;
-        yield return new WaitForSeconds(HumanSpawnTimer);
+        yield return new WaitForSeconds(masterFlow.GetHumanSpawnRate());
         StartCoroutine(spawnHumans());
     }
 }

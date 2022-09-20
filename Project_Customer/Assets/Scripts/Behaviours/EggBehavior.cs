@@ -7,6 +7,7 @@ public class EggBehavior : MonoBehaviour
     public SpawnTurtles SpawnerParent;
     public float TurtleSizeScale;
     public GameObject turtlePrefab;
+    
     MasterFlow masterFlow;
 
     public void Start()

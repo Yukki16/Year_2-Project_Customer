@@ -13,11 +13,12 @@ public class MasterFlow : MonoBehaviour
     public GameObject draggablesParent;
     public int intlTrashPieces;
 
-    private int intlSpawnHumanDelay = 10;
-    private int intlSpawnSeagullDelay = 30;
-    private int intlSpawnCrabDelay = 50;
+    private readonly int intlSpawnHumanDelay = 10;
+    private readonly int intlSpawnSeagullDelay = 30;
+    private readonly int intlSpawnCrabDelay = 50;
 
-    public int TurtleSpawnDelay = 15;
+    public int EggSpawnDelay = 20;
+    public int TurtleSpawnDelay = 7;
     public int HumanSpawnDelay = 9;
     public int SeagullSpawnDelay = 12;
     public int CrabSpawnDelay = 15;
@@ -26,9 +27,9 @@ public class MasterFlow : MonoBehaviour
 
     private GameObject trashSpot;
 
-    int maxDistanceFromCenter = 15;
-    int intlTrashMaxBottomDistance = 36;
-    int intlTrashMinBottomDistance = 12;
+    private readonly int maxDistanceFromCenter = 15;
+    private readonly int intlTrashMaxBottomDistance = 36;
+    private readonly int intlTrashMinBottomDistance = 12;
 
     private bool preloadCheck { get; }
 
@@ -43,7 +44,6 @@ public class MasterFlow : MonoBehaviour
         SpawnInitialTrash();
 
         StartCoroutine(StartSpawns());
-        StartCoroutine(IncreaseSpawnRates());
     }
 
     #region SpawnSettings
@@ -53,14 +53,7 @@ public class MasterFlow : MonoBehaviour
         StartCoroutine(StartHumanSpawn());
         StartCoroutine(StartCrabSpawn());
         StartCoroutine(StartSeagullSpawn());
-        yield return null;
-    }
-    private IEnumerator IncreaseSpawnRates()
-    {
-        StartCoroutine(IncreaseTurtleSpawnRate());
-        StartCoroutine(IncreaseHumanSpawnRate());
-        StartCoroutine(IncreaseSeagullSpawnRate());
-        StartCoroutine(IncreaseCrabSpawnRate());
+        StartCoroutine(IncreaseEggSpawnRate());
         yield return null;
     }
 
@@ -68,18 +61,21 @@ public class MasterFlow : MonoBehaviour
     {
         yield return new WaitForSeconds(intlSpawnHumanDelay);
         spawnHumans.enabled = true;
+        StartCoroutine(IncreaseHumanSpawnRate());
     }
 
     private IEnumerator StartSeagullSpawn()
     {
         yield return new WaitForSeconds(intlSpawnSeagullDelay);
         spawnSeagulls.enabled = true;
+        StartCoroutine(IncreaseSeagullSpawnRate());
     }
 
     private IEnumerator StartCrabSpawn()
     {
         yield return new WaitForSeconds(intlSpawnCrabDelay);
-        spawnCrabs.enabled = true;
+        spawnCrabs.enabled = true;  
+        StartCoroutine(IncreaseCrabSpawnRate());
     }
 
     private IEnumerator IncreaseTurtleSpawnRate()
@@ -121,6 +117,15 @@ public class MasterFlow : MonoBehaviour
             StartCoroutine(IncreaseCrabSpawnRate());
         }
     }
+    private IEnumerator IncreaseEggSpawnRate()
+    {
+        yield return new WaitForSeconds(ObjSpawnRateIncreaseDelay);
+        if (EggSpawnDelay > 10)
+        {
+            EggSpawnDelay -= 1;
+            StartCoroutine(IncreaseEggSpawnRate());
+        }
+    }
 
     #endregion
 
@@ -128,7 +133,7 @@ public class MasterFlow : MonoBehaviour
 
     public int GetEggSpawnRate()
     {
-        return TurtleSpawnDelay;
+        return EggSpawnDelay;
     }
 
     public int GetTurtleSpawnRate()
