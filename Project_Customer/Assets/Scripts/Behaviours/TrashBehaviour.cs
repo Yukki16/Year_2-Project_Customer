@@ -5,9 +5,11 @@ using UnityEngine;
 public class TrashBehaviour : MonoBehaviour
 {
     private bool locked;
+    private bool hasBeenPickedUp;
 
     public void DisableBinCollection()
     {
+        hasBeenPickedUp = true;
         locked = true;
     }
 
@@ -18,7 +20,7 @@ public class TrashBehaviour : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.CompareTag("bin") && !locked)
+        if (collision.gameObject.CompareTag("bin") && !locked && hasBeenPickedUp)
         {
             Destroy(gameObject);
         }

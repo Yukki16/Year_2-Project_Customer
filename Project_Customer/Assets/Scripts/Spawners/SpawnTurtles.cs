@@ -11,26 +11,25 @@ public class SpawnTurtles : MonoBehaviour
     private Terrain playArea;
 
     GameObject turtles;
-
     GameObject targets;
+    MasterFlow masterFlow;
 
     [SerializeField] private GameObject turtlePrefab;
     [SerializeField] private GameObject eggPrefab;
 
     private int spawnEggStep, leftEggs = 1, rightEggs;
 
-    public int turtleSpawnTimeMin = 8;
-    public int turtleSpawnTimeMax = 14;
     public int EggSeperationDistance = 5;
     public float TurtleSizeScale = 3.5f;
     public int MaxEggsTotal = 6;
-    public int EggSpawnTimer;
 
     GameObject TurtleSpawnEggs;
     #endregion
 
     private void Start()
     {
+        masterFlow = FindObjectOfType<MasterFlow>();
+
         turtles = new GameObject(name: "Turtles");
         turtles.transform.SetParent(gameObject.transform);
 
@@ -46,7 +45,6 @@ public class SpawnTurtles : MonoBehaviour
         TurtleSpawnEggs = new GameObject();
         TurtleSpawnEggs.transform.SetParent(transform);
 
- 
         StartCoroutine(SpawnSpawners());
     }
 
@@ -69,8 +67,6 @@ public class SpawnTurtles : MonoBehaviour
     {
         GameObject newEgg = Instantiate(eggPrefab, TurtleSpawnEggs.transform);
 
-
-
         if (spawnEggStep % 2 == 0)
         {
             //Spawn Egg on Right Side
@@ -91,7 +87,7 @@ public class SpawnTurtles : MonoBehaviour
             yield break;
         }
 
-        yield return new WaitForSeconds(EggSpawnTimer);
+        yield return new WaitForSeconds(masterFlow.GetEggSpawnRate());
         spawnEggStep++;
         StartCoroutine(SpawnSpawners());
 

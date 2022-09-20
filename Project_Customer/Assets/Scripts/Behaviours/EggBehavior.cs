@@ -5,18 +5,16 @@ using UnityEngine;
 public class EggBehavior : MonoBehaviour
 {
     public SpawnTurtles SpawnerParent;
-    public int SpawnTimerMin;
-    public int SpawnTimerMax;
     public float TurtleSizeScale;
     public GameObject turtlePrefab;
+    MasterFlow masterFlow;
 
     public void Start()
     {
+        masterFlow = GameObject.FindObjectOfType<MasterFlow>();
         SpawnerParent = GameObject.FindGameObjectWithTag("TurtleSpawner").GetComponent<SpawnTurtles>();
         turtlePrefab = SpawnerParent.GetTurtlePrefab();
         TurtleSizeScale = SpawnerParent.TurtleSizeScale;
-        SpawnTimerMin = SpawnerParent.turtleSpawnTimeMin;
-        SpawnTimerMax = SpawnerParent.turtleSpawnTimeMax;
 
         StartCoroutine(spawnTurtles());
     }
@@ -27,7 +25,7 @@ public class EggBehavior : MonoBehaviour
         newTurtle.transform.localScale = new Vector3(TurtleSizeScale, TurtleSizeScale, TurtleSizeScale);
         SpawnerParent.AddTurtle(newTurtle);    
        
-        yield return new WaitForSeconds(Random.Range(SpawnTimerMin, SpawnTimerMax));
+        yield return new WaitForSeconds(masterFlow.GetTurtleSpawnRate());
         StartCoroutine(spawnTurtles());     
     }
 

@@ -9,6 +9,7 @@ public class SpawnHumans : MonoBehaviour
         
     private List<GameObject> spawnPoints;
     private Terrain playArea;
+    public int HumanSpawnTimer = 8;
     public int DistanceFromBorder = 25;
     public int MinHeightFromBottom = 10;
     public int MaxHeightFromBottom = 30;
@@ -68,7 +69,7 @@ public class SpawnHumans : MonoBehaviour
     {
         GameObject newHuman = Instantiate(HumanPrefab, spawnPoints[Random.Range(0, spawnPoints.Count - 1)].transform);
         newHuman.transform.parent = humans.transform;
-        yield return new WaitForSeconds(Random.Range(5, 10));
+        yield return new WaitForSeconds(HumanSpawnTimer);
         StartCoroutine(spawnHumans());
     }
 }

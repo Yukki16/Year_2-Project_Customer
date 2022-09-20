@@ -8,12 +8,14 @@ public class SpawnSeagulls : MonoBehaviour
     private Terrain playArea;
     private GameObject[] Turtles;
     GameObject Seagulls;
-    public int SeagullSpawnTimer = 5;
+    MasterFlow masterFlow;
     public bool EnableSpawning;
     public bool SpawnSeagull;
 
     void Start()
     {
+        masterFlow = GameObject.FindObjectOfType<MasterFlow>();
+
         playArea = Terrain.activeTerrain;
         Seagulls = new GameObject(name: "Seagulls");
         Seagulls.transform.SetParent(gameObject.transform);
@@ -23,7 +25,7 @@ public class SpawnSeagulls : MonoBehaviour
 
     IEnumerator spawnSeagulls()
     {
-        yield return new WaitForSeconds(SeagullSpawnTimer);
+        yield return new WaitForSeconds(masterFlow.GetSeagullSpawnRate());
         if (EnableSpawning)
         {
             GameObject newSeagull = Instantiate(SeagullPrefab);

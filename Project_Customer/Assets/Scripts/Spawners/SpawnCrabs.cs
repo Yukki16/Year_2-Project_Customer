@@ -4,18 +4,16 @@ using UnityEngine;
 
 public class SpawnCrabs : MonoBehaviour
 {
-
     [SerializeField] GameObject CrabPrefab;
-
-    private Terrain playArea;
-
     GameObject crabs;
+
+    MasterFlow masterFlow;
     private GameObject targets;
+    private Terrain playArea;
 
     public int MaxDistanceFromCenter = 20;
     public int MinHeightFromBottom = 32;
     public int MaxHeightFromBottom = 42;
-    public int CrabSpawnTimer = 1;
 
     void Start()
     {
