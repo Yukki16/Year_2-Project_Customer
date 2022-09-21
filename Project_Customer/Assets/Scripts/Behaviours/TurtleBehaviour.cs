@@ -125,10 +125,19 @@ public class TurtleBehaviour : MonoBehaviour
     {
         if (animator.GetFloat("WalkSpeed") <= 0.11f)
         {
-            tweenTo.Kill();
-            tween.Kill();
-            DestroyTurtle();
+            StartCoroutine(TurtleTrashDeath());
         }
+    }
+
+    IEnumerator TurtleTrashDeath()
+    {
+        tweenTo.Kill();
+        tween.Kill();
+        tween = rend.material.DOColor(Color.white, 0.1f);
+        animator.SetFloat("WalkSpeed", 1);
+        animator.SetTrigger("TrashDeath");
+        yield return new WaitForSeconds(5.01f);
+        DestroyTurtle();
     }
 
     void DestroyOnTarget()

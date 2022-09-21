@@ -40,14 +40,14 @@ public class Seagull : MonoBehaviour
     private GameObject trashTarget;
     private GameObject targetTurtle;
     private Animator animator;
-    private List<GameObject> turtleList;
+    private SpawnTurtles turtleSpawner;
     private bool trashCanceled;
 
     #endregion
 
     void Start()
     {
-        turtleList = GameObject.FindGameObjectWithTag("TurtleSpawner").GetComponent<SpawnTurtles>().GetTurtles();
+        turtleSpawner = GameObject.FindGameObjectWithTag("TurtleSpawner").GetComponent<SpawnTurtles>();
 
         playArea = Terrain.activeTerrain;
 
@@ -186,7 +186,8 @@ public class Seagull : MonoBehaviour
                 targetTurtle = ReturnClosestTurtle();
         }
 
-        targetTurtle.GetComponent<TurtleBehaviour>().EnableOutline();
+
+        targetTurtle.GetComponent<TurtleBehaviour>().EnableOutline();   
         foundTurtle = true;
         currentState = SeagullState.Detect;
     }
@@ -194,10 +195,9 @@ public class Seagull : MonoBehaviour
     //Returns a random turtle from available list
     private GameObject ReturnRandomTurtle()
     {
-
-        if (turtleList.Count > 0)
+        if (turtleSpawner.GetTurtles().Count > 0)
         {
-            return turtleList[Random.Range(0, turtleList.Count - 1)];
+            return turtleSpawner.GetTurtles()[Random.Range(0, turtleSpawner.GetTurtles().Count - 1)];
         }
 
         else
@@ -211,18 +211,18 @@ public class Seagull : MonoBehaviour
     //Returns the turtle closest to the seagull
     private GameObject ReturnClosestTurtle()
     {
-        targetTurtle = turtleList[0];
+        targetTurtle = turtleSpawner.GetTurtles()[0];
 
         float lowestDist = Mathf.Infinity;
 
-        for (int i = 0; i < turtleList.Count; i++)
+        for (int i = 0; i < turtleSpawner.GetTurtles().Count; i++)
         {
-            float dist = Vector3.Distance(turtleList[i].transform.position, transform.position);
+            float dist = Vector3.Distance(turtleSpawner.GetTurtles()[i].transform.position, transform.position);
 
             if (dist < lowestDist)
             {
                 lowestDist = dist;
-                targetTurtle = turtleList[i];
+                targetTurtle = turtleSpawner.GetTurtles()[i];
             }
         }
 

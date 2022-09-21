@@ -358,7 +358,7 @@ MonoBehaviour:
   CrabPrefab: {fileID: 2648057164794756449, guid: 300032dd0b669174eb0c97f60ea45c34, type: 3}
   MaxDistanceFromCenter: 10
   MinHeightFromBottom: 10
-  MaxHeightFromBottom: 15
+  MaxHeightFromBottom: 30
 --- !u!4 &39442581
 Transform:
   m_ObjectHideFlags: 0
@@ -412,14 +412,16 @@ MonoBehaviour:
   intlTrashPieces: 15
   intlSpawnEggDelay: 3
   intlSpawnHumanDelay: 10
-  intlSpawnSeagullDelay: 30
-  intlSpawnCrabDelay: 10
+  intlSpawnSeagullDelay: 90
+  intlSpawnCrabDelay: 35
   EggSpawnDelay: 35
   TurtleSpawnDelay: 16
   HumanSpawnDelay: 9
   SeagullSpawnDelay: 12
   CrabSpawnDelay: 15
   TurtleDeathTime: 5
+  hmnDropRateMin: 2
+  hmnDropRateMax: 5
   ObjSpawnRateIncreaseDelay: 15
 --- !u!4 &40324731
 Transform:
@@ -500,6 +502,10 @@ PrefabInstance:
       value: 1.232184
       objectReference: {fileID: 0}
     - target: {fileID: 2706486478953497042, guid: 6c7c2d8569441bb4bbcb15b35f4c77c7, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2706486478953497042, guid: 6c7c2d8569441bb4bbcb15b35f4c77c7, type: 3}
       propertyPath: m_Center.y
       value: 0.5049083
       objectReference: {fileID: 0}
@@ -511,7 +517,12 @@ PrefabInstance:
       propertyPath: m_TagString
       value: bin
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 6907802295580690609, guid: 6c7c2d8569441bb4bbcb15b35f4c77c7, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 7045440718013014484, guid: 6c7c2d8569441bb4bbcb15b35f4c77c7, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 6c7c2d8569441bb4bbcb15b35f4c77c7, type: 3}
 --- !u!1001 &89643513
 PrefabInstance:
@@ -1818,6 +1829,23 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1ccbbeef7277e0644b3866c9840300f0, type: 3}
+--- !u!1 &566889440 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3835806788688792193, guid: 6c7c2d8569441bb4bbcb15b35f4c77c7, type: 3}
+  m_PrefabInstance: {fileID: 71160810}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &566889446
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 566889440}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 39e9e1b023a9d534cb0328149424daf6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &567852581 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 9065134665529840230, guid: 52e21bca7d9e35f4ab52ef54db4704e7, type: 3}

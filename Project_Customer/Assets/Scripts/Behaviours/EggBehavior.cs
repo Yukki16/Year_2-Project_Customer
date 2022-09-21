@@ -22,6 +22,7 @@ public class EggBehavior : MonoBehaviour
 
     IEnumerator spawnTurtles()
     {
+        yield return new WaitForSeconds(1.5f);
         GameObject newTurtle = Instantiate(turtlePrefab, transform);
         newTurtle.transform.localScale = new Vector3(TurtleSizeScale, TurtleSizeScale, TurtleSizeScale);
         SpawnerParent.AddTurtle(newTurtle);    
