@@ -1,100 +1,5 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &829641277897142266
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1632784519747539453}
-  m_Layer: 0
-  m_Name: CrabHandROOT
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1632784519747539453
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 829641277897142266}
-  m_LocalRotation: {x: -0.7071068, y: 0.7071068, z: -0, w: 0}
-  m_LocalPosition: {x: -0, y: -0.239, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 5905596766670659770}
-  - {fileID: 7020868368106776014}
-  m_Father: {fileID: 3821888754534849567}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 90, z: -90}
---- !u!1 &1778082364654121598
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 6381648124263676799}
-  m_Layer: 0
-  m_Name: CrabHandBigClawNull
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &6381648124263676799
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1778082364654121598}
-  m_LocalRotation: {x: 0, y: 0, z: 0.22850445, w: 0.97354287}
-  m_LocalPosition: {x: -0.1755335, y: 0, z: -3.001361e-18}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 2647085446953964162}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &2377295473930650480
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 5748720219873469428}
-  m_Layer: 0
-  m_Name: CrabHandSmallClawNULL
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &5748720219873469428
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2377295473930650480}
-  m_LocalRotation: {x: 0.44989112, y: -0.54552543, z: 0.44989112, w: 0.54552543}
-  m_LocalPosition: {x: -0.09771347, y: 0.0010575771, z: -8.8415665e-18}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 7716310977292562827}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2648057164794756449
 GameObject:
   m_ObjectHideFlags: 0
@@ -122,7 +27,7 @@ Transform:
   m_GameObject: {fileID: 2648057164794756449}
   m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 10, y: 10, z: 10}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1577183777558261944}
@@ -154,164 +59,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 4.4, y: 1, z: 4.4}
+  m_Size: {x: 0.44, y: 0.44, z: 0.44}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!1 &3922744001800911639
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 7020868368106776014}
-  - component: {fileID: 110840192449190354}
-  m_Layer: 0
-  m_Name: CrabHand
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &7020868368106776014
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3922744001800911639}
-  m_LocalRotation: {x: -0.000000029802312, y: -0.7071068, z: -0.000000029802312, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1632784519747539453}
-  m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
---- !u!137 &110840192449190354
-SkinnedMeshRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3922744001800911639}
-  m_Enabled: 1
-  m_CastShadows: 1
-  m_ReceiveShadows: 1
-  m_DynamicOccludee: 1
-  m_StaticShadowCaster: 0
-  m_MotionVectors: 1
-  m_LightProbeUsage: 1
-  m_ReflectionProbeUsage: 1
-  m_RayTracingMode: 3
-  m_RayTraceProcedural: 0
-  m_RenderingLayerMask: 1
-  m_RendererPriority: 0
-  m_Materials:
-  - {fileID: 2100000, guid: 631a4ced5d4285341949e3fd85455212, type: 2}
-  m_StaticBatchInfo:
-    firstSubMesh: 0
-    subMeshCount: 0
-  m_StaticBatchRoot: {fileID: 0}
-  m_ProbeAnchor: {fileID: 0}
-  m_LightProbeVolumeOverride: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_ReceiveGI: 1
-  m_PreserveUVs: 0
-  m_IgnoreNormalsForChartDetection: 0
-  m_ImportantGI: 0
-  m_StitchLightmapSeams: 1
-  m_SelectedEditorRenderState: 3
-  m_MinimumChartSize: 4
-  m_AutoUVMaxDistance: 0.5
-  m_AutoUVMaxAngle: 89
-  m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
-  serializedVersion: 2
-  m_Quality: 0
-  m_UpdateWhenOffscreen: 0
-  m_SkinnedMotionVectors: 1
-  m_Mesh: {fileID: -6331607595129161443, guid: 42e097004c2550042878eec58de5a2e2, type: 3}
-  m_Bones:
-  - {fileID: 1632784519747539453}
-  - {fileID: 5905596766670659770}
-  - {fileID: 2600725330853833439}
-  - {fileID: 7716310977292562827}
-  - {fileID: 5748720219873469428}
-  - {fileID: 2647085446953964162}
-  - {fileID: 6381648124263676799}
-  m_BlendShapeWeights: []
-  m_RootBone: {fileID: 1632784519747539453}
-  m_AABB:
-    m_Center: {x: -0.19219881, y: -0.010987967, z: 0}
-    m_Extent: {x: 0.20707077, y: 0.14211608, z: 0.058144134}
-  m_DirtyAABB: 0
---- !u!1 &4619340600463269869
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 7716310977292562827}
-  m_Layer: 0
-  m_Name: CrabHandSmallClaw1
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &7716310977292562827
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4619340600463269869}
-  m_LocalRotation: {x: 0.94739294, y: -0.3200729, z: -6.5368934e-17, w: 4.254783e-17}
-  m_LocalPosition: {x: -0.083741195, y: 7.9936054e-17, z: -6.58831e-19}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 5748720219873469428}
-  m_Father: {fileID: 2600725330853833439}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &6482317226376881236
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 2647085446953964162}
-  m_Layer: 0
-  m_Name: CrabHandBigClaw
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &2647085446953964162
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6482317226376881236}
-  m_LocalRotation: {x: -4.816393e-35, y: -8.5520375e-18, z: 0.025513645, w: 0.9996745}
-  m_LocalPosition: {x: -0.09797511, y: 0.04575599, z: 7.326829e-18}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 6381648124263676799}
-  m_Father: {fileID: 5905596766670659770}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &7255656006322021522
 GameObject:
   m_ObjectHideFlags: 0
@@ -338,7 +87,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7255656006322021522}
   m_LocalRotation: {x: -0, y: -0.7071068, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: 0.10500002, y: -0.164, z: -0.16100003}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.3, y: 0.3, z: 0.3}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -5182,71 +4931,6 @@ ParticleSystem:
         m_PostInfinity: 2
         m_RotationOrder: 4
     vectorLabel1_3: W
---- !u!1 &7733086646843368192
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 2600725330853833439}
-  m_Layer: 0
-  m_Name: CrabHandSmallClaw
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &2600725330853833439
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7733086646843368192}
-  m_LocalRotation: {x: 0, y: 0, z: 0.17767479, w: 0.98408926}
-  m_LocalPosition: {x: -0.057062168, y: -4.6573433e-35, z: -4.599406e-19}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 7716310977292562827}
-  m_Father: {fileID: 5905596766670659770}
-  m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &8856982221737544276
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 5905596766670659770}
-  m_Layer: 0
-  m_Name: CrabHandBigClaw
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &5905596766670659770
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8856982221737544276}
-  m_LocalRotation: {x: 0.997347, y: -0.072794236, z: -8.476841e-18, w: 6.077651e-17}
-  m_LocalPosition: {x: -0.11887312, y: -5.5511148e-18, z: -3.0814877e-34}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 2647085446953964162}
-  - {fileID: 2600725330853833439}
-  m_Father: {fileID: 1632784519747539453}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &8949144362846449100
 GameObject:
   m_ObjectHideFlags: 0
@@ -5275,8 +4959,7 @@ Transform:
   m_LocalPosition: {x: 0.0000007078052, y: -0.105009995, z: -0.0000014454131}
   m_LocalScale: {x: 5.4999995, y: 5.500001, z: 5.4999995}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 1632784519747539453}
+  m_Children: []
   m_Father: {fileID: 3455414690689361883}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -5313,15 +4996,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 5b495355e6e1a3a4da1ea97d3617cfca, type: 3}
       propertyPath: m_LocalScale.x
-      value: 10.25416
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 5b495355e6e1a3a4da1ea97d3617cfca, type: 3}
       propertyPath: m_LocalScale.y
-      value: 10.25416
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 5b495355e6e1a3a4da1ea97d3617cfca, type: 3}
       propertyPath: m_LocalScale.z
-      value: 10.25416
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 5b495355e6e1a3a4da1ea97d3617cfca, type: 3}
       propertyPath: m_LocalPosition.x
@@ -5370,10 +5053,22 @@ PrefabInstance:
     - target: {fileID: 3024000808402082274, guid: 5b495355e6e1a3a4da1ea97d3617cfca, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: c6e29ca7eeabc564ca63699d03ba54d2, type: 2}
+      objectReference: {fileID: 2100000, guid: 8b4427da44330444f9e0fc752629c31b, type: 2}
     - target: {fileID: 5684631524298271229, guid: 5b495355e6e1a3a4da1ea97d3617cfca, type: 3}
       propertyPath: m_LocalScale.y
-      value: 0.62764
+      value: 1.3276469
+      objectReference: {fileID: 0}
+    - target: {fileID: 5684631524298271229, guid: 5b495355e6e1a3a4da1ea97d3617cfca, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 6e-15
+      objectReference: {fileID: 0}
+    - target: {fileID: 5684631524298271229, guid: 5b495355e6e1a3a4da1ea97d3617cfca, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.030088
+      objectReference: {fileID: 0}
+    - target: {fileID: 5684631524298271229, guid: 5b495355e6e1a3a4da1ea97d3617cfca, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 6e-15
       objectReference: {fileID: 0}
     - target: {fileID: 6669172101347319196, guid: 5b495355e6e1a3a4da1ea97d3617cfca, type: 3}
       propertyPath: m_Materials.Array.data[0]

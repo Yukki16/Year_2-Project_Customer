@@ -13,10 +13,10 @@ public class MasterFlow : MonoBehaviour
     public GameObject draggablesParent;
     public int intlTrashPieces;
 
-    private readonly int intlSpawnEggDelay = 3;
-    private readonly int intlSpawnHumanDelay = 10;
-    private readonly int intlSpawnSeagullDelay = 30;
-    private readonly int intlSpawnCrabDelay = 120;
+    public int intlSpawnEggDelay = 3;
+    public int intlSpawnHumanDelay = 10;
+    public int intlSpawnSeagullDelay = 30;
+    public int intlSpawnCrabDelay = 120;
 
     public int EggSpawnDelay = 20;
     public int TurtleSpawnDelay = 7;

@@ -10,7 +10,6 @@ public class Seagull : MonoBehaviour
     private SeagullState currentState;
 
     public Vector3 startingVector;
-    private Vector3 lastPosition;
 
     private float timeCounter;
     private float targetTimer;
@@ -42,7 +41,8 @@ public class Seagull : MonoBehaviour
     private GameObject targetTurtle;
     private Animator animator;
     private List<GameObject> turtleList;
-    
+    private bool trashCanceled;
+
     #endregion
 
     void Start()
@@ -114,7 +114,7 @@ public class Seagull : MonoBehaviour
         if (currentState != SeagullState.Pursue)
             return;
 
-        if (collision.gameObject.tag is "Draggable")
+        if (collision.gameObject.tag is "Draggable" && collision.gameObject.GetComponent<TrashBehaviour>().GetIsActive())
         {
             trashTarget = collision.gameObject;
             currentState = SeagullState.TrashExit;
@@ -172,10 +172,10 @@ public class Seagull : MonoBehaviour
         }
 
         if (RandomTurtle)
-        targetTurtle = ReturnRandomTurtle();
+            targetTurtle = ReturnRandomTurtle();
 
         if (ClosestTurtle)
-        targetTurtle = ReturnClosestTurtle();
+            targetTurtle = ReturnClosestTurtle();
 
         if (targetTurtle == null)
         {
@@ -194,7 +194,18 @@ public class Seagull : MonoBehaviour
     //Returns a random turtle from available list
     private GameObject ReturnRandomTurtle()
     {
-        return turtleList[Random.Range(0, turtleList.Count - 1)];
+
+        if (turtleList.Count > 0)
+        {
+            return turtleList[Random.Range(0, turtleList.Count - 1)];
+        }
+
+        else
+        {
+            currentState = SeagullState.Patrol;
+            return null;
+        }
+
     }
 
     //Returns the turtle closest to the seagull
@@ -232,12 +243,18 @@ public class Seagull : MonoBehaviour
             DestroySeagull();
         }
     }
-  
+
     //Called when trash is presented to the seagull before it can take targeted turtle
     private void TrashCancel()
     {
-        targetTurtle.gameObject.GetComponent<TurtleBehaviour>().DisableOutline();
-        GameObject.FindGameObjectWithTag("DraggableParent").GetComponent<Dragger>().DisableSelected();
+        if (!trashCanceled)
+        {
+            targetTurtle.GetComponent<TurtleBehaviour>().DisableOutline();
+            GameObject.FindGameObjectWithTag("DraggableParent").GetComponent<Dragger>().DisableSelected();
+            trashCanceled = true;
+        }
+
+
         animator.SetTrigger("Pickup");
         trashTarget.transform.position = transform.position;
         MoveFowardUp();
@@ -258,7 +275,7 @@ public class Seagull : MonoBehaviour
     private void MoveFowardUp()
     {
         //visualTransfom.rotation = Quaternion.Euler(new Vector3(0, 0, 0));
-        
+
         transform.position += new Vector3(visualTransfom.forward.x, targetYModifier, visualTransfom.forward.z) * Time.deltaTime * 25;
         if (targetYModifier < 100)
             targetYModifier += 0.005f;
@@ -267,6 +284,12 @@ public class Seagull : MonoBehaviour
     //Called after detection
     private void MoveToTurtle()
     {
+
+        if (targetTurtle == null)
+        {
+            Debug.Log("LostTurtle");
+            currentState = SeagullState.Patrol;
+        }
 
         visualTransfom.LookAt(targetTurtle.transform);
 
@@ -293,7 +316,7 @@ public class Seagull : MonoBehaviour
         if (TurtleTaken)
         {
             if (targetTurtle != null)
-            targetTurtle.GetComponent<TurtleBehaviour>().DestroyTurtle();
+                targetTurtle.GetComponent<TurtleBehaviour>().DestroyTurtle();
         }
         Object.Destroy(gameObject);
     }

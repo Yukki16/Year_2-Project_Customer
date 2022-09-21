@@ -31,6 +31,7 @@ public class TurtleBehaviour : MonoBehaviour
     public int MinWobbleDistance = 5;
     public int MaxWobbleDistance = 10;
     public int WobbleSwitchTimer;
+    public int TurtleRemovalPoint = 35;
 
     Outline outline;
     private bool excecution;
@@ -66,27 +67,28 @@ public class TurtleBehaviour : MonoBehaviour
     {
         if (collision.gameObject.tag is "TurtleUntargetable")
         {
+            Debug.Log("removed");
             RemoveFromList();
         }
     }
+
     private DG.Tweening.Core.TweenerCore<Color, Color, DG.Tweening.Plugins.Options.ColorOptions> tween;
-    private DG.Tweening.Core.TweenerCore<float, float, DG.Tweening.Plugins.Options.FloatOptions> speedTween;
-        
-        private void OnTriggerEnter(Collider collision)
+    private Tween tweenTo;
+
+    private void OnTriggerEnter(Collider collision)
     {
         if (collision.gameObject.tag is "Draggable")
         {
-            Debug.Log("contact");
             DisableTurtle();
+            RemoveFromList();
+
             if (tween != null && tween.active)
             {               
                 tween.Kill();
             }
             
             tween = rend.material.DOColor(Color.red, masterFlow.ReturnTurtleDeathTime());
-            DOTween.To(() => animator.GetFloat("WalkSpeed"), value => { animator.SetFloat("WalkSpeed", value); }, 0.1f, masterFlow.ReturnTurtleDeathTime());
-            //rend.material.shader = Shader.Find("Universal Render Pipeline/Simple Lit");
-            //rend.material.SetColor("_BaseColor", new Color(255, 0.4f, 0.6f, 255f));
+            tweenTo = DOTween.To(() => animator.GetFloat("WalkSpeed"), value => { animator.SetFloat("WalkSpeed", value); }, 0.1f, masterFlow.ReturnTurtleDeathTime());
         }
     }
 
@@ -98,8 +100,34 @@ public class TurtleBehaviour : MonoBehaviour
             {
                 tween.Kill();
             }
+
+            if (tweenTo != null && tweenTo.active)
+            {
+                tweenTo.Kill();
+                animator.SetFloat("WalkSpeed", 1);
+            }
+
             tween = rend.material.DOColor(Color.white, 1.0f);
+            AddSelfToList();
             EnableTurtle();
+        }
+    }
+
+    void DetectRemovalPoint()
+    {
+        if (transform.position.z >= TurtleRemovalPoint)
+        {
+            RemoveFromList();
+        }
+    }
+
+    void DetectTurtleSlow()
+    {
+        if (animator.GetFloat("WalkSpeed") <= 0.11f)
+        {
+            tweenTo.Kill();
+            tween.Kill();
+            DestroyTurtle();
         }
     }
 
@@ -118,11 +146,29 @@ public class TurtleBehaviour : MonoBehaviour
 
     public void RemoveFromList()
     {
-        GameObject.FindGameObjectWithTag("TurtleSpawner").GetComponent<SpawnTurtles>().GetTurtles().Remove(gameObject);
+        List<GameObject> list = GameObject.FindGameObjectWithTag("TurtleSpawner").GetComponent<SpawnTurtles>().GetTurtles();
+
+        if (list.Contains(gameObject))
+            list.Remove(gameObject);
+    }
+
+    public void AddSelfToList()
+    {
+        GameObject.FindGameObjectWithTag("TurtleSpawner").GetComponent<SpawnTurtles>().GetTurtles().Add(gameObject);
     }
 
     public void DestroyTurtle()
     {
+        if (tween != null && tween.active)
+        {
+            tween.Kill();
+        }
+
+        if (tweenTo != null && tweenTo.active)
+        {
+            tweenTo.Kill();
+        }
+
         RemoveFromList();
         Destroy(targetObj);
         Destroy(gameObject);
@@ -188,7 +234,9 @@ public class TurtleBehaviour : MonoBehaviour
 
     void Update()
     {
+        DetectRemovalPoint();
         DestroyOnTarget();
+        DetectTurtleSlow();
     }
 
 

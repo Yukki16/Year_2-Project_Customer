@@ -154,8 +154,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   CrabPrefab: {fileID: 2648057164794756449, guid: 300032dd0b669174eb0c97f60ea45c34, type: 3}
   MaxDistanceFromCenter: 10
-  MinHeightFromBottom: 30
-  MaxHeightFromBottom: 40
+  MinHeightFromBottom: 10
+  MaxHeightFromBottom: 15
 --- !u!4 &39442581
 Transform:
   m_ObjectHideFlags: 0
@@ -206,12 +206,17 @@ MonoBehaviour:
   spawnTurtles: {fileID: 1660498962}
   trashPrefab: {fileID: 6812620011374146146, guid: ee433ad743b66894b8e642aa0a6f8dc2, type: 3}
   draggablesParent: {fileID: 1969094602}
-  intlTrashPieces: 0
-  EggSpawnDelay: 20
+  intlTrashPieces: 15
+  intlSpawnEggDelay: 3
+  intlSpawnHumanDelay: 10
+  intlSpawnSeagullDelay: 30
+  intlSpawnCrabDelay: 10
+  EggSpawnDelay: 30
   TurtleSpawnDelay: 15
   HumanSpawnDelay: 9
   SeagullSpawnDelay: 12
   CrabSpawnDelay: 15
+  TurtleDeathTime: 5
   ObjSpawnRateIncreaseDelay: 15
 --- !u!4 &40324731
 Transform:

@@ -147,6 +147,7 @@ MonoBehaviour:
   MinWobbleDistance: 5
   MaxWobbleDistance: 10
   WobbleSwitchTimer: 2
+  TurtleRemovalPoint: 35
 --- !u!64 &1866541548456393187
 MeshCollider:
   m_ObjectHideFlags: 0
