@@ -40,7 +40,7 @@ public class Dragger : MonoBehaviour
     public void DisableSelected()
     {
         Cursor.visible = true;
-        lrOfTrash.enabled = false;
+        //lrOfTrash.enabled = false;
         selectedObject = null;
     }
 
@@ -108,7 +108,7 @@ public class Dragger : MonoBehaviour
 
             selectedObject.GetComponent<Rigidbody>().useGravity = true;
 
-            selectedObject.GetComponent<LineRenderer>().enabled = false;
+            //selectedObject.GetComponent<LineRenderer>().enabled = false;
 
             selectedObject = null;
             Cursor.visible = true;
@@ -129,8 +129,8 @@ public class Dragger : MonoBehaviour
 
             selectedObject.GetComponent<Rigidbody>().useGravity = false;
 
-            AddLineRay();
-            UpdateLine();
+           // AddLineRay();
+            //UpdateLine();
         }
     }
 

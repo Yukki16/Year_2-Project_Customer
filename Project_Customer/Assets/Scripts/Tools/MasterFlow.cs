@@ -23,6 +23,7 @@ public class MasterFlow : MonoBehaviour
     public int HumanSpawnDelay = 9;
     public int SeagullSpawnDelay = 12;
     public int CrabSpawnDelay = 20;
+    public int TurtleDeathTime = 5;
 
     public int ObjSpawnRateIncreaseDelay = 15;
 
@@ -36,6 +37,8 @@ public class MasterFlow : MonoBehaviour
 
     void Start()
     {
+        Application.targetFrameRate = 60;
+
         spawnTurtles.enabled = false;
         spawnCrabs.enabled = false;
         spawnHumans.enabled = false;
@@ -140,6 +143,10 @@ public class MasterFlow : MonoBehaviour
 
     #region ReturnRates
 
+    public int ReturnTurtleDeathTime()
+    {
+        return TurtleDeathTime;
+    }
     public int GetEggSpawnRate()
     {
         return EggSpawnDelay;

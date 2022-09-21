@@ -143,6 +143,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5d9eba1573cb2034980f9d593d61faaf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rend: {fileID: 2561068308062442355}
   MinWobbleDistance: 5
   MaxWobbleDistance: 10
   WobbleSwitchTimer: 2
@@ -263,6 +264,11 @@ PrefabInstance:
       objectReference: {fileID: 9100000, guid: 6f5ea71540c91d94e8b24e1dde2c9305, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f040300e73aba524d9e216d03efdb2ab, type: 3}
+--- !u!137 &2561068308062442355 stripped
+SkinnedMeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 8934947365378006869, guid: f040300e73aba524d9e216d03efdb2ab, type: 3}
+  m_PrefabInstance: {fileID: 6374266124182850598}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &4638026716329266516 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1740753393920131442, guid: f040300e73aba524d9e216d03efdb2ab, type: 3}

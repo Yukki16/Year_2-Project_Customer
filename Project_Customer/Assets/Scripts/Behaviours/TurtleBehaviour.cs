@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using DG.Tweening;
 
 public class TurtleBehaviour : MonoBehaviour
 {
@@ -17,12 +18,15 @@ public class TurtleBehaviour : MonoBehaviour
 
     GameObject targetObj;
 
-    public Animator animator;
+    public Renderer rend;
+
+    [System.NonSerialized] public Animator animator;
 
     private int direction = 1;
 
     int EndDistanceFromTop = 15;
 
+    private MasterFlow masterFlow;
 
     public int MinWobbleDistance = 5;
     public int MaxWobbleDistance = 10;
@@ -33,13 +37,15 @@ public class TurtleBehaviour : MonoBehaviour
 
     void Start()
     {
+        masterFlow = FindObjectOfType<MasterFlow>();
+        //rend = GetComponentInChildren<Renderer>();
         animator = GetComponentInChildren<Animator>();
         targetObj = new GameObject();
         turtleSpawnerParent = GameObject.FindGameObjectWithTag("TurtleTargets");
         outline = GetComponent<Outline>();
         mover = GetComponent<Mover>();
         playArea = Terrain.activeTerrain;
-        StartCoroutine(WiggleTarget());
+        //StartCoroutine(WiggleTarget());
         SpawnTarget();
     }
 
@@ -58,12 +64,44 @@ public class TurtleBehaviour : MonoBehaviour
 
     void OnCollisionEnter(Collision collision)
     {
+        if (collision.gameObject.tag is "TurtleUntargetable")
+        {
+            RemoveFromList();
+        }
+    }
+    private DG.Tweening.Core.TweenerCore<Color, Color, DG.Tweening.Plugins.Options.ColorOptions> tween;
+    private DG.Tweening.Core.TweenerCore<float, float, DG.Tweening.Plugins.Options.FloatOptions> speedTween;
+        
+        private void OnTriggerEnter(Collider collision)
+    {
         if (collision.gameObject.tag is "Draggable")
         {
-            Destroy(gameObject);
+            Debug.Log("contact");
+            DisableTurtle();
+            if (tween != null && tween.active)
+            {               
+                tween.Kill();
+            }
+            
+            tween = rend.material.DOColor(Color.red, masterFlow.ReturnTurtleDeathTime());
+            DOTween.To(() => animator.GetFloat("WalkSpeed"), value => { animator.SetFloat("WalkSpeed", value); }, 0.1f, masterFlow.ReturnTurtleDeathTime());
+            //rend.material.shader = Shader.Find("Universal Render Pipeline/Simple Lit");
+            //rend.material.SetColor("_BaseColor", new Color(255, 0.4f, 0.6f, 255f));
         }
     }
 
+    private void OnTriggerExit(Collider collision)
+    {
+        if (collision.gameObject.tag is "Draggable")
+        {
+            if (tween != null && tween.active)
+            {
+                tween.Kill();
+            }
+            tween = rend.material.DOColor(Color.white, 1.0f);
+            EnableTurtle();
+        }
+    }
 
     void DestroyOnTarget()
     {
@@ -103,6 +141,11 @@ public class TurtleBehaviour : MonoBehaviour
     public void DisableTurtle()
     {
         mover.Cancel();
+    }
+
+    public void EnableTurtle()
+    {
+        mover.Enable();
     }
 
     //TODO

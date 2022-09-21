@@ -32,6 +32,11 @@ public class Mover : MonoBehaviour
         navMeshAgent.isStopped = true;
     }
 
+    public void Enable()
+    {
+        navMeshAgent.isStopped = false;
+    }
+
     private void UpdateAnimator()
     {
         Vector3 velocity = navMeshAgent.velocity;
