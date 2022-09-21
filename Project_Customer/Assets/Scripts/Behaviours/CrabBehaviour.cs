@@ -41,6 +41,8 @@ public class CrabBehaviour : MonoBehaviour
 
         if (collision.gameObject.tag is "Draggable")
         {
+            if (!collision.gameObject.GetComponent<TrashBehaviour>().hasBeenPickedUp)
+                return;
             Destroy(collision.gameObject);
             Destroy(gameObject);
         }

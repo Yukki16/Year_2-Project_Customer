@@ -25,6 +25,7 @@ public class Seagull : MonoBehaviour
     public float width = 8;
     public float startingDistance = 50;
 
+    public int RadiusShrinkSpeed = 5;
     public int PickupSpeed = 1;
 
     public bool ClosestTurtle;
@@ -141,7 +142,7 @@ public class Seagull : MonoBehaviour
         }
 
         if (!hasShrank)
-            width -= 0.02f;
+            width -= 0.01f * RadiusShrinkSpeed;
     }
 
     //Points the seagull toward a specific point
@@ -220,7 +221,7 @@ public class Seagull : MonoBehaviour
 
     private void RemoveFromTurtles(GameObject turtle)
     {
-            
+        turtle.GetComponent<TurtleBehaviour>().RemoveFromList();
     }
 
     void DetectTurtleLoss()

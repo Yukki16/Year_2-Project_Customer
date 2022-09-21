@@ -206,7 +206,7 @@ MonoBehaviour:
   spawnTurtles: {fileID: 1660498962}
   trashPrefab: {fileID: 6812620011374146146, guid: ee433ad743b66894b8e642aa0a6f8dc2, type: 3}
   draggablesParent: {fileID: 1969094602}
-  intlTrashPieces: 15
+  intlTrashPieces: 0
   EggSpawnDelay: 20
   TurtleSpawnDelay: 15
   HumanSpawnDelay: 9
@@ -2100,7 +2100,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1660498961}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b1e66d5a8fd5ce446825cfdc48cb13b0, type: 3}
   m_Name: 
@@ -2568,7 +2568,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4397120021343468506, guid: de1be6cecd5b10f4d9f97381ebcc4eb1, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.25881964
+      value: 0.8182877
       objectReference: {fileID: 0}
     - target: {fileID: 4397120021343468506, guid: de1be6cecd5b10f4d9f97381ebcc4eb1, type: 3}
       propertyPath: m_LocalRotation.x
@@ -2576,7 +2576,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4397120021343468506, guid: de1be6cecd5b10f4d9f97381ebcc4eb1, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.9659257
+      value: 0.57480896
       objectReference: {fileID: 0}
     - target: {fileID: 4397120021343468506, guid: de1be6cecd5b10f4d9f97381ebcc4eb1, type: 3}
       propertyPath: m_LocalRotation.z
@@ -2588,7 +2588,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4397120021343468506, guid: de1be6cecd5b10f4d9f97381ebcc4eb1, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: 150
+      value: 70.173
       objectReference: {fileID: 0}
     - target: {fileID: 4397120021343468506, guid: de1be6cecd5b10f4d9f97381ebcc4eb1, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
