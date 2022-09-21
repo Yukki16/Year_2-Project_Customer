@@ -30,7 +30,6 @@ public class TrashBehaviour : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("bin") && !locked && hasBeenPickedUp)
         {
-            collision.gameObject.GetComponent<BinBehaviour>().PrintTest();
             Destroy(gameObject);
         }
     }

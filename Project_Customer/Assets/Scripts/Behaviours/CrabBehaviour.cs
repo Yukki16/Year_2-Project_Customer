@@ -59,6 +59,7 @@ public class CrabBehaviour : MonoBehaviour
     {
         yield return new WaitForSeconds(0.5f);
         entered = true;
+        Debug.Log("test");
     }
 
     IEnumerator DetectTrash(Collider collision)
