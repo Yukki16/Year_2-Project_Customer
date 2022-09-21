@@ -17,6 +17,7 @@ public class Dragger : MonoBehaviour
     public int MinThrowVelocity = 20;
 
     [SerializeField] private GameObject blobShadowPrefab;
+    
     private bool addedBlob = false;
 
     private GameObject blob = null;
@@ -44,7 +45,7 @@ public class Dragger : MonoBehaviour
     public void DisableSelected()
     {
         Cursor.visible = true;
-        //lrOfTrash.enabled = false;
+        blob.SetActive(false);
         selectedObject = null;
     }
 

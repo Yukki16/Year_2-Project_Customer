@@ -25,6 +25,9 @@ public class MasterFlow : MonoBehaviour
     public int CrabSpawnDelay = 20;
     public int TurtleDeathTime = 5;
 
+    public int hmnDropRateMin = 3;
+    public int hmnDropRateMax = 7;
+
     public int ObjSpawnRateIncreaseDelay = 15;
 
     private GameObject trashSpot;
@@ -142,6 +145,11 @@ public class MasterFlow : MonoBehaviour
     #endregion
 
     #region ReturnRates
+
+    public int ReturnHumanDropRate()
+    {
+        return (Random.Range(hmnDropRateMin, hmnDropRateMax)); 
+    }
 
     public int ReturnTurtleDeathTime()
     {

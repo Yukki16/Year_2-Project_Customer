@@ -186,7 +186,7 @@ public class Seagull : MonoBehaviour
                 targetTurtle = ReturnClosestTurtle();
         }
 
-        targetTurtle.gameObject.GetComponent<TurtleBehaviour>().EnableOutline();
+        targetTurtle.GetComponent<TurtleBehaviour>().EnableOutline();
         foundTurtle = true;
         currentState = SeagullState.Detect;
     }
