@@ -4,8 +4,21 @@ using UnityEngine;
 
 public class BinBehaviour : MonoBehaviour
 {
-    public void Test()
+    private Transform trashPile;
+    private int trashCounter;
+
+    public void Start()
     {
-        Debug.Log("test");
+
+        trashPile = transform.GetChild(0);
     }
+
+    public void RaiseTrash()
+    {
+        trashCounter++;
+        trashPile.transform.Translate(new Vector3(0, 0.05f, 0));
+    }
+
+    
+
 }
