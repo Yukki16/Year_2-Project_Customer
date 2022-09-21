@@ -22,6 +22,9 @@ public class Dragger : MonoBehaviour
     private GameObject blob = null;
     private bool doneOnce = false;
 
+    public LayerMask trashLayerMask;
+
+
     private void Start()
     {
         lastMousePos = Input.mousePosition;
@@ -168,8 +171,8 @@ public class Dragger : MonoBehaviour
         Vector3 worldMousePosFar = Camera.main.ScreenToWorldPoint(screenMousePosFar);
         Vector3 worldMousePosNear = Camera.main.ScreenToWorldPoint(screenMousePosNear);
         RaycastHit hit;
+        
         Physics.Raycast(worldMousePosNear, worldMousePosFar - worldMousePosNear, out hit);
-
         return hit;
     }
 
