@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: -8166738654125824138}
   - component: {fileID: -3791056783764956538}
   - component: {fileID: 6771060670173108106}
+  - component: {fileID: 6766375546144398557}
   m_Layer: 0
   m_Name: TrashBag
   m_TagString: Draggable
@@ -98,6 +99,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 96ae707f90ebb60489e7a245545ef75d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  locked: 0
+  hasBeenPickedUp: 0
 --- !u!64 &-3791056783764956538
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -128,3 +131,16 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &6766375546144398557
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4003768918084697609}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6a140fad377f8ca42895495ce2434309, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  trashPrefab: {fileID: 6812620011374146146, guid: 5db135f6c95710c4baf182f90184b972, type: 3}

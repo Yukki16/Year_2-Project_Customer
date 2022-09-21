@@ -39,10 +39,5 @@ public class SpawnCrabs : MonoBehaviour
         newCrab.transform.parent = crabs.transform;
         StartCoroutine(spawnCrabs());
     }
-
-    private void Update()
-    {
-        Debug.Log("Active");
-    }
 }
     
