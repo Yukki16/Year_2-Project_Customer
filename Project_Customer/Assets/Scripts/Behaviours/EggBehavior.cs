@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class EggBehavior : MonoBehaviour
 {
-    public SpawnTurtles SpawnerParent;
+    private SpawnTurtles SpawnerParent;
     public float TurtleSizeScale;
     public GameObject turtlePrefab;
     

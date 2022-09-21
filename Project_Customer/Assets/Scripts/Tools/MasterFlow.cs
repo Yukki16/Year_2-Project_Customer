@@ -16,13 +16,13 @@ public class MasterFlow : MonoBehaviour
     private readonly int intlSpawnEggDelay = 3;
     private readonly int intlSpawnHumanDelay = 10;
     private readonly int intlSpawnSeagullDelay = 30;
-    private readonly int intlSpawnCrabDelay = 50;
+    private readonly int intlSpawnCrabDelay = 120;
 
     public int EggSpawnDelay = 20;
     public int TurtleSpawnDelay = 7;
     public int HumanSpawnDelay = 9;
     public int SeagullSpawnDelay = 12;
-    public int CrabSpawnDelay = 15;
+    public int CrabSpawnDelay = 20;
 
     public int ObjSpawnRateIncreaseDelay = 15;
 
@@ -36,6 +36,7 @@ public class MasterFlow : MonoBehaviour
 
     void Start()
     {
+        spawnTurtles.enabled = false;
         spawnCrabs.enabled = false;
         spawnHumans.enabled = false;
         spawnSeagulls.enabled = false;
@@ -51,11 +52,18 @@ public class MasterFlow : MonoBehaviour
 
     private IEnumerator StartSpawns()
     {
+        StartCoroutine(StartEggSpawn());
         StartCoroutine(StartHumanSpawn());
         StartCoroutine(StartCrabSpawn());
         StartCoroutine(StartSeagullSpawn());
-        StartCoroutine(IncreaseEggSpawnRate());
         yield return null;
+    }
+
+    private IEnumerator StartEggSpawn()
+    {
+        yield return new WaitForSeconds(intlSpawnEggDelay);
+        spawnTurtles.enabled = true;
+        StartCoroutine(IncreaseEggSpawnRate());
     }
 
     private IEnumerator StartHumanSpawn()
