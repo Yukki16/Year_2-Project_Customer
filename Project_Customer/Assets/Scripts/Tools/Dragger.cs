@@ -16,10 +16,11 @@ public class Dragger : MonoBehaviour
 
     public int MinThrowVelocity = 20;
 
+    [SerializeField] private GameObject blobShadowPrefab;
+    private bool addedBlob = false;
 
-    public Color lineColor;
-    private LineRenderer lrOfTrash;
-    [SerializeField] private Material lrShader;
+    private GameObject blob = null;
+    private bool doneOnce = false;
 
     private void Start()
     {
@@ -107,11 +108,11 @@ public class Dragger : MonoBehaviour
 
 
             selectedObject.GetComponent<Rigidbody>().useGravity = true;
-
-            //selectedObject.GetComponent<LineRenderer>().enabled = false;
-
+            selectedObject.GetComponent<MeshRenderer>().shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.On;
             selectedObject = null;
+            blob.SetActive(false);
             Cursor.visible = true;
+            doneOnce = false;
         }
 
         if (selectedObject != null)
@@ -128,49 +129,29 @@ public class Dragger : MonoBehaviour
             selectedObject.transform.position = new Vector3(worldPosition.x, GrabHeight, worldPosition.z);
 
             selectedObject.GetComponent<Rigidbody>().useGravity = false;
-
-           // AddLineRay();
-            //UpdateLine();
+            AddBlobShadow();
         }
     }
 
-    private void UpdateLine()
+    private void AddBlobShadow()
     {
-        lrOfTrash.SetPosition(0, selectedObject.transform.position);
-        lrOfTrash.SetPosition(1, new Vector3(selectedObject.transform.position.x, selectedObject.transform.position.y - 5, selectedObject.transform.position.z));
-    }
-
-    private void AddLineRay()
-    {
-        //Adds the line renderer to the object
-        if (!selectedObject.TryGetComponent(typeof(LineRenderer), out Component component))
+        Vector3 blobPoz = new Vector3(selectedObject.transform.position.x, 0, selectedObject.transform.position.z);
+        if(!addedBlob)
         {
-            lrOfTrash = selectedObject.AddComponent<LineRenderer>();
-            lrOfTrash.material = lrShader;
-
-            Debug.Log("Added the linerenderer");
-
-            lrOfTrash.useWorldSpace = true;
-            //Adds the 2 points of the line so it renders
-            lrOfTrash.SetPosition(0, selectedObject.transform.position);
-            //Debug.Log(selectedObject.GetComponent<Renderer>().bounds.center);
-            //Debug.Log(selectedObject.transform.position);
-            lrOfTrash.SetPosition(1, new Vector3(selectedObject.transform.position.x, selectedObject.transform.position.y - 5, selectedObject.transform.position.z));
-            lrOfTrash.startWidth = 0.1f;
-            lrOfTrash.endWidth = 0.1f;
-
-            lrOfTrash.alignment = LineAlignment.View;
-            Gradient gradient = new Gradient();
-            gradient.SetKeys(
-                new GradientColorKey[] { new GradientColorKey(lineColor, 0.0f), new GradientColorKey(lineColor, 1.0f) },
-                new GradientAlphaKey[] { new GradientAlphaKey(1f, 0.0f), new GradientAlphaKey(1f, 1.0f) }
-            );
-            lrOfTrash.colorGradient = gradient;
+            addedBlob = true;
+            blob = Instantiate(blobShadowPrefab, blobPoz, blobShadowPrefab.transform.rotation);
         }
         else
         {
-            lrOfTrash.enabled = true;
+            if (!doneOnce)
+            {
+                selectedObject.GetComponent<MeshRenderer>().shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.Off;
+                blob.SetActive(true);
+                doneOnce = true;
+            }
         }
+
+        blob.transform.position = blobPoz;
     }
     private RaycastHit CastRay()
     {
