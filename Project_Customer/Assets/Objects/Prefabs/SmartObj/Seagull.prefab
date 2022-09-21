@@ -47,14 +47,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f0bd840a0f9df9e4caaddb9d2c6f2150, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startingVector: {x: 50, y: 10, z: 15}
-  TimeBeforeTarget: 3
-  DistanceToPickUp: 0.5
+  startingVector: {x: 0, y: 0, z: 0}
+  TimeBeforeTarget: 8
+  DistanceToPickUp: 1
   speed: 1.4
-  width: 10
+  width: 11
   startingDistance: 50
   RadiusShrinkSpeed: 5
-  PickupSpeed: 32
+  PickupSpeed: 12
   ClosestTurtle: 0
   RandomTurtle: 1
 --- !u!65 &6323773556790831546
