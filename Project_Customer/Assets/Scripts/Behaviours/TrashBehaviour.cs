@@ -1,0 +1,36 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class TrashBehaviour : MonoBehaviour
+{
+    private bool isActive;
+    private bool locked;
+    public bool hasBeenPickedUp;
+
+    public void DisableBinCollection()
+    {
+        isActive = true;
+        hasBeenPickedUp = true;
+        locked = true;
+    }
+
+    public void EnableBinCollection()
+    {
+        isActive = false;
+        locked = false;
+    }
+
+    public bool GetIsActive()
+    {
+        return isActive;
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("bin") && !locked && hasBeenPickedUp)
+        {
+            Destroy(gameObject);
+        }
+    }
+}

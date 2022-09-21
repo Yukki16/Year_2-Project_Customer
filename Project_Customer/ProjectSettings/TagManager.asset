@@ -3,7 +3,18 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - bin
+  - TrashParent
+  - PlayArea
+  - HumanTargets
+  - TurtleTargets
+  - Turtle
+  - Draggable
+  - DraggableParent
+  - TurtleSpawner
+  - CrabTargets
+  - TurtleUntargetable
   layers:
   - Default
   - TransparentFX
