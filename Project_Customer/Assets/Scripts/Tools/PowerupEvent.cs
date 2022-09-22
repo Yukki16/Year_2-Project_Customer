@@ -40,7 +40,7 @@ public class PowerupEvent : MonoBehaviour
         switch(Random.Range(0, 2))
         {
             case 0:
-                if (!MasterFlow.spawnSeagulls.enabled)
+                if (!MasterFlow.spawnSeagulls.enabled && activeScareCrow != null)
                 {
                     GhostTurtles();
                 }
@@ -83,6 +83,7 @@ public class PowerupEvent : MonoBehaviour
         MasterFlow.DeactivateScareCrow();
         scareCrow.GetComponent<Animator>().SetTrigger("LowerScareCrow");
         yield return new WaitForSeconds(1f);
+        activeScareCrow = null;
         Destroy(scareCrow);
        
     }
