@@ -412,7 +412,7 @@ MonoBehaviour:
   intlTrashPieces: 15
   intlSpawnEggDelay: 3
   intlSpawnHumanDelay: 10
-  intlSpawnSeagullDelay: 1
+  intlSpawnSeagullDelay: 90
   intlSpawnCrabDelay: 35
   EggSpawnDelay: 35
   TurtleSpawnDelay: 12
@@ -454,12 +454,16 @@ PrefabInstance:
       value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 2257817185439516790, guid: 6c7c2d8569441bb4bbcb15b35f4c77c7, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.91266
+      objectReference: {fileID: 0}
+    - target: {fileID: 2257817185439516790, guid: 6c7c2d8569441bb4bbcb15b35f4c77c7, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0.5417595
       objectReference: {fileID: 0}
     - target: {fileID: 2257817185439516790, guid: 6c7c2d8569441bb4bbcb15b35f4c77c7, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 5.297853
+      value: 4.91
       objectReference: {fileID: 0}
     - target: {fileID: 2257817185439516790, guid: 6c7c2d8569441bb4bbcb15b35f4c77c7, type: 3}
       propertyPath: m_LocalPosition.z
@@ -2615,7 +2619,7 @@ MonoBehaviour:
   MasterFlow: {fileID: 40324730}
   Turtles: {fileID: 1660498962}
   Seagulls: {fileID: 767454734}
-  trashThreshold: 1
+  trashThreshold: 15
   ScareCrowLifeTime: 30
 --- !u!1 &853775216
 GameObject:

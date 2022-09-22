@@ -40,7 +40,15 @@ public class PowerupEvent : MonoBehaviour
         switch(Random.Range(0, 2))
         {
             case 0:
-                SpawnScareCrow();
+                if (!MasterFlow.spawnSeagulls.enabled)
+                {
+                    GhostTurtles();
+                }
+                else
+                {
+                    SpawnScareCrow();
+                }
+                   
                 break;
 
             case 1:
@@ -57,8 +65,8 @@ public class PowerupEvent : MonoBehaviour
         scareCrow.transform.parent = PowerupChildren.transform;
         Seagulls.ReppelAllSeagulls();
         MasterFlow.ActivateScareCrow();
-        StartCoroutine(DespawnScareCrow());
         activeScareCrow = scareCrow;
+        StartCoroutine(DespawnScareCrow());
     }
 
     private void GhostTurtles()
