@@ -191,7 +191,7 @@ public class MasterFlow : MonoBehaviour
 
     public void DeactivateScareCrow()
     {
-        spawnSeagulls.enabled = true;
+        spawnSeagulls.EnableSpawning = true;
     }
 
     private GameObject randomTrash()

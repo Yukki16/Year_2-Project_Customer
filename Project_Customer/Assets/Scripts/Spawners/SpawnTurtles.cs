@@ -7,6 +7,7 @@ public class SpawnTurtles : MonoBehaviour
     #region fields
     private List<GameObject> spawnPoints;
     private List<GameObject> turtleList;
+    private List<GameObject> turtleSeagullList;
 
     private Terrain playArea;
 
@@ -43,6 +44,7 @@ public class SpawnTurtles : MonoBehaviour
 
         spawnPoints = new List<GameObject>();
         turtleList = new List<GameObject>();
+        turtleSeagullList = new List<GameObject>();
 
         TurtleSpawnEggs = new GameObject();
         TurtleSpawnEggs.transform.SetParent(transform);
@@ -55,9 +57,15 @@ public class SpawnTurtles : MonoBehaviour
         return turtleList;
     }
 
+    public List<GameObject> GetTargetableTurtles()
+    {
+        return turtleSeagullList;
+    }
+
     public void AddTurtle(GameObject turtle)
     {
         turtleList.Add(turtle);
+        turtleSeagullList.Add(turtle);
     }
 
     public GameObject GetTurtlePrefab()

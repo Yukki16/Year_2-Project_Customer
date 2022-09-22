@@ -412,7 +412,7 @@ MonoBehaviour:
   intlTrashPieces: 15
   intlSpawnEggDelay: 3
   intlSpawnHumanDelay: 10
-  intlSpawnSeagullDelay: 90
+  intlSpawnSeagullDelay: 1
   intlSpawnCrabDelay: 35
   EggSpawnDelay: 35
   TurtleSpawnDelay: 12
@@ -422,7 +422,7 @@ MonoBehaviour:
   TurtleDeathTime: 5
   hmnDropRateMin: 2
   hmnDropRateMax: 5
-  ObjSpawnRateIncreaseDelay: 15
+  ObjSpawnRateIncreaseDelay: 30
 --- !u!4 &40324731
 Transform:
   m_ObjectHideFlags: 0
@@ -2614,7 +2614,8 @@ MonoBehaviour:
   ScareCrowPrefab: {fileID: 5730012755707006912, guid: 2fa40a27b9fc4e54d834b5f8a7cc240f, type: 3}
   MasterFlow: {fileID: 40324730}
   Turtles: {fileID: 1660498962}
-  trashThreshold: 15
+  Seagulls: {fileID: 767454734}
+  trashThreshold: 1
   ScareCrowLifeTime: 30
 --- !u!1 &853775216
 GameObject:
@@ -4564,6 +4565,18 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 2977536016786132256, guid: 8279c79eb718cc54b82dbd7a35033f2f, type: 3}
   m_PrefabInstance: {fileID: 1354579753}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1969094606
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1969094602}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5d1a19eb58b05f342b0539dfacae1c2c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1976625368
 PrefabInstance:
   m_ObjectHideFlags: 0

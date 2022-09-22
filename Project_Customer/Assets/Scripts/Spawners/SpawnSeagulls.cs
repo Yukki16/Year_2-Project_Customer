@@ -5,8 +5,7 @@ using UnityEngine;
 public class SpawnSeagulls : MonoBehaviour
 {
     [SerializeField] GameObject SeagullPrefab;
-    private Terrain playArea;
-    private GameObject[] Turtles;
+    private List<GameObject> seagullList;
     GameObject Seagulls;
     MasterFlow masterFlow;
     public bool EnableSpawning;
@@ -16,11 +15,20 @@ public class SpawnSeagulls : MonoBehaviour
     {
         masterFlow = GameObject.FindObjectOfType<MasterFlow>();
 
-        playArea = Terrain.activeTerrain;
+        seagullList = new List<GameObject>();
+
         Seagulls = new GameObject(name: "Seagulls");
         Seagulls.transform.SetParent(gameObject.transform);
 
         StartCoroutine(spawnSeagulls());
+    }
+
+    public void ReppelAllSeagulls()
+    {
+        foreach (var seagull in seagullList)
+        {
+            seagull.GetComponent<Seagull>().EarlyExit();
+        }
     }
 
     IEnumerator spawnSeagulls()
@@ -29,9 +37,15 @@ public class SpawnSeagulls : MonoBehaviour
         if (EnableSpawning)
         {
             GameObject newSeagull = Instantiate(SeagullPrefab);
-            newSeagull.transform.parent = Seagulls.transform;        
+            seagullList.Add(newSeagull);
+            newSeagull.transform.parent = Seagulls.transform;           
         }      
         StartCoroutine(spawnSeagulls());
+    }
+
+    public List<GameObject> GetSeagulls()
+    {
+        return seagullList;
     }
 
     private void Update()
@@ -40,6 +54,7 @@ public class SpawnSeagulls : MonoBehaviour
         {
             GameObject newSeagull = Instantiate(SeagullPrefab);
             newSeagull.transform.parent = Seagulls.transform;
+            seagullList.Add(newSeagull);
             SpawnSeagull = false;
         }        
     }

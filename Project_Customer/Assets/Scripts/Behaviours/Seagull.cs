@@ -5,7 +5,7 @@ using System.Collections.Generic;
 public class Seagull : MonoBehaviour
 {
     #region fields
-    private enum SeagullState { Patrol, Detect, Pursue, Pickup, TurtleExit, TrashExit };
+    private enum SeagullState { Patrol, Detect, Pursue, Pickup, TurtleExit, TrashExit, EarlyExit };
 
     private SeagullState currentState;
 
@@ -67,7 +67,7 @@ public class Seagull : MonoBehaviour
 
     void Update()
     {
-        if (targetTurtle == null)
+        if (targetTurtle == null && currentState != SeagullState.EarlyExit)
         {
             currentState = SeagullState.Patrol;
         }
@@ -98,6 +98,12 @@ public class Seagull : MonoBehaviour
             case SeagullState.Detect:
                 Detection();
                 break;
+
+            case SeagullState.EarlyExit:
+                MoveFowardUp();
+                break;
+
+           
         }
 
         DetectTurtleLoss();
@@ -107,6 +113,22 @@ public class Seagull : MonoBehaviour
     }
 
     #region methods
+
+
+    public void RemoveFromList()
+    {
+        List<GameObject> list = GameObject.FindGameObjectWithTag("SeagullSpawner").GetComponent<SpawnSeagulls>().GetSeagulls();
+
+        if (list.Contains(gameObject))
+            list.Remove(gameObject);
+    }
+
+    public void EarlyExit()
+    {
+        Debug.Log("marker");
+        currentState = SeagullState.EarlyExit;
+        //animator.SetTrigger("Pickup");
+    }
 
     //Checks whether the seagull is eligible and detects a draggable object's collider
     void OnCollisionEnter(Collision collision)
@@ -196,9 +218,9 @@ public class Seagull : MonoBehaviour
     //Returns a random turtle from available list
     private GameObject ReturnRandomTurtle()
     {
-        if (turtleSpawner.GetTurtles().Count > 0)
+        if (turtleSpawner.GetTargetableTurtles().Count > 0)
         {
-            return turtleSpawner.GetTurtles()[Random.Range(0, turtleSpawner.GetTurtles().Count - 1)];
+            return turtleSpawner.GetTargetableTurtles()[Random.Range(0, turtleSpawner.GetTargetableTurtles().Count - 1)];
         }
 
         else
@@ -212,18 +234,18 @@ public class Seagull : MonoBehaviour
     //Returns the turtle closest to the seagull
     private GameObject ReturnClosestTurtle()
     {
-        targetTurtle = turtleSpawner.GetTurtles()[0];
+        targetTurtle = turtleSpawner.GetTargetableTurtles()[0];
 
         float lowestDist = Mathf.Infinity;
 
-        for (int i = 0; i < turtleSpawner.GetTurtles().Count; i++)
+        for (int i = 0; i < turtleSpawner.GetTargetableTurtles().Count; i++)
         {
-            float dist = Vector3.Distance(turtleSpawner.GetTurtles()[i].transform.position, transform.position);
+            float dist = Vector3.Distance(turtleSpawner.GetTargetableTurtles()[i].transform.position, transform.position);
 
             if (dist < lowestDist)
             {
                 lowestDist = dist;
-                targetTurtle = turtleSpawner.GetTurtles()[i];
+                targetTurtle = turtleSpawner.GetTargetableTurtles()[i];
             }
         }
 

@@ -182,7 +182,7 @@ public class TurtleBehaviour : MonoBehaviour
 
     public void RemoveFromList()
     {
-        List<GameObject> list = GameObject.FindGameObjectWithTag("TurtleSpawner").GetComponent<SpawnTurtles>().GetTurtles();
+        List<GameObject> list = GameObject.FindGameObjectWithTag("TurtleSpawner").GetComponent<SpawnTurtles>().GetTargetableTurtles();
 
         if (list.Contains(gameObject))
             list.Remove(gameObject);
@@ -190,7 +190,7 @@ public class TurtleBehaviour : MonoBehaviour
 
     public void AddSelfToList()
     {
-        GameObject.FindGameObjectWithTag("TurtleSpawner").GetComponent<SpawnTurtles>().GetTurtles().Add(gameObject);
+        GameObject.FindGameObjectWithTag("TurtleSpawner").GetComponent<SpawnTurtles>().GetTargetableTurtles().Add(gameObject);
     }
 
     public void DestroyTurtle()

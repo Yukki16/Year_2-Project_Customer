@@ -8,6 +8,7 @@ public class PowerupEvent : MonoBehaviour
     [SerializeField] GameObject ScareCrowPrefab;
     [SerializeField] MasterFlow MasterFlow;
     [SerializeField] SpawnTurtles Turtles;
+    [SerializeField] SpawnSeagulls Seagulls;
     [SerializeField] int trashThreshold;
     private GameObject PowerupChildren;
     private GameObject activeScareCrow;
@@ -54,6 +55,7 @@ public class PowerupEvent : MonoBehaviour
     {
         GameObject scareCrow = Instantiate(ScareCrowPrefab, position: new Vector3(50, 0, 20), rotation: Quaternion.Euler(Vector3.zero));
         scareCrow.transform.parent = PowerupChildren.transform;
+        Seagulls.ReppelAllSeagulls();
         MasterFlow.ActivateScareCrow();
         StartCoroutine(DespawnScareCrow());
         activeScareCrow = scareCrow;
