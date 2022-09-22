@@ -31,7 +31,6 @@ public class BinBehaviour : MonoBehaviour
             timesFilled++;  
             trashCounter = 0;
             trashPile.transform.Translate(new Vector3(0, -trashRaise * trashThreshold, 0));
-            Debug.Log("full");
         }
     }
 

@@ -77,14 +77,26 @@ public class CrabBehaviour : MonoBehaviour
         triggered = true;
         animator.SetTrigger("DetectTurtle");
         TurtleBehaviour tb = collision.gameObject.GetComponent<TurtleBehaviour>();
-        tb.animator.SetTrigger("CrabDeath");    
-        tb.StartCoroutine(tb.MoveTowards(transform.position));
-        //wait until excecution animation is played
-        yield return new WaitForSeconds(1f);
-        tb.DestroyTurtle();
-        yield return new WaitForSeconds(0.53f);
-        animator.SetTrigger("ShrinkHill");
-        yield return new WaitForSeconds(0.33f);
-        Destroy(gameObject);
+        if (!tb.GetGhostMode())
+        {
+            tb.animator.SetTrigger("CrabDeath");
+            tb.StartCoroutine(tb.MoveTowards(transform.position));
+            //wait until excecution animation is played
+            yield return new WaitForSeconds(1f);
+            tb.DestroyTurtle();
+            yield return new WaitForSeconds(0.53f);
+            animator.SetTrigger("ShrinkHill");
+            yield return new WaitForSeconds(0.33f);
+            Destroy(gameObject);
+        }
+        else
+        {
+            //wait until excecution animation is played
+            yield return new WaitForSeconds(1f);
+            yield return new WaitForSeconds(0.53f);
+            animator.SetTrigger("ShrinkHill");
+            yield return new WaitForSeconds(0.33f);
+            Destroy(gameObject);
+        }
     }
 }

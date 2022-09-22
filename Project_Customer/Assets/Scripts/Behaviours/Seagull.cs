@@ -186,8 +186,9 @@ public class Seagull : MonoBehaviour
                 targetTurtle = ReturnClosestTurtle();
         }
 
-
+        if (!targetTurtle.GetComponent<TurtleBehaviour>().GetGhostMode())
         targetTurtle.GetComponent<TurtleBehaviour>().EnableOutline();   
+
         foundTurtle = true;
         currentState = SeagullState.Detect;
     }
@@ -263,11 +264,15 @@ public class Seagull : MonoBehaviour
     //Called when seagull reaches target turtle on pursuit
     private void CarryAway()
     {
+        TurtleBehaviour tb = targetTurtle.GetComponent<TurtleBehaviour>();
         animator.SetTrigger("Pickup");
         TurtleTaken = true;
-        targetTurtle.GetComponent<TurtleBehaviour>().DisableOutline();
-        targetTurtle.GetComponent<TurtleBehaviour>().DisableTurtle();
-        targetTurtle.transform.position = new Vector3(transform.position.x, transform.position.y + 1, transform.position.z);
+        if (!tb.GetGhostMode())
+        {
+            tb.DisableOutline();
+            tb.DisableTurtle();
+            targetTurtle.transform.position = new Vector3(transform.position.x, transform.position.y + 1, transform.position.z);
+        }
         MoveFowardUp();
     }
 
