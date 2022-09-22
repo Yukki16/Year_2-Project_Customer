@@ -8,8 +8,10 @@ public class PowerupEvent : MonoBehaviour
     [SerializeField] GameObject ScareCrowPrefab;
     [SerializeField] MasterFlow MasterFlow;
     [SerializeField] SpawnTurtles Turtles;
+    [SerializeField] int trashThreshold;
     private GameObject PowerupChildren;
     private GameObject activeScareCrow;
+
 
     [SerializeField] float ScareCrowLifeTime;
 
@@ -21,6 +23,11 @@ public class PowerupEvent : MonoBehaviour
         playArea = Terrain.activeTerrain;
     }
 
+    public int ReturnTrashThreshold()
+    {
+        return trashThreshold;
+    }
+
     public void StartRandomEvent()
     {
         StartCoroutine(RandomEvent());
@@ -29,7 +36,17 @@ public class PowerupEvent : MonoBehaviour
 
     public IEnumerator RandomEvent()
     {
-        GhostTurtles();
+        switch(Random.Range(0, 2))
+        {
+            case 0:
+                SpawnScareCrow();
+                break;
+
+            case 1:
+                GhostTurtles();
+                break;
+
+        }
         yield return null;
     }
 

@@ -224,6 +224,7 @@ RectTransform:
   - {fileID: 1777841813}
   - {fileID: 1241496491}
   - {fileID: 1971524070}
+  - {fileID: 1744196554}
   m_Father: {fileID: 241360519}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1174,8 +1175,7 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1.0022752, y: 1.0022752, z: 1.0022752}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 1744196554}
+  m_Children: []
   m_Father: {fileID: 190465916}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1503,7 +1503,7 @@ GameObject:
   - component: {fileID: 1744196556}
   - component: {fileID: 1744196555}
   m_Layer: 5
-  m_Name: RawImage
+  m_Name: VideoImage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1516,17 +1516,17 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1744196553}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.0022752, y: 1.0022752, z: 1.0022752}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 1241496491}
-  m_RootOrder: 0
+  m_Father: {fileID: 190465916}
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -0.014862, y: 0.000030518}
+  m_AnchoredPosition: {x: -0.025795255, y: 0.0001366661}
   m_SizeDelta: {x: 1919.3, y: 1080.4}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1744196555
@@ -1576,7 +1576,7 @@ GameObject:
   - component: {fileID: 1777841815}
   - component: {fileID: 1777841814}
   m_Layer: 5
-  m_Name: RawImage
+  m_Name: Background
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1696,7 +1696,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 07dec8c235262f649b616f3d64150483, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  image: {fileID: 1777841814}
+  image: {fileID: 1744196555}
   videoToPlay: {fileID: 32900000, guid: f91ca6f2415e28a42a6907647320ad71, type: 3}
   videoPlayer: {fileID: 1241496492}
   audioSource: {fileID: 0}
@@ -1792,7 +1792,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7888348160767946833, guid: e0a13fe28f333e7479379825d1466161, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7888348160815610629, guid: e0a13fe28f333e7479379825d1466161, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
@@ -1896,7 +1896,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7888348162196514017, guid: e0a13fe28f333e7479379825d1466161, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e0a13fe28f333e7479379825d1466161, type: 3}
