@@ -45,7 +45,6 @@ public class TurtleBehaviour : MonoBehaviour
     void Start()
     {
         masterFlow = FindObjectOfType<MasterFlow>();
-        //rend = GetComponentInChildren<Renderer>();
         animator = GetComponentInChildren<Animator>();
         targetObj = new GameObject();
         turtleSpawnerParent = GameObject.FindGameObjectWithTag("TurtleTargets");
