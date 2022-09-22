@@ -21,10 +21,14 @@ public class CrabBehaviour : MonoBehaviour
 
     private MeshCollider mc;
 
+    private LivesSystem livesSystem;
+    private Highscore highscore;
     #endregion
 
     void Start()
     {
+        livesSystem = FindObjectOfType<LivesSystem>();
+        highscore = FindObjectOfType<Highscore>();
         particles = GetComponentInChildren<ParticleSystem>();
         animator = GetComponentInChildren<Animator>();
         StartCoroutine(EntryDelay());
@@ -69,6 +73,7 @@ public class CrabBehaviour : MonoBehaviour
         Destroy(collision.gameObject);
         animator.SetTrigger("ShrinkHill");
         yield return new WaitForSeconds(0.33f);
+        StartCoroutine(highscore.AddScore());
         Destroy(gameObject);
     }
 
@@ -87,6 +92,7 @@ public class CrabBehaviour : MonoBehaviour
             yield return new WaitForSeconds(0.53f);
             animator.SetTrigger("ShrinkHill");
             yield return new WaitForSeconds(0.33f);
+            StartCoroutine(livesSystem.UpdateLives());
             Destroy(gameObject);
         }
         else

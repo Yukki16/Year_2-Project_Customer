@@ -40,10 +40,15 @@ public class TurtleBehaviour : MonoBehaviour
 
     Outline outline;
     private bool excecution;
+
+    private LivesSystem livesSystem;
+    private Highscore highscore;
     #endregion
 
     void Start()
     {
+        livesSystem = FindObjectOfType<LivesSystem>();
+        highscore = FindObjectOfType<Highscore>();
         masterFlow = FindObjectOfType<MasterFlow>();
         //rend = GetComponentInChildren<Renderer>();
         animator = GetComponentInChildren<Animator>();
@@ -165,6 +170,7 @@ public class TurtleBehaviour : MonoBehaviour
         animator.SetFloat("WalkSpeed", 1);
         animator.SetTrigger("TrashDeath");
         yield return new WaitForSeconds(5.01f);
+        StartCoroutine(livesSystem.UpdateLives());
         DestroyTurtle();
     }
 
@@ -177,6 +183,7 @@ public class TurtleBehaviour : MonoBehaviour
 
         if (Vector3.Distance(transform.position, targetObj.transform.position) < 1 && !excecution)
         {
+            StartCoroutine(highscore.AddScore());
             DestroyTurtle();
         }
     }
