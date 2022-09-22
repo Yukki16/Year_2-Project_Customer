@@ -43,10 +43,14 @@ public class Seagull : MonoBehaviour
     private SpawnTurtles turtleSpawner;
     private bool trashCanceled;
 
+    private LivesSystem livesSystem;
+    private Highscore highscore;
     #endregion
 
     void Start()
     {
+        livesSystem = FindObjectOfType<LivesSystem>();
+        highscore = FindObjectOfType<Highscore>();
         turtleSpawner = GameObject.FindGameObjectWithTag("TurtleSpawner").GetComponent<SpawnTurtles>();
 
         playArea = Terrain.activeTerrain;
@@ -274,6 +278,7 @@ public class Seagull : MonoBehaviour
             targetTurtle.GetComponent<TurtleBehaviour>().DisableOutline();
             GameObject.FindGameObjectWithTag("DraggableParent").GetComponent<Dragger>().DisableSelected();
             trashCanceled = true;
+            StartCoroutine(highscore.AddScore());
         }
 
 
@@ -332,6 +337,7 @@ public class Seagull : MonoBehaviour
     {
         if (transform.position.x >= playArea.terrainData.size.x || transform.position.x <= playArea.transform.position.x || transform.position.y > 50)
         {
+            StartCoroutine(livesSystem.UpdateLives());
             DestroySeagull();
         }
     }

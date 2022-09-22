@@ -20,7 +20,7 @@ public class VideoPlayer2 : MonoBehaviour
     {
         videoPlayer.clip = videoToPlay;
         videoPlayer.Prepare();
-        WaitForSeconds waitForSeconds = new WaitForSeconds(1);
+        WaitForSeconds waitForSeconds = new WaitForSeconds(0.5f);
         while (!videoPlayer.isPrepared)
         {
             yield return waitForSeconds;
@@ -30,6 +30,7 @@ public class VideoPlayer2 : MonoBehaviour
 
         image.texture = videoPlayer.texture;
         videoPlayer.Play();
+        //yield return null;
         //audioSource.Play();
 
     }
