@@ -54,7 +54,7 @@ MonoBehaviour:
   width: 11
   startingDistance: 50
   RadiusShrinkSpeed: 5
-  PickupSpeed: 36
+  PickupSpeed: 28
   ClosestTurtle: 0
   RandomTurtle: 1
 --- !u!65 &6323773556790831546

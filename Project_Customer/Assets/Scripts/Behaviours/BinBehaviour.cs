@@ -6,8 +6,7 @@ public class BinBehaviour : MonoBehaviour
 {
     private Transform trashPile;
     private int trashCounter;
-    private int trashThreshold = 2;
-    private float trashRaise = 0.07f;
+    private float trashRaise = 0.05f;
     private int timesFilled;
 
     [SerializeField] PowerupEvent powerupEventManager;
@@ -19,18 +18,19 @@ public class BinBehaviour : MonoBehaviour
 
     public void RaiseTrash()
     {
+        FindObjectOfType<AudioManager>().PlayRandom(new string[] { "Trash1", "Trash2", "Trash3" }, true);
         trashCounter++;
         trashPile.transform.Translate(new Vector3(0, trashRaise, 0));
     }
 
     public void Update()
     {
-        if (trashCounter == trashThreshold)
+        if (trashCounter == powerupEventManager.ReturnTrashThreshold())
         {
             powerupEventManager.StartRandomEvent();
             timesFilled++;  
             trashCounter = 0;
-            trashPile.transform.Translate(new Vector3(0, -trashRaise * trashThreshold, 0));
+            trashPile.transform.Translate(new Vector3(0, -trashRaise * powerupEventManager.ReturnTrashThreshold(), 0));
         }
     }
 

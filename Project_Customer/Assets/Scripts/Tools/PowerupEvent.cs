@@ -8,8 +8,11 @@ public class PowerupEvent : MonoBehaviour
     [SerializeField] GameObject ScareCrowPrefab;
     [SerializeField] MasterFlow MasterFlow;
     [SerializeField] SpawnTurtles Turtles;
+    [SerializeField] SpawnSeagulls Seagulls;
+    [SerializeField] int trashThreshold;
     private GameObject PowerupChildren;
     private GameObject activeScareCrow;
+
 
     [SerializeField] float ScareCrowLifeTime;
 
@@ -21,6 +24,11 @@ public class PowerupEvent : MonoBehaviour
         playArea = Terrain.activeTerrain;
     }
 
+    public int ReturnTrashThreshold()
+    {
+        return trashThreshold;
+    }
+
     public void StartRandomEvent()
     {
         StartCoroutine(RandomEvent());
@@ -29,17 +37,36 @@ public class PowerupEvent : MonoBehaviour
 
     public IEnumerator RandomEvent()
     {
-        GhostTurtles();
+        switch(Random.Range(0, 2))
+        {
+            case 0:
+                if (!MasterFlow.spawnSeagulls.enabled)
+                {
+                    GhostTurtles();
+                }
+                else
+                {
+                    SpawnScareCrow();
+                }
+                   
+                break;
+
+            case 1:
+                GhostTurtles();
+                break;
+
+        }
         yield return null;
     }
 
     private void SpawnScareCrow()
     {
-        GameObject scareCrow = Instantiate(ScareCrowPrefab, position: new Vector3(50, 0, 20), rotation: Quaternion.Euler(Vector3.zero));
+        GameObject scareCrow = Instantiate(ScareCrowPrefab, position: new Vector3(50, -0.28f, 20), rotation: Quaternion.Euler(Vector3.zero));
         scareCrow.transform.parent = PowerupChildren.transform;
+        Seagulls.ReppelAllSeagulls();
         MasterFlow.ActivateScareCrow();
-        StartCoroutine(DespawnScareCrow());
         activeScareCrow = scareCrow;
+        StartCoroutine(DespawnScareCrow(scareCrow));
     }
 
     private void GhostTurtles()
@@ -50,11 +77,14 @@ public class PowerupEvent : MonoBehaviour
         }
     }
 
-    public IEnumerator DespawnScareCrow()
+    public IEnumerator DespawnScareCrow(GameObject scareCrow)
     {
         yield return new WaitForSeconds(ScareCrowLifeTime);
-        Destroy(activeScareCrow);
         MasterFlow.DeactivateScareCrow();
+        scareCrow.GetComponent<Animator>().SetTrigger("LowerScareCrow");
+        yield return new WaitForSeconds(1f);
+        Destroy(scareCrow);
+       
     }
 
 
