@@ -61,12 +61,12 @@ public class PowerupEvent : MonoBehaviour
 
     private void SpawnScareCrow()
     {
-        GameObject scareCrow = Instantiate(ScareCrowPrefab, position: new Vector3(50, 0, 20), rotation: Quaternion.Euler(Vector3.zero));
+        GameObject scareCrow = Instantiate(ScareCrowPrefab, position: new Vector3(50, -0.28f, 20), rotation: Quaternion.Euler(Vector3.zero));
         scareCrow.transform.parent = PowerupChildren.transform;
         Seagulls.ReppelAllSeagulls();
         MasterFlow.ActivateScareCrow();
         activeScareCrow = scareCrow;
-        StartCoroutine(DespawnScareCrow());
+        StartCoroutine(DespawnScareCrow(scareCrow));
     }
 
     private void GhostTurtles()
@@ -77,11 +77,14 @@ public class PowerupEvent : MonoBehaviour
         }
     }
 
-    public IEnumerator DespawnScareCrow()
+    public IEnumerator DespawnScareCrow(GameObject scareCrow)
     {
         yield return new WaitForSeconds(ScareCrowLifeTime);
-        Destroy(activeScareCrow);
         MasterFlow.DeactivateScareCrow();
+        scareCrow.GetComponent<Animator>().SetTrigger("LowerScareCrow");
+        yield return new WaitForSeconds(1f);
+        Destroy(scareCrow);
+       
     }
 
 
