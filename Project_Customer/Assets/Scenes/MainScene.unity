@@ -415,7 +415,7 @@ MonoBehaviour:
   intlSpawnSeagullDelay: 90
   intlSpawnCrabDelay: 35
   EggSpawnDelay: 35
-  TurtleSpawnDelay: 16
+  TurtleSpawnDelay: 12
   HumanSpawnDelay: 9
   SeagullSpawnDelay: 12
   CrabSpawnDelay: 15

@@ -6,7 +6,7 @@ public class BinBehaviour : MonoBehaviour
 {
     private Transform trashPile;
     private int trashCounter;
-    private int trashThreshold = 1;
+    private int trashThreshold = 2;
     private float trashRaise = 0.07f;
     private int timesFilled;
 
