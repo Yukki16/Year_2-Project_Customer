@@ -6,8 +6,8 @@ using DG.Tweening;
 
 public class TurtleBehaviour : MonoBehaviour
 {
+    #region fields
     private Terrain playArea;
-
     private float offset;
 
     Mover mover;
@@ -15,6 +15,11 @@ public class TurtleBehaviour : MonoBehaviour
     Vector3 targetObjPosition;
 
     private GameObject turtleSpawnerParent;
+
+    private bool ghostMode;
+
+    private Material baseMaterial;
+    [SerializeField] Material GhostMaterial;
 
     GameObject targetObj;
 
@@ -35,6 +40,7 @@ public class TurtleBehaviour : MonoBehaviour
 
     Outline outline;
     private bool excecution;
+    #endregion
 
     void Start()
     {
@@ -75,9 +81,14 @@ public class TurtleBehaviour : MonoBehaviour
     private DG.Tweening.Core.TweenerCore<Color, Color, DG.Tweening.Plugins.Options.ColorOptions> tween;
     private Tween tweenTo;
 
+    public bool GetGhostMode()
+    {
+        return ghostMode;
+    }
+
     private void OnTriggerEnter(Collider collision)
     {
-        if (collision.gameObject.tag is "Draggable")
+        if (collision.gameObject.tag is "Draggable" && !ghostMode)
         {
             DisableTurtle();
             RemoveFromList();
@@ -89,6 +100,7 @@ public class TurtleBehaviour : MonoBehaviour
             
             tween = rend.material.DOColor(Color.red, masterFlow.ReturnTurtleDeathTime());
             tweenTo = DOTween.To(() => animator.GetFloat("WalkSpeed"), value => { animator.SetFloat("WalkSpeed", value); }, 0.1f, masterFlow.ReturnTurtleDeathTime());
+            
         }
     }
 
@@ -110,6 +122,22 @@ public class TurtleBehaviour : MonoBehaviour
             tween = rend.material.DOColor(Color.white, 1.0f);
             AddSelfToList();
             EnableTurtle();
+        }
+    }
+
+    public void ToggleGhost(bool setting)
+    {
+        if (setting)
+        {
+            ghostMode = true;
+            baseMaterial = rend.material;
+            rend.material = GhostMaterial;
+        }
+
+        if (!setting)
+        {
+            ghostMode = false;
+            rend.material = baseMaterial;
         }
     }
 

@@ -634,7 +634,7 @@ Transform:
   - {fileID: 585104935}
   - {fileID: 1751878361}
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &178471287
 GameObject:
@@ -1038,7 +1038,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7888348161523074546, guid: e0a13fe28f333e7479379825d1466161, type: 3}
       propertyPath: m_RootOrder
-      value: 6
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 7888348161523074546, guid: e0a13fe28f333e7479379825d1466161, type: 3}
       propertyPath: m_AnchorMax.x
@@ -2104,7 +2104,7 @@ RectTransform:
   m_Children:
   - {fileID: 415829900}
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -2611,7 +2611,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ab94a075c9dd8f6479b8d2dd7ee2bb78, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ScareCrowPrefab: {fileID: 0}
+  ScareCrowPrefab: {fileID: 5730012755707006912, guid: 2fa40a27b9fc4e54d834b5f8a7cc240f, type: 3}
+  MasterFlow: {fileID: 40324730}
+  Turtles: {fileID: 1660498962}
+  ScareCrowLifeTime: 3
 --- !u!1 &853775216
 GameObject:
   m_ObjectHideFlags: 0
@@ -3130,7 +3133,7 @@ Transform:
   - {fileID: 356299039}
   - {fileID: 241957488}
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &1068408776 stripped
 Transform:
@@ -3622,63 +3625,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 9065134665529840230, guid: 52e21bca7d9e35f4ab52ef54db4704e7, type: 3}
   m_PrefabInstance: {fileID: 1674313425}
   m_PrefabAsset: {fileID: 0}
---- !u!1001 &1539707520
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 5730012755707006912, guid: 2fa40a27b9fc4e54d834b5f8a7cc240f, type: 3}
-      propertyPath: m_Name
-      value: ScareCrow
-      objectReference: {fileID: 0}
-    - target: {fileID: 7658609456148845592, guid: 2fa40a27b9fc4e54d834b5f8a7cc240f, type: 3}
-      propertyPath: m_RootOrder
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7658609456148845592, guid: 2fa40a27b9fc4e54d834b5f8a7cc240f, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 48.38491
-      objectReference: {fileID: 0}
-    - target: {fileID: 7658609456148845592, guid: 2fa40a27b9fc4e54d834b5f8a7cc240f, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0.15533257
-      objectReference: {fileID: 0}
-    - target: {fileID: 7658609456148845592, guid: 2fa40a27b9fc4e54d834b5f8a7cc240f, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 12.812571
-      objectReference: {fileID: 0}
-    - target: {fileID: 7658609456148845592, guid: 2fa40a27b9fc4e54d834b5f8a7cc240f, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7658609456148845592, guid: 2fa40a27b9fc4e54d834b5f8a7cc240f, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7658609456148845592, guid: 2fa40a27b9fc4e54d834b5f8a7cc240f, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7658609456148845592, guid: 2fa40a27b9fc4e54d834b5f8a7cc240f, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7658609456148845592, guid: 2fa40a27b9fc4e54d834b5f8a7cc240f, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7658609456148845592, guid: 2fa40a27b9fc4e54d834b5f8a7cc240f, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7658609456148845592, guid: 2fa40a27b9fc4e54d834b5f8a7cc240f, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 2fa40a27b9fc4e54d834b5f8a7cc240f, type: 3}
 --- !u!1001 &1562398056
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4392,7 +4338,7 @@ RectTransform:
   m_Children:
   - {fileID: 525781715}
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -4722,5 +4668,5 @@ Transform:
   - {fileID: 1324704}
   - {fileID: 618917723}
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

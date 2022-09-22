@@ -36,6 +36,8 @@ public class MasterFlow : MonoBehaviour
     private readonly int intlTrashMaxBottomDistance = 36;
     private readonly int intlTrashMinBottomDistance = 12;
 
+    private bool scareCrowActive;
+
     private bool preloadCheck { get; }
 
     void Start()
@@ -180,6 +182,17 @@ public class MasterFlow : MonoBehaviour
         return CrabSpawnDelay;
     }
     #endregion
+
+
+    public void ActivateScareCrow()
+    {
+        spawnSeagulls.enabled = false;
+    }
+
+    public void DeactivateScareCrow()
+    {
+        spawnSeagulls.enabled = true;
+    }
 
     private GameObject randomTrash()
     {

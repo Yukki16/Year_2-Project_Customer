@@ -59,7 +59,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 34678d40259d1a343b6be96e0b019a16, type: 2}
+  - {fileID: 2100000, guid: f176e4c8a59a9a8459c15210fb6052ea, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -143,6 +143,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5d9eba1573cb2034980f9d593d61faaf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  GhostMaterial: {fileID: 2100000, guid: f176e4c8a59a9a8459c15210fb6052ea, type: 2}
   rend: {fileID: 2561068308062442355}
   MinWobbleDistance: 5
   MaxWobbleDistance: 10
@@ -347,6 +348,10 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 8934947365378006869, guid: f040300e73aba524d9e216d03efdb2ab, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 967f229700f3cae418b07c76ef43c628, type: 2}
     - target: {fileID: 9010316042452115318, guid: f040300e73aba524d9e216d03efdb2ab, type: 3}
       propertyPath: m_Controller
       value: 
