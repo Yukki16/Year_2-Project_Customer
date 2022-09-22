@@ -26,7 +26,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3869240520649807329}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: -2.57, z: 0}
   m_LocalScale: {x: 2.7757556, y: 2.7757556, z: 2.7757556}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -125,7 +125,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7658609456148845592}
-  - component: {fileID: 8009916256526081990}
+  - component: {fileID: 8588986708240047473}
   m_Layer: 0
   m_Name: ScareCrow
   m_TagString: Untagged
@@ -149,7 +149,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!95 &8009916256526081990
+--- !u!95 &8588986708240047473
 Animator:
   serializedVersion: 4
   m_ObjectHideFlags: 0
@@ -198,7 +198,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3578825971139408234, guid: 472c72edda84239448fbd42c1303c5f0, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: -0.19
       objectReference: {fileID: 0}
     - target: {fileID: 3578825971139408234, guid: 472c72edda84239448fbd42c1303c5f0, type: 3}
       propertyPath: m_LocalPosition.z

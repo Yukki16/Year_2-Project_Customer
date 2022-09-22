@@ -11,10 +11,10 @@ public class PowerupEvent : MonoBehaviour
     [SerializeField] SpawnSeagulls Seagulls;
     [SerializeField] int trashThreshold;
     private GameObject PowerupChildren;
-    private GameObject activeScareCrow;
-
+    GameObject scareCrow;
 
     [SerializeField] float ScareCrowLifeTime;
+    private bool scareCrowActive;
 
 
     private void Start()
@@ -37,16 +37,17 @@ public class PowerupEvent : MonoBehaviour
 
     public IEnumerator RandomEvent()
     {
-        switch(Random.Range(0, 2))
+        yield return new WaitForSeconds(1);
+        switch(Random.Range(0, 1))
         {
             case 0:
-                if (!MasterFlow.spawnSeagulls.enabled && activeScareCrow != null)
+                if (MasterFlow.spawnSeagulls.enabled && !scareCrowActive)
                 {
-                    GhostTurtles();
+                    SpawnScareCrow();
                 }
                 else
                 {
-                    SpawnScareCrow();
+                    GhostTurtles();
                 }
                    
                 break;
@@ -56,36 +57,46 @@ public class PowerupEvent : MonoBehaviour
                 break;
 
         }
-        yield return null;
-    }
 
-    private void SpawnScareCrow()
-    {
-        GameObject scareCrow = Instantiate(ScareCrowPrefab, position: new Vector3(50, -0.28f, 20), rotation: Quaternion.Euler(Vector3.zero));
-        scareCrow.transform.parent = PowerupChildren.transform;
-        Seagulls.ReppelAllSeagulls();
-        MasterFlow.ActivateScareCrow();
-        activeScareCrow = scareCrow;
-        StartCoroutine(DespawnScareCrow(scareCrow));
+        yield return new WaitForFixedUpdate();
     }
-
-    private void GhostTurtles()
+   private void GhostTurtles()
     {
         foreach(var turtle in Turtles.GetTurtles())
         {
+            if (turtle == null) return; 
             turtle.GetComponent<TurtleBehaviour>().ToggleGhost(true);
         }
     }
 
-    public IEnumerator DespawnScareCrow(GameObject scareCrow)
+    private void SpawnScareCrow()
+    {
+        scareCrowActive = true;
+
+        if (scareCrow == null)
+        {
+            scareCrow = Instantiate(ScareCrowPrefab, position: new Vector3(50, -0.28f, 20), rotation: Quaternion.Euler(Vector3.zero));
+            scareCrow.transform.parent = PowerupChildren.transform;
+        }
+        else
+        {
+            scareCrow.GetComponent<Animator>().SetTrigger("RaiseScareCrow");
+        }
+
+        Seagulls.ReppelAllSeagulls();
+        MasterFlow.ActivateScareCrow();
+        StartCoroutine(DespawnScareCrow());
+    }
+
+ 
+    public IEnumerator DespawnScareCrow()
     {
         yield return new WaitForSeconds(ScareCrowLifeTime);
         MasterFlow.DeactivateScareCrow();
+        if (scareCrow != null)
         scareCrow.GetComponent<Animator>().SetTrigger("LowerScareCrow");
-        yield return new WaitForSeconds(1f);
-        activeScareCrow = null;
-        Destroy(scareCrow);
-       
+        scareCrowActive = false;
+        yield return null;
     }
 
 

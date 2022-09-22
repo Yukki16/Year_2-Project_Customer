@@ -72,6 +72,7 @@ public class CrabBehaviour : MonoBehaviour
         //wait until excecution animation is played
         triggered = true;
         yield return new WaitForSeconds(0.23f);
+        if (collision.gameObject != null)
         Destroy(collision.gameObject);
         animator.SetTrigger("ShrinkHill");
         yield return new WaitForSeconds(0.33f);
@@ -94,7 +95,7 @@ public class CrabBehaviour : MonoBehaviour
             yield return new WaitForSeconds(0.53f);
             animator.SetTrigger("ShrinkHill");
             yield return new WaitForSeconds(0.33f);
-            StartCoroutine(livesSystem.UpdateLives());
+            //StartCoroutine(livesSystem.UpdateLives());
             Destroy(gameObject);
         }
         else

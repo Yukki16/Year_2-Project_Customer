@@ -10,8 +10,8 @@ public class Highscore : MonoBehaviour
     public TMP_Text endscreenHSText;
     private void Start()
     {
-        highscoreText.text = highscore.ToString();
-        endscreenHSText.text = highscore.ToString();
+        //highscoreText.text = highscore.ToString();
+        //endscreenHSText.text = highscore.ToString();
     }
     void Update()
     {
@@ -21,8 +21,8 @@ public class Highscore : MonoBehaviour
     public IEnumerator AddScore()
     {
         highscore += 500;
-        highscoreText.text = highscore.ToString();
-        endscreenHSText.text = highscore.ToString();
+        //highscoreText.text = highscore.ToString();
+        //endscreenHSText.text = highscore.ToString();
         yield return null;
     }
 }

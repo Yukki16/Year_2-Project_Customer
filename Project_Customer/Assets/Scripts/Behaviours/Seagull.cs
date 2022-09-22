@@ -121,7 +121,7 @@ public class Seagull : MonoBehaviour
 
     public void RemoveFromList()
     {
-        List<GameObject> list = GameObject.FindGameObjectWithTag("SeagullSpawner").GetComponent<SpawnSeagulls>().GetSeagulls();
+        List<GameObject> list = GameObject.FindObjectOfType<SpawnSeagulls>().GetSeagulls();
 
         if (list.Contains(gameObject))
             list.Remove(gameObject);
@@ -129,6 +129,7 @@ public class Seagull : MonoBehaviour
 
     public void EarlyExit()
     {
+        Debug.Log("attempt");
         currentState = SeagullState.EarlyExit;
         //animator.SetTrigger("Pickup");
     }
@@ -337,7 +338,7 @@ public class Seagull : MonoBehaviour
     {
         if (transform.position.x >= playArea.terrainData.size.x || transform.position.x <= playArea.transform.position.x || transform.position.y > 50)
         {
-            StartCoroutine(livesSystem.UpdateLives());
+            //StartCoroutine(livesSystem.UpdateLives());
             DestroySeagull();
         }
     }
@@ -350,6 +351,7 @@ public class Seagull : MonoBehaviour
             if (targetTurtle != null)
                 targetTurtle.GetComponent<TurtleBehaviour>().DestroyTurtle();
         }
+        RemoveFromList();
         Object.Destroy(gameObject);
     }
 
@@ -369,8 +371,8 @@ public class Seagull : MonoBehaviour
 
     private void OnDrawGizmos()
     {
-        Gizmos.color = Color.red;
-        Gizmos.DrawRay(visualTransfom.position, visualTransfom.forward * 10);
+        //sGizmos.color = Color.red;
+        //Gizmos.DrawRay(visualTransfom.position, visualTransfom.forward * 10);
     }
 
     #endregion
