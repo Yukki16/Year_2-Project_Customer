@@ -125,7 +125,6 @@ public class Seagull : MonoBehaviour
 
     public void EarlyExit()
     {
-        Debug.Log("marker");
         currentState = SeagullState.EarlyExit;
         //animator.SetTrigger("Pickup");
     }
