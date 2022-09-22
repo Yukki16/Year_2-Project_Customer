@@ -30,6 +30,8 @@ public class CrabBehaviour : MonoBehaviour
         StartCoroutine(EntryDelay());
         currentState = CrabState.Stationary;
         playArea = Terrain.activeTerrain;
+
+        FindObjectOfType<AudioManager>().Play("SandEmerge", true);
     }
 
 

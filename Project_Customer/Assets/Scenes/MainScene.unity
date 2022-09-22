@@ -2716,8 +2716,8 @@ MonoBehaviour:
   MasterFlow: {fileID: 40324730}
   Turtles: {fileID: 1660498962}
   Seagulls: {fileID: 767454734}
-  trashThreshold: 1
-  ScareCrowLifeTime: 2
+  trashThreshold: 15
+  ScareCrowLifeTime: 30
 --- !u!1 &853775216
 GameObject:
   m_ObjectHideFlags: 0
@@ -4703,22 +4703,77 @@ MonoBehaviour:
   sounds:
   - name: Item Select
     clip: {fileID: 8300000, guid: c0fe952e60099d04c8cba8f7311736f0, type: 3}
-    volume: 0.8
+    volume: 0.3
     pitch: 1
     source: {fileID: 0}
   - name: Trash1
     clip: {fileID: 8300000, guid: 4d253cd9536bc644581270ec18505649, type: 3}
-    volume: 0.7
+    volume: 0.2
     pitch: 1
     source: {fileID: 0}
   - name: Trash2
     clip: {fileID: 8300000, guid: 94e34a7a808ff4e47aa2177b8c9e3382, type: 3}
-    volume: 0.7
+    volume: 0.2
     pitch: 1
     source: {fileID: 0}
   - name: Trash3
     clip: {fileID: 8300000, guid: 4ec4f44a59fee644d9722587fb4fd88d, type: 3}
-    volume: 0.7
+    volume: 0.2
+    pitch: 1
+    source: {fileID: 0}
+  - name: SandEmerge
+    clip: {fileID: 8300000, guid: fc0caf872b36c794f9e311e0209d23fa, type: 3}
+    volume: 0.8
+    pitch: 1
+    source: {fileID: 0}
+  - name: Step1
+    clip: {fileID: 8300000, guid: 16a07c98fb2bdc145a4d12ac2f036e7d, type: 3}
+    volume: 1
+    pitch: 1
+    source: {fileID: 0}
+  - name: Step2
+    clip: {fileID: 8300000, guid: aa5c06d0bd465d1498e9b594d5dd1fb7, type: 3}
+    volume: 1
+    pitch: 1
+    source: {fileID: 0}
+  - name: Step3
+    clip: {fileID: 8300000, guid: 3465fd52664ae3445a083e5f13ad9279, type: 3}
+    volume: 0.75
+    pitch: 1
+    source: {fileID: 0}
+  - name: Step4
+    clip: {fileID: 8300000, guid: 0c9cbac37ca0602499494954c202f999, type: 3}
+    volume: 1
+    pitch: 1
+    source: {fileID: 0}
+  - name: Step5
+    clip: {fileID: 8300000, guid: 3a078318977c8c84bb11f148cd714374, type: 3}
+    volume: 1
+    pitch: 1
+    source: {fileID: 0}
+  - name: Step6
+    clip: {fileID: 8300000, guid: 64b64542d0b51cb4c9c7b8905204b79c, type: 3}
+    volume: 1
+    pitch: 1
+    source: {fileID: 0}
+  - name: Step7
+    clip: {fileID: 8300000, guid: 98529aa7dcbc4ca46a3cef80ac42b5cc, type: 3}
+    volume: 1
+    pitch: 1
+    source: {fileID: 0}
+  - name: TurtleStep
+    clip: {fileID: 8300000, guid: 4374aabdfc893554281a9f60a1a93835, type: 3}
+    volume: 1
+    pitch: 1
+    source: {fileID: 0}
+  - name: SandEmerge2
+    clip: {fileID: 8300000, guid: 752f1382fc19d60408db08c284700751, type: 3}
+    volume: 0.5
+    pitch: 1
+    source: {fileID: 0}
+  - name: EggCrack
+    clip: {fileID: 8300000, guid: 9fca18fe146f7854ea246709b5243a32, type: 3}
+    volume: 0.5
     pitch: 1
     source: {fileID: 0}
 --- !u!1 &1969094602 stripped
