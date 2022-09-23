@@ -8,6 +8,13 @@ public class TrashBehaviour : MonoBehaviour
     private bool locked;
     public bool hasBeenPickedUp;
 
+    private Highscore highscore;
+
+    private void Start()
+    {
+        highscore = FindObjectOfType<Highscore>();
+    }
+
     public void DisableBinCollection()
     {
         isActive = true;
@@ -29,7 +36,9 @@ public class TrashBehaviour : MonoBehaviour
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.CompareTag("bin") && !locked && hasBeenPickedUp)
-        {
+        {          
+            collision.gameObject.GetComponent<BinBehaviour>().RaiseTrash();
+            //StartCoroutine(highscore.AddScore());
             Destroy(gameObject);
         }
     }

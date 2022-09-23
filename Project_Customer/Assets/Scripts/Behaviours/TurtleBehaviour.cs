@@ -6,8 +6,8 @@ using DG.Tweening;
 
 public class TurtleBehaviour : MonoBehaviour
 {
+    #region fields
     private Terrain playArea;
-
     private float offset;
 
     Mover mover;
@@ -16,7 +16,10 @@ public class TurtleBehaviour : MonoBehaviour
 
     private GameObject turtleSpawnerParent;
 
+
     GameObject targetObj;
+
+    private bool invincibleMode;
 
     public Renderer rend;
 
@@ -24,7 +27,7 @@ public class TurtleBehaviour : MonoBehaviour
 
     private int direction = 1;
 
-    int EndDistanceFromTop = 15;
+    int EndDistanceFromTop = 10;
 
     private MasterFlow masterFlow;
 
@@ -34,15 +37,25 @@ public class TurtleBehaviour : MonoBehaviour
     public int TurtleRemovalPoint = 35;
 
     Outline outline;
+
+    GameObject turtleShield;
+
     private bool excecution;
+
+    private LivesSystem livesSystem;
+    private Highscore highscore;
+    #endregion
 
     void Start()
     {
+        livesSystem = FindObjectOfType<LivesSystem>();
+        highscore = FindObjectOfType<Highscore>();
         masterFlow = FindObjectOfType<MasterFlow>();
-        //rend = GetComponentInChildren<Renderer>();
         animator = GetComponentInChildren<Animator>();
         targetObj = new GameObject();
         turtleSpawnerParent = GameObject.FindGameObjectWithTag("TurtleTargets");
+        turtleShield = transform.GetChild(1).gameObject;
+        turtleShield.SetActive(false);
         outline = GetComponent<Outline>();
         mover = GetComponent<Mover>();
         playArea = Terrain.activeTerrain;
@@ -75,11 +88,21 @@ public class TurtleBehaviour : MonoBehaviour
     private DG.Tweening.Core.TweenerCore<Color, Color, DG.Tweening.Plugins.Options.ColorOptions> tween;
     private Tween tweenTo;
 
+    public bool GetInvincibleMode()
+    {
+        return invincibleMode;
+    }
+
     private void OnTriggerEnter(Collider collision)
     {
-        if (collision.gameObject.tag is "Draggable")
+        if (collision.gameObject.tag is "Draggable" && !invincibleMode)
         {
             DisableTurtle();
+            if (masterFlow.tutorial.turtle == null)
+            {
+                masterFlow.tutorial.turtle = this.gameObject;
+                StartCoroutine(masterFlow.tutorial.TurtleTutorial(masterFlow.tutorial.turtle));
+            }
             RemoveFromList();
 
             if (tween != null && tween.active)
@@ -89,6 +112,7 @@ public class TurtleBehaviour : MonoBehaviour
             
             tween = rend.material.DOColor(Color.red, masterFlow.ReturnTurtleDeathTime());
             tweenTo = DOTween.To(() => animator.GetFloat("WalkSpeed"), value => { animator.SetFloat("WalkSpeed", value); }, 0.1f, masterFlow.ReturnTurtleDeathTime());
+            
         }
     }
 
@@ -113,6 +137,22 @@ public class TurtleBehaviour : MonoBehaviour
         }
     }
 
+    public void ToggleInvincible(bool setting)
+    {
+
+        turtleShield.SetActive(setting);
+
+        if (setting)
+        {
+            invincibleMode = true;            
+        }
+
+        if (!setting)
+        {
+            invincibleMode = false;
+        }
+    }
+
     void DetectRemovalPoint()
     {
         if (transform.position.z >= TurtleRemovalPoint)
@@ -125,10 +165,20 @@ public class TurtleBehaviour : MonoBehaviour
     {
         if (animator.GetFloat("WalkSpeed") <= 0.11f)
         {
-            tweenTo.Kill();
-            tween.Kill();
-            DestroyTurtle();
+            StartCoroutine(TurtleTrashDeath());
         }
+    }
+
+    IEnumerator TurtleTrashDeath()
+    {
+        tweenTo.Kill();
+        tween.Kill();
+        tween = rend.material.DOColor(Color.white, 0.1f);
+        animator.SetFloat("WalkSpeed", 1);
+        animator.SetTrigger("TrashDeath");
+        yield return new WaitForSeconds(5.01f);
+        StartCoroutine(livesSystem.UpdateLives());
+        DestroyTurtle();
     }
 
     void DestroyOnTarget()
@@ -140,13 +190,14 @@ public class TurtleBehaviour : MonoBehaviour
 
         if (Vector3.Distance(transform.position, targetObj.transform.position) < 1 && !excecution)
         {
+            //StartCoroutine(highscore.AddScore());
             DestroyTurtle();
         }
     }
 
     public void RemoveFromList()
     {
-        List<GameObject> list = GameObject.FindGameObjectWithTag("TurtleSpawner").GetComponent<SpawnTurtles>().GetTurtles();
+        List<GameObject> list = GameObject.FindGameObjectWithTag("TurtleSpawner").GetComponent<SpawnTurtles>().GetTargetableTurtles();
 
         if (list.Contains(gameObject))
             list.Remove(gameObject);
@@ -154,7 +205,7 @@ public class TurtleBehaviour : MonoBehaviour
 
     public void AddSelfToList()
     {
-        GameObject.FindGameObjectWithTag("TurtleSpawner").GetComponent<SpawnTurtles>().GetTurtles().Add(gameObject);
+        GameObject.FindGameObjectWithTag("TurtleSpawner").GetComponent<SpawnTurtles>().GetTargetableTurtles().Add(gameObject);
     }
 
     public void DestroyTurtle()

@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 3455414690689361883}
   - component: {fileID: 6722684753064992077}
   - component: {fileID: 2876922439323694989}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Crab
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -72,7 +72,7 @@ GameObject:
   - component: {fileID: 8361855142784009411}
   - component: {fileID: 8186307322604651854}
   - component: {fileID: 8565743763332120328}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: ParticleParent
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4941,7 +4941,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3821888754534849567}
   - component: {fileID: 5317246741502415306}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Visual
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5046,14 +5046,46 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -7057489413929239769, guid: 5b495355e6e1a3a4da1ea97d3617cfca, type: 3}
+      propertyPath: m_Layer
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: -4382053622387334352, guid: 5b495355e6e1a3a4da1ea97d3617cfca, type: 3}
+      propertyPath: m_Layer
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: -1700792846905319459, guid: 5b495355e6e1a3a4da1ea97d3617cfca, type: 3}
+      propertyPath: m_Layer
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 613467584801407808, guid: 5b495355e6e1a3a4da1ea97d3617cfca, type: 3}
+      propertyPath: m_Layer
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 5b495355e6e1a3a4da1ea97d3617cfca, type: 3}
       propertyPath: m_Name
       value: HillAndCrab
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 5b495355e6e1a3a4da1ea97d3617cfca, type: 3}
+      propertyPath: m_Layer
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2593469200580653002, guid: 5b495355e6e1a3a4da1ea97d3617cfca, type: 3}
+      propertyPath: m_Layer
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 3024000808402082274, guid: 5b495355e6e1a3a4da1ea97d3617cfca, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 8b4427da44330444f9e0fc752629c31b, type: 2}
+    - target: {fileID: 3518336442878243406, guid: 5b495355e6e1a3a4da1ea97d3617cfca, type: 3}
+      propertyPath: m_Layer
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4287691140287103911, guid: 5b495355e6e1a3a4da1ea97d3617cfca, type: 3}
+      propertyPath: m_Layer
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 5684631524298271229, guid: 5b495355e6e1a3a4da1ea97d3617cfca, type: 3}
       propertyPath: m_LocalScale.y
       value: 1.3276469
@@ -5070,10 +5102,18 @@ PrefabInstance:
       propertyPath: m_LocalPosition.z
       value: 6e-15
       objectReference: {fileID: 0}
+    - target: {fileID: 5950647366436784740, guid: 5b495355e6e1a3a4da1ea97d3617cfca, type: 3}
+      propertyPath: m_Layer
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 6669172101347319196, guid: 5b495355e6e1a3a4da1ea97d3617cfca, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 06871257b285a0147a8e25075ce0e291, type: 2}
+    - target: {fileID: 8181757443716359268, guid: 5b495355e6e1a3a4da1ea97d3617cfca, type: 3}
+      propertyPath: m_Layer
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5b495355e6e1a3a4da1ea97d3617cfca, type: 3}
 --- !u!4 &1577183777558261944 stripped

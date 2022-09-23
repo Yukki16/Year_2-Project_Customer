@@ -9,6 +9,7 @@ public class MasterFlow : MonoBehaviour
     public SpawnHumans spawnHumans;
     public SpawnSeagulls spawnSeagulls;
     public SpawnTurtles spawnTurtles;
+    [SerializeField] public Tutorial tutorial;
     public GameObject trashPrefab;
     public GameObject draggablesParent;
     public int intlTrashPieces;
@@ -25,6 +26,9 @@ public class MasterFlow : MonoBehaviour
     public int CrabSpawnDelay = 20;
     public int TurtleDeathTime = 5;
 
+    public int hmnDropRateMin = 3;
+    public int hmnDropRateMax = 7;
+
     public int ObjSpawnRateIncreaseDelay = 15;
 
     private GameObject trashSpot;
@@ -32,6 +36,9 @@ public class MasterFlow : MonoBehaviour
     private readonly int maxDistanceFromCenter = 15;
     private readonly int intlTrashMaxBottomDistance = 36;
     private readonly int intlTrashMinBottomDistance = 12;
+
+    private bool scareCrowActive;
+
 
     private bool preloadCheck { get; }
 
@@ -49,16 +56,27 @@ public class MasterFlow : MonoBehaviour
         SpawnInitialTrash();
 
         StartCoroutine(StartSpawns());
+
+        //StartCoroutine(PingSeagullRate());
     }
 
-    #region SpawnSettings
+    private IEnumerator PingSeagullRate()
+    {
+        Debug.Log(SeagullSpawnDelay);
+        yield return new WaitForSeconds(1);
+        StartCoroutine(PingSeagullRate());
+    }
 
-    private IEnumerator StartSpawns()
+
+        #region SpawnSettings
+
+        private IEnumerator StartSpawns()
     {
         StartCoroutine(StartEggSpawn());
         StartCoroutine(StartHumanSpawn());
         StartCoroutine(StartCrabSpawn());
         StartCoroutine(StartSeagullSpawn());
+
         yield return null;
     }
 
@@ -115,7 +133,7 @@ public class MasterFlow : MonoBehaviour
         yield return new WaitForSeconds(ObjSpawnRateIncreaseDelay);
         if (SeagullSpawnDelay > 2)
         {
-            SeagullSpawnDelay -= 1;
+            //SeagullSpawnDelay -= 1;
             StartCoroutine(IncreaseSeagullSpawnRate());
         }
     }
@@ -142,6 +160,11 @@ public class MasterFlow : MonoBehaviour
     #endregion
 
     #region ReturnRates
+
+    public int ReturnHumanDropRate()
+    {
+        return (Random.Range(hmnDropRateMin, hmnDropRateMax)); 
+    }
 
     public int ReturnTurtleDeathTime()
     {
@@ -173,6 +196,17 @@ public class MasterFlow : MonoBehaviour
     }
     #endregion
 
+
+    public void ActivateScareCrow()
+    {
+        spawnSeagulls.EnableSpawning = false;
+    }
+
+    public void DeactivateScareCrow()
+    {
+        spawnSeagulls.EnableSpawning = true;
+    }
+
     private GameObject randomTrash()
     {
         Transform toGameobject = trashPrefab.transform.GetChild(Random.Range(0, trashPrefab.transform.childCount));
@@ -184,9 +218,14 @@ public class MasterFlow : MonoBehaviour
         for (int i = 0; i < intlTrashPieces; i++)
         {
             trashSpot.transform.position = new Vector3(playArea.terrainData.size.x / 2 + Random.Range(-maxDistanceFromCenter, maxDistanceFromCenter),
-            playArea.transform.position.y + 3, Random.Range(playArea.transform.position.z + intlTrashMinBottomDistance,
+            playArea.transform.position.y + 5, Random.Range(playArea.transform.position.z + intlTrashMinBottomDistance,
             playArea.transform.position.z + intlTrashMaxBottomDistance));
             GameObject newTrash = Instantiate(randomTrash(), trashSpot.transform);
+            if(tutorial.trash == null)
+            {
+                tutorial.trash = newTrash;
+                StartCoroutine(tutorial.TrashTutorial(tutorial.trash));
+            }
             newTrash.transform.SetParent(draggablesParent.transform);
         }
     }

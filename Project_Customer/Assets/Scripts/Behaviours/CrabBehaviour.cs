@@ -21,19 +21,25 @@ public class CrabBehaviour : MonoBehaviour
 
     private MeshCollider mc;
 
+    private LivesSystem livesSystem;
+    private Highscore highscore;
     #endregion
 
     void Start()
     {
+        livesSystem = FindObjectOfType<LivesSystem>();
+        highscore = FindObjectOfType<Highscore>();
         particles = GetComponentInChildren<ParticleSystem>();
         animator = GetComponentInChildren<Animator>();
         StartCoroutine(EntryDelay());
         currentState = CrabState.Stationary;
         playArea = Terrain.activeTerrain;
+
+        FindObjectOfType<AudioManager>().Play("SandEmerge", true);
     }
 
 
-    private void OnTriggerEnter (Collider collision)
+    private void OnTriggerStay (Collider collision)
     {
         if (!entered) return;
         if (triggered) return;
@@ -57,9 +63,8 @@ public class CrabBehaviour : MonoBehaviour
 
     IEnumerator EntryDelay()
     {
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(3f);
         entered = true;
-        Debug.Log("test");
     }
 
     IEnumerator DetectTrash(Collider collision)
@@ -67,9 +72,11 @@ public class CrabBehaviour : MonoBehaviour
         //wait until excecution animation is played
         triggered = true;
         yield return new WaitForSeconds(0.23f);
+        if (collision.gameObject != null)
         Destroy(collision.gameObject);
         animator.SetTrigger("ShrinkHill");
         yield return new WaitForSeconds(0.33f);
+        StartCoroutine(highscore.AddScore());
         Destroy(gameObject);
     }
 
@@ -78,14 +85,27 @@ public class CrabBehaviour : MonoBehaviour
         triggered = true;
         animator.SetTrigger("DetectTurtle");
         TurtleBehaviour tb = collision.gameObject.GetComponent<TurtleBehaviour>();
-        tb.animator.SetTrigger("CrabDeath");    
-        tb.StartCoroutine(tb.MoveTowards(transform.position));
-        //wait until excecution animation is played
-        yield return new WaitForSeconds(1f);
-        tb.DestroyTurtle();
-        yield return new WaitForSeconds(0.53f);
-        animator.SetTrigger("ShrinkHill");
-        yield return new WaitForSeconds(0.33f);
-        Destroy(gameObject);
+        if (!tb.GetInvincibleMode())
+        {
+            tb.animator.SetTrigger("CrabDeath");
+            tb.StartCoroutine(tb.MoveTowards(transform.position));
+            //wait until excecution animation is played
+            yield return new WaitForSeconds(1f);
+            tb.DestroyTurtle();
+            yield return new WaitForSeconds(0.53f);
+            animator.SetTrigger("ShrinkHill");
+            yield return new WaitForSeconds(0.33f);
+            StartCoroutine(livesSystem.UpdateLives());
+            Destroy(gameObject);
+        }
+        else
+        {
+            //wait until excecution animation is played
+            yield return new WaitForSeconds(1f);
+            yield return new WaitForSeconds(0.53f);
+            animator.SetTrigger("ShrinkHill");
+            yield return new WaitForSeconds(0.33f);
+            Destroy(gameObject);
+        }
     }
 }

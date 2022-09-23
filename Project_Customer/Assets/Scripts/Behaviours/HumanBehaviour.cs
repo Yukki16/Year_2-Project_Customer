@@ -9,9 +9,11 @@ public class HumanBehaviour : MonoBehaviour
     public GameObject trashPrefab;
     public int TargetDistanceFromBorder;
     private GameObject trashParent;
+    private MasterFlow masterFlow;
 
     private void Start()
     {
+        masterFlow = FindObjectOfType<MasterFlow>();
         playArea = Terrain.activeTerrain;
         trashParent = GameObject.FindGameObjectWithTag("DraggableParent");
         SpawnTarget();
@@ -50,7 +52,7 @@ public class HumanBehaviour : MonoBehaviour
         GameObject newTrash = Instantiate(randomTrash(), gameObject.transform);
         newTrash.transform.parent = trashParent.transform;
         newTrash.transform.localScale *= 0.3f;
-        yield return new WaitForSeconds(Random.Range(1, 5));
+        yield return new WaitForSeconds(masterFlow.ReturnHumanDropRate());
         StartCoroutine(spawnTrash());
     }
 

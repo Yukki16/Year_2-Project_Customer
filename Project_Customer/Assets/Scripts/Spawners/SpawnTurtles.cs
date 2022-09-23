@@ -7,6 +7,7 @@ public class SpawnTurtles : MonoBehaviour
     #region fields
     private List<GameObject> spawnPoints;
     private List<GameObject> turtleList;
+    private List<GameObject> turtleSeagullList;
 
     private Terrain playArea;
 
@@ -28,6 +29,8 @@ public class SpawnTurtles : MonoBehaviour
 
     private void Start()
     {
+        transform.rotation = Quaternion.Euler(0, 55, 0);
+
         masterFlow = FindObjectOfType<MasterFlow>();
 
         turtles = new GameObject(name: "Turtles");
@@ -41,6 +44,7 @@ public class SpawnTurtles : MonoBehaviour
 
         spawnPoints = new List<GameObject>();
         turtleList = new List<GameObject>();
+        turtleSeagullList = new List<GameObject>();
 
         TurtleSpawnEggs = new GameObject();
         TurtleSpawnEggs.transform.SetParent(transform);
@@ -53,9 +57,15 @@ public class SpawnTurtles : MonoBehaviour
         return turtleList;
     }
 
+    public List<GameObject> GetTargetableTurtles()
+    {
+        return turtleSeagullList;
+    }
+
     public void AddTurtle(GameObject turtle)
     {
         turtleList.Add(turtle);
+        turtleSeagullList.Add(turtle);
     }
 
     public GameObject GetTurtlePrefab()
@@ -70,13 +80,13 @@ public class SpawnTurtles : MonoBehaviour
         if (spawnEggStep % 2 == 0)
         {
             //Spawn Egg on Right Side
-            newEgg.transform.position = new Vector3((playArea.terrainData.size.x / 2) + rightEggs * EggSeperationDistance, 0.15f, 3);
+            newEgg.transform.position = new Vector3((playArea.terrainData.size.x / 2) + rightEggs * EggSeperationDistance, 0.15f, 5);
             rightEggs++;
         }
         else
         {
             //Spawn Egg on Left Side
-            newEgg.transform.position = new Vector3(playArea.terrainData.size.x / 2 + leftEggs * -EggSeperationDistance, 0.15f, 3);
+            newEgg.transform.position = new Vector3(playArea.terrainData.size.x / 2 + leftEggs * -EggSeperationDistance, 0.15f, 5);
             leftEggs++;
         }
 

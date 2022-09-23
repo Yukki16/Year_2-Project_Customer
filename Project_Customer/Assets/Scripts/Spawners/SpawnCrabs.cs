@@ -33,10 +33,14 @@ public class SpawnCrabs : MonoBehaviour
     IEnumerator spawnCrabs()
     {        
         yield return new WaitForSeconds(masterFlow.GetCrabSpawnRate());
-        Debug.Log("SpawnedCrab");
         GameObject newCrab = Instantiate(CrabPrefab, position: new Vector3(playArea.terrainData.size.x / 2 + Random.Range(-MaxDistanceFromCenter, MaxDistanceFromCenter),
         playArea.transform.position.y, Random.Range(playArea.transform.position.z + MinHeightFromBottom,
         playArea.transform.position.z + MaxHeightFromBottom)), rotation: Quaternion.Euler(new Vector3(0, Random.Range(0, 360), 0)));
+        if(masterFlow.tutorial.crab == null)
+        {
+            masterFlow.tutorial.crab = newCrab;
+            StartCoroutine(masterFlow.tutorial.CrabTutorial(masterFlow.tutorial.crab));
+        }
         newCrab.transform.parent = crabs.transform;
         StartCoroutine(spawnCrabs());
     }
