@@ -104,11 +104,6 @@ public class TurtleBehaviour : MonoBehaviour
         if (collision.gameObject.tag is "Draggable" && !invincibleMode)
         {
             DisableTurtle();
-            if (masterFlow.tutorial.turtle == null)
-            {
-                masterFlow.tutorial.turtle = this.gameObject;
-                StartCoroutine(masterFlow.tutorial.TurtleTutorial(masterFlow.tutorial.turtle));
-            }
             RemoveFromList();
 
             if (tween != null && tween.active)
@@ -183,7 +178,7 @@ public class TurtleBehaviour : MonoBehaviour
         animator.SetFloat("WalkSpeed", 1);
         animator.SetTrigger("TrashDeath");
         yield return new WaitForSeconds(5.01f);
-        StartCoroutine(livesSystem.UpdateLives());
+        //StartCoroutine(livesSystem.UpdateLives());
         DestroyTurtle();
     }
 

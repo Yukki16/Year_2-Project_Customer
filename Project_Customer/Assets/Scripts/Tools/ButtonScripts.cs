@@ -7,7 +7,7 @@ using UnityEngine.UI;
 public class ButtonScripts : MonoBehaviour
 {
     #region fields
-    [SerializeField] private Tutorial tutorial;
+
     [SerializeField] private Canvas pauseCanvas = null;
     [SerializeField] private Canvas settingsCanvas = null;
 
@@ -18,8 +18,6 @@ public class ButtonScripts : MonoBehaviour
     public GameObject loadingCanvas = null;
     public Slider loadingBar = null;
     public GameObject currentCanvas = null;
-
-    [SerializeField] private AudioManager audioManager;
 
     #endregion
     // Update is called once per frame
@@ -54,12 +52,10 @@ public class ButtonScripts : MonoBehaviour
         if (paused)
         {
             Time.timeScale = 0f;
-            tutorial.paused = true;
         }
         else
         {
             Time.timeScale = 1f;
-            tutorial.paused = false;
         }
 
         yield return null;
@@ -105,8 +101,4 @@ public class ButtonScripts : MonoBehaviour
         previousCanvas.gameObject.SetActive(true);
     }
 
-    public void ChangeVolume(Slider slider)
-    {
-        audioManager.ChangeVolume(slider.value / 10);
-    }
 }

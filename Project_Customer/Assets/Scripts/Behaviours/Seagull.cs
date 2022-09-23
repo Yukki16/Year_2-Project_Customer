@@ -367,7 +367,7 @@ public class Seagull : MonoBehaviour
     {
         if (transform.position.x >= playArea.terrainData.size.x || transform.position.x <= playArea.transform.position.x || transform.position.y > 20)
         {
-            StartCoroutine(livesSystem.UpdateLives());
+            //StartCoroutine(livesSystem.UpdateLives());
             DestroySeagull();
         }
     }

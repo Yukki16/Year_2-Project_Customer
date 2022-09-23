@@ -95,7 +95,7 @@ public class CrabBehaviour : MonoBehaviour
             yield return new WaitForSeconds(0.53f);
             animator.SetTrigger("ShrinkHill");
             yield return new WaitForSeconds(0.33f);
-            StartCoroutine(livesSystem.UpdateLives());
+            //StartCoroutine(livesSystem.UpdateLives());
             Destroy(gameObject);
         }
         else
