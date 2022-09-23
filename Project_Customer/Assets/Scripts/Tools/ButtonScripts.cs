@@ -7,7 +7,7 @@ using UnityEngine.UI;
 public class ButtonScripts : MonoBehaviour
 {
     #region fields
-
+    [SerializeField] private Tutorial tutorial;
     [SerializeField] private Canvas pauseCanvas = null;
     [SerializeField] private Canvas settingsCanvas = null;
 
@@ -54,10 +54,12 @@ public class ButtonScripts : MonoBehaviour
         if (paused)
         {
             Time.timeScale = 0f;
+            tutorial.paused = true;
         }
         else
         {
             Time.timeScale = 1f;
+            tutorial.paused = false;
         }
 
         yield return null;

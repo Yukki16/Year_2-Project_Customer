@@ -15,6 +15,9 @@ public class Tutorial : MonoBehaviour
     private bool towardsObject = false;
     private bool backToPlace = false;
 
+    public bool paused = false;
+    private bool tutorialPlaying = false;
+
     private GameObject objectToMoveTowards;
 
 
@@ -44,9 +47,13 @@ public class Tutorial : MonoBehaviour
 
     public IEnumerator TrashTutorial(GameObject trashObj)
     {
+        yield return new WaitUntil(() => tutorialPlaying == false);
+        yield return new WaitUntil(() => paused == false);
         if (!trashTutorial)
         {
+            tutorialPlaying = true;
             yield return new WaitForSecondsRealtime(3f);
+            yield return new WaitUntil(() => paused == false);
             Time.timeScale = 0f;
             trashTutorial = true;
             trashText.gameObject.SetActive(true);
@@ -61,6 +68,7 @@ public class Tutorial : MonoBehaviour
             towardsObject = true;
 
             yield return new WaitUntil(() => towardsObject == false);
+            yield return new WaitUntil(() => paused == false);
             yield return new WaitForSecondsRealtime(2f);
             DisableOutline();
 
@@ -74,6 +82,7 @@ public class Tutorial : MonoBehaviour
             towardsObject = true;
 
             yield return new WaitUntil(() => towardsObject == false);
+            yield return new WaitUntil(() => paused == false);
             yield return new WaitForSecondsRealtime(2f);
             DisableOutline();
 
@@ -87,6 +96,7 @@ public class Tutorial : MonoBehaviour
             towardsObject = true;
 
             yield return new WaitUntil(() => towardsObject == false);
+            yield return new WaitUntil(() => paused == false);
             yield return new WaitForSecondsRealtime(2f);
             DisableOutline();
 
@@ -99,19 +109,25 @@ public class Tutorial : MonoBehaviour
             towardsObject = true;
 
             yield return new WaitUntil(() => towardsObject == false);
+            yield return new WaitUntil(() => paused == false);
             DisableOutline();
             cam.transform.rotation = defaultCamSettings.transform.rotation;
             trashText.gameObject.SetActive(false);
             Time.timeScale = 1f;
+            tutorialPlaying = false;
         }
         yield return null;
     }
 
     public IEnumerator SeagulTutorial(GameObject theSeagul)
     {
+        yield return new WaitUntil(() => tutorialPlaying == false);
+        yield return new WaitUntil(() => paused == false);
         if (!seagulTutorial)
         {
+            tutorialPlaying = true;
             yield return new WaitForSecondsRealtime(8f);
+            yield return new WaitUntil(() => paused == false);
             Time.timeScale = 0f;
             seagulTutorial = true;
             seagulText.gameObject.SetActive(true);
@@ -126,6 +142,7 @@ public class Tutorial : MonoBehaviour
             towardsObject = true;
 
             yield return new WaitUntil(() => towardsObject == false);
+            yield return new WaitUntil(() => paused == false);
             yield return new WaitForSecondsRealtime(5f);
             DisableOutline();
 
@@ -139,19 +156,25 @@ public class Tutorial : MonoBehaviour
             towardsObject = true;
 
             yield return new WaitUntil(() => towardsObject == false);
+            yield return new WaitUntil(() => paused == false);
             DisableOutline();
             cam.transform.rotation = defaultCamSettings.transform.rotation;
             seagulText.gameObject.SetActive(false);
             Time.timeScale = 1f;
+            tutorialPlaying = false;
         }
         yield return null;
     }
 
     public IEnumerator CrabTutorial(GameObject theCrab)
     {
+        yield return new WaitUntil(() => tutorialPlaying == false);
+        yield return new WaitUntil(() => paused == false);
         if (!crabTutorial)
         {
+            tutorialPlaying = true;
             yield return new WaitForSecondsRealtime(2f);
+            yield return new WaitUntil(() => paused == false);
             Time.timeScale = 0f;
             crabTutorial = true;
 
@@ -167,6 +190,7 @@ public class Tutorial : MonoBehaviour
             towardsObject = true;
 
             yield return new WaitUntil(() => towardsObject == false);
+            yield return new WaitUntil(() => paused == false);
             yield return new WaitForSecondsRealtime(2f);
             //DisableOutline();
 
@@ -180,20 +204,26 @@ public class Tutorial : MonoBehaviour
             towardsObject = true;
 
             yield return new WaitUntil(() => towardsObject == false);
+            yield return new WaitUntil(() => paused == false);
             //DisableOutline();
 
             cam.transform.rotation = defaultCamSettings.transform.rotation;
             crabText.gameObject.SetActive(false);
             Time.timeScale = 1f;
+            tutorialPlaying = false;
         }
         yield return null;
     }
 
     public IEnumerator TurtleTutorial(GameObject theTurtle)
     {
+        yield return new WaitUntil(() => tutorialPlaying == false);
+        yield return new WaitUntil(() => paused == false);
         if (!turtleInTrashTutorial)
         {
+            tutorialPlaying = true;
             yield return new WaitForSecondsRealtime(2f);
+            yield return new WaitUntil(() => paused == false);
             Time.timeScale = 0f;
             turtleInTrashTutorial = true;
 
@@ -209,6 +239,7 @@ public class Tutorial : MonoBehaviour
             towardsObject = true;
 
             yield return new WaitUntil(() => towardsObject == false);
+            yield return new WaitUntil(() => paused == false);
             yield return new WaitForSecondsRealtime(5f);
             DisableOutline();
 
@@ -222,20 +253,26 @@ public class Tutorial : MonoBehaviour
             towardsObject = true;
 
             yield return new WaitUntil(() => towardsObject == false);
+            yield return new WaitUntil(() => paused == false);
             DisableOutline();
 
             cam.transform.rotation = defaultCamSettings.transform.rotation;
             turtleText.gameObject.SetActive(false);
             Time.timeScale = 1f;
+            tutorialPlaying = false;
         }
         yield return null;
     }
 
     public IEnumerator ScareCrowTutorial(GameObject theScareCrow)
     {
+        yield return new WaitUntil(() => tutorialPlaying == false);
+        yield return new WaitUntil(() => paused == false);
         if (!scarecowTutorial)
         {
+            tutorialPlaying = true;
             yield return new WaitForSecondsRealtime(2f);
+            yield return new WaitUntil(() => paused == false);
             Time.timeScale = 0f;
             scarecowTutorial = true;
 
@@ -243,40 +280,47 @@ public class Tutorial : MonoBehaviour
 
             cam.transform.LookAt(theScareCrow.transform.position);
             objectToMoveTowards = theScareCrow;
-            if (!(outline = objectToMoveTowards.AddComponent<Outline>()))
+            /*if (!(outline = objectToMoveTowards.AddComponent<Outline>()))
             {
                 outline = objectToMoveTowards.GetComponent<Outline>();
             }
-            EnableOutline();
+            EnableOutline();*/
             towardsObject = true;
 
             yield return new WaitUntil(() => towardsObject == false);
+            yield return new WaitUntil(() => paused == false);
             yield return new WaitForSecondsRealtime(5f);
-            DisableOutline();
+
+            //DisableOutline();
 
 
             objectToMoveTowards = defaultCamSettings;
-            if (!(outline = objectToMoveTowards.AddComponent<Outline>()))
+            /*if (!(outline = objectToMoveTowards.AddComponent<Outline>()))
             {
                 outline = objectToMoveTowards.GetComponent<Outline>();
             }
-            EnableOutline();
+            EnableOutline();*/
             towardsObject = true;
 
             yield return new WaitUntil(() => towardsObject == false);
-            DisableOutline();
+            yield return new WaitUntil(() => paused == false);
+            //DisableOutline();
 
             cam.transform.rotation = defaultCamSettings.transform.rotation;
             scareCrowText.gameObject.SetActive(false);
             Time.timeScale = 1f;
+            tutorialPlaying = false;
         }
         yield return null;
     }
 
     public IEnumerator ShildedTutorial(GameObject theTurtle)
     {
+        yield return new WaitUntil(() => tutorialPlaying == false);
+        yield return new WaitUntil(() => paused == false);
         if (!shieldTutorial)
         {
+            tutorialPlaying = true;
             shieldTutorial = true;
             yield return new WaitForSecondsRealtime(2f);
             Time.timeScale = 0f;
@@ -311,6 +355,7 @@ public class Tutorial : MonoBehaviour
             cam.transform.rotation = defaultCamSettings.transform.rotation;
             shieldText.gameObject.SetActive(false);
             Time.timeScale = 1f;
+            tutorialPlaying = false;
         }
         yield return null;
     }
