@@ -76,7 +76,7 @@ public class CrabBehaviour : MonoBehaviour
         Destroy(collision.gameObject);
         animator.SetTrigger("ShrinkHill");
         yield return new WaitForSeconds(0.33f);
-        //StartCoroutine(highscore.AddScore());
+        StartCoroutine(highscore.AddScore());
         Destroy(gameObject);
     }
 

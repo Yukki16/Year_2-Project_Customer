@@ -1353,13 +1353,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 07564704e273c724c8632d6f4de0fb4c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tutorial: {fileID: 1721337287}
+  tutorial: {fileID: 0}
   pauseCanvas: {fileID: 168279894}
   settingsCanvas: {fileID: 0}
   loadingCanvas: {fileID: 1792437539}
   loadingBar: {fileID: 1945379049}
   currentCanvas: {fileID: 0}
-  audioManager: {fileID: 81780969}
+  audioManager: {fileID: 0}
 --- !u!4 &688268113
 Transform:
   m_ObjectHideFlags: 0
@@ -1994,7 +1994,7 @@ MonoBehaviour:
   MasterFlow: {fileID: 1720395503}
   Turtles: {fileID: 226676130}
   Seagulls: {fileID: 1990316875}
-  trashThreshold: 12
+  trashThreshold: 2
   ScareCrowLifeTime: 10
   IceCreamLifeTime: 15
 --- !u!4 &1415007806
