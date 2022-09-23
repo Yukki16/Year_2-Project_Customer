@@ -6153,9 +6153,44 @@ MonoBehaviour:
     volume: 0.5
     pitch: 1
     source: {fileID: 0}
-  - name: EggCrack
-    clip: {fileID: 8300000, guid: 9fca18fe146f7854ea246709b5243a32, type: 3}
+  - name: Gull1
+    clip: {fileID: 8300000, guid: 8ddf2d8cf51719345bf9ef216d2f9575, type: 3}
     volume: 0.5
+    pitch: 1
+    source: {fileID: 0}
+  - name: Gull2
+    clip: {fileID: 8300000, guid: c582c004156be784c96bcd6636d14799, type: 3}
+    volume: 0.5
+    pitch: 1
+    source: {fileID: 0}
+  - name: Gull3
+    clip: {fileID: 8300000, guid: 00d9dab173565554abfecafa46ecef82, type: 3}
+    volume: 0.5
+    pitch: 1
+    source: {fileID: 0}
+  - name: Gull4
+    clip: {fileID: 8300000, guid: 74933c976c110814d89abf169d8068d3, type: 3}
+    volume: 0.5
+    pitch: 1
+    source: {fileID: 0}
+  - name: GullPursue1
+    clip: {fileID: 8300000, guid: 04d6908bfa4af41499f0a9859b28b3ab, type: 3}
+    volume: 0.5
+    pitch: 1
+    source: {fileID: 0}
+  - name: GullPursue2
+    clip: {fileID: 8300000, guid: c136d1927b9fbbf448dde7d2240f6db0, type: 3}
+    volume: 0.5
+    pitch: 1
+    source: {fileID: 0}
+  - name: GullPursue3
+    clip: {fileID: 8300000, guid: c652e33364314b34a8fc1264785286ac, type: 3}
+    volume: 0.5
+    pitch: 1
+    source: {fileID: 0}
+  - name: GullFlap
+    clip: {fileID: 8300000, guid: fb8f0fec980033b41afe94547268e844, type: 3}
+    volume: 0.4
     pitch: 1
     source: {fileID: 0}
 --- !u!1 &1969094602 stripped

@@ -8,7 +8,7 @@ public class RemoveBottles : MonoBehaviour
     {
         for (int i = 0; i < transform.childCount; i++)
         {
-            if (transform.GetChild(i).transform.position.y < -2)
+            if (transform.GetChild(i).transform.position.y < -2 || transform.GetChild(i).transform.position.y > 20)
             {
                 Destroy(transform.GetChild(i).gameObject);
             }

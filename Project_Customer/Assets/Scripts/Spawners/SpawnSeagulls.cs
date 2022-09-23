@@ -10,6 +10,7 @@ public class SpawnSeagulls : MonoBehaviour
     MasterFlow masterFlow;
     public bool EnableSpawning;
     public bool SpawnSeagull;
+    private bool crRunning;
 
     void Start()
     {
@@ -36,13 +37,7 @@ public class SpawnSeagulls : MonoBehaviour
     }
 
     IEnumerator spawnSeagulls()
-    {       
-        if (!EnableSpawning)
-        {
-            yield return new WaitForSeconds(3);
-            StartCoroutine(spawnSeagulls());
-        }
-
+    {           
         GameObject newSeagull = Instantiate(SeagullPrefab);
         seagullList.Add(newSeagull);
         newSeagull.transform.parent = Seagulls.transform;
@@ -75,6 +70,17 @@ public class SpawnSeagulls : MonoBehaviour
 
     private void Update()
     {
+        if (!EnableSpawning)
+        {
+            crRunning = false;
+            StopCoroutine(spawnSeagulls());
+        }
+
+        if (crRunning && EnableSpawning)
+        {
+            StartCoroutine(spawnSeagulls());
+        }
+
         if (SpawnSeagull)
         {
             GameObject newSeagull = Instantiate(SeagullPrefab);
