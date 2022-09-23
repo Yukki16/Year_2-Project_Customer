@@ -2277,9 +2277,9 @@ MonoBehaviour:
   MasterFlow: {fileID: 1720395503}
   Turtles: {fileID: 226676130}
   Seagulls: {fileID: 1990316875}
-  trashThreshold: 2
+  trashThreshold: 12
   ScareCrowLifeTime: 10
-  IceCreamLifeTime: 5
+  IceCreamLifeTime: 15
 --- !u!4 &1415007806
 Transform:
   m_ObjectHideFlags: 0
@@ -2748,7 +2748,7 @@ MonoBehaviour:
   intlTrashPieces: 15
   intlSpawnEggDelay: 3
   intlSpawnHumanDelay: 10
-  intlSpawnSeagullDelay: 4
+  intlSpawnSeagullDelay: 12
   intlSpawnCrabDelay: 35
   EggSpawnDelay: 35
   TurtleSpawnDelay: 12
