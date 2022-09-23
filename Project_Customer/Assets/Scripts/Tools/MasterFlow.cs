@@ -9,6 +9,7 @@ public class MasterFlow : MonoBehaviour
     public SpawnHumans spawnHumans;
     public SpawnSeagulls spawnSeagulls;
     public SpawnTurtles spawnTurtles;
+    [SerializeField] public Tutorial tutorial;
     public GameObject trashPrefab;
     public GameObject draggablesParent;
     public int intlTrashPieces;
@@ -37,6 +38,7 @@ public class MasterFlow : MonoBehaviour
     private readonly int intlTrashMinBottomDistance = 12;
 
     private bool scareCrowActive;
+
 
     private bool preloadCheck { get; }
 
@@ -74,6 +76,7 @@ public class MasterFlow : MonoBehaviour
         StartCoroutine(StartHumanSpawn());
         StartCoroutine(StartCrabSpawn());
         StartCoroutine(StartSeagullSpawn());
+
         yield return null;
     }
 
@@ -228,6 +231,11 @@ public class MasterFlow : MonoBehaviour
             playArea.transform.position.y + 5, Random.Range(playArea.transform.position.z + intlTrashMinBottomDistance,
             playArea.transform.position.z + intlTrashMaxBottomDistance));
             GameObject newTrash = Instantiate(randomTrash(), trashSpot.transform);
+            if(tutorial.trash == null)
+            {
+                tutorial.trash = newTrash;
+                StartCoroutine(tutorial.TrashTutorial(tutorial.trash));
+            }
             newTrash.transform.SetParent(draggablesParent.transform);
         }
     }
