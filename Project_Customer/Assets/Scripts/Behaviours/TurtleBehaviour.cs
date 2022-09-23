@@ -16,12 +16,10 @@ public class TurtleBehaviour : MonoBehaviour
 
     private GameObject turtleSpawnerParent;
 
-    private bool ghostMode;
-
-    private Material baseMaterial;
-    [SerializeField] Material GhostMaterial;
 
     GameObject targetObj;
+
+    private bool invincibleMode;
 
     public Renderer rend;
 
@@ -39,15 +37,25 @@ public class TurtleBehaviour : MonoBehaviour
     public int TurtleRemovalPoint = 35;
 
     Outline outline;
+
+    GameObject turtleShield;
+
     private bool excecution;
+
+    private LivesSystem livesSystem;
+    private Highscore highscore;
     #endregion
 
     void Start()
     {
+        livesSystem = FindObjectOfType<LivesSystem>();
+        highscore = FindObjectOfType<Highscore>();
         masterFlow = FindObjectOfType<MasterFlow>();
         animator = GetComponentInChildren<Animator>();
         targetObj = new GameObject();
         turtleSpawnerParent = GameObject.FindGameObjectWithTag("TurtleTargets");
+        turtleShield = transform.GetChild(1).gameObject;
+        turtleShield.SetActive(false);
         outline = GetComponent<Outline>();
         mover = GetComponent<Mover>();
         playArea = Terrain.activeTerrain;
@@ -80,14 +88,14 @@ public class TurtleBehaviour : MonoBehaviour
     private DG.Tweening.Core.TweenerCore<Color, Color, DG.Tweening.Plugins.Options.ColorOptions> tween;
     private Tween tweenTo;
 
-    public bool GetGhostMode()
+    public bool GetInvincibleMode()
     {
-        return ghostMode;
+        return invincibleMode;
     }
 
     private void OnTriggerEnter(Collider collision)
     {
-        if (collision.gameObject.tag is "Draggable" && !ghostMode)
+        if (collision.gameObject.tag is "Draggable" && !invincibleMode)
         {
             DisableTurtle();
             RemoveFromList();
@@ -124,19 +132,19 @@ public class TurtleBehaviour : MonoBehaviour
         }
     }
 
-    public void ToggleGhost(bool setting)
+    public void ToggleInvincible(bool setting)
     {
+
+        turtleShield.SetActive(setting);
+
         if (setting)
         {
-            ghostMode = true;
-            baseMaterial = rend.material;
-            rend.material = GhostMaterial;
+            invincibleMode = true;            
         }
 
         if (!setting)
         {
-            ghostMode = false;
-            rend.material = baseMaterial;
+            invincibleMode = false;
         }
     }
 
@@ -164,6 +172,7 @@ public class TurtleBehaviour : MonoBehaviour
         animator.SetFloat("WalkSpeed", 1);
         animator.SetTrigger("TrashDeath");
         yield return new WaitForSeconds(5.01f);
+        //StartCoroutine(livesSystem.UpdateLives());
         DestroyTurtle();
     }
 
@@ -176,13 +185,14 @@ public class TurtleBehaviour : MonoBehaviour
 
         if (Vector3.Distance(transform.position, targetObj.transform.position) < 1 && !excecution)
         {
+            StartCoroutine(highscore.AddScore());
             DestroyTurtle();
         }
     }
 
     public void RemoveFromList()
     {
-        List<GameObject> list = GameObject.FindGameObjectWithTag("TurtleSpawner").GetComponent<SpawnTurtles>().GetTurtles();
+        List<GameObject> list = GameObject.FindGameObjectWithTag("TurtleSpawner").GetComponent<SpawnTurtles>().GetTargetableTurtles();
 
         if (list.Contains(gameObject))
             list.Remove(gameObject);
@@ -190,7 +200,7 @@ public class TurtleBehaviour : MonoBehaviour
 
     public void AddSelfToList()
     {
-        GameObject.FindGameObjectWithTag("TurtleSpawner").GetComponent<SpawnTurtles>().GetTurtles().Add(gameObject);
+        GameObject.FindGameObjectWithTag("TurtleSpawner").GetComponent<SpawnTurtles>().GetTargetableTurtles().Add(gameObject);
     }
 
     public void DestroyTurtle()

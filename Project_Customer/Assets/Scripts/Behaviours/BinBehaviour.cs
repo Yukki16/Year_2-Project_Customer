@@ -18,6 +18,7 @@ public class BinBehaviour : MonoBehaviour
 
     public void RaiseTrash()
     {
+        FindObjectOfType<AudioManager>().PlayRandom(new string[] { "Trash1", "Trash2", "Trash3" }, true);
         trashCounter++;
         trashPile.transform.Translate(new Vector3(0, trashRaise, 0));
     }

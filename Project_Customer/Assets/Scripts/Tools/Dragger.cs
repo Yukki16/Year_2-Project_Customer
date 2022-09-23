@@ -6,9 +6,7 @@ public class Dragger : MonoBehaviour
 {
     private GameObject selectedObject;
 
-    private Vector3 lastMousePos;
-
-    Vector3 previousGrabPosition;
+    AudioManager audioManager;
 
     public int GrabHeight = 3;
 
@@ -25,10 +23,9 @@ public class Dragger : MonoBehaviour
 
     public LayerMask trashLayerMask;
 
-
     private void Start()
     {
-        lastMousePos = Input.mousePosition;
+        audioManager = FindObjectOfType<AudioManager>();
     }
 
     void EnableOutline(GameObject trashObject)
@@ -51,7 +48,6 @@ public class Dragger : MonoBehaviour
 
     private void Update()
     {
-        lastMousePos = Input.mousePosition;
 
         RaycastHit hit = CastRay();
         if (hit.collider != null)
@@ -66,6 +62,7 @@ public class Dragger : MonoBehaviour
                         {
                             return;
                         }
+                        audioManager.Play("Item Select", true);
                         hit.collider.GetComponent<TrashBehaviour>().DisableBinCollection();
                         selectedObject = hit.collider.gameObject;
                         Cursor.visible = false;
@@ -121,8 +118,6 @@ public class Dragger : MonoBehaviour
 
         if (selectedObject != null)
         {
-            previousGrabPosition = selectedObject.transform.position;
-
             Vector3 position = new Vector3(Input.mousePosition.x,
                 Input.mousePosition.y,
                 Camera.main.WorldToScreenPoint(selectedObject.transform.position).z);

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class PowerupEvent : MonoBehaviour
 {
@@ -8,12 +9,13 @@ public class PowerupEvent : MonoBehaviour
     [SerializeField] GameObject ScareCrowPrefab;
     [SerializeField] MasterFlow MasterFlow;
     [SerializeField] SpawnTurtles Turtles;
+    [SerializeField] SpawnSeagulls Seagulls;
     [SerializeField] int trashThreshold;
     private GameObject PowerupChildren;
-    private GameObject activeScareCrow;
-
+    GameObject scareCrow;
 
     [SerializeField] float ScareCrowLifeTime;
+    private bool scareCrowActive;
 
 
     private void Start()
@@ -36,10 +38,19 @@ public class PowerupEvent : MonoBehaviour
 
     public IEnumerator RandomEvent()
     {
+        yield return new WaitForSeconds(1);
         switch(Random.Range(0, 2))
         {
             case 0:
-                SpawnScareCrow();
+                if (MasterFlow.spawnSeagulls.enabled && !scareCrowActive)
+                {
+                    SpawnScareCrow();
+                }
+                else
+                {
+                    GhostTurtles();
+                }
+                   
                 break;
 
             case 1:
@@ -47,31 +58,47 @@ public class PowerupEvent : MonoBehaviour
                 break;
 
         }
-        yield return null;
+
+        yield return new WaitForFixedUpdate();
+    }
+   private void GhostTurtles()
+    {
+        foreach(var turtle in Turtles.GetTurtles())
+        {
+            if (turtle == null) return; 
+            turtle.GetComponent<TurtleBehaviour>().ToggleInvincible(true);
+        }
     }
 
     private void SpawnScareCrow()
     {
-        GameObject scareCrow = Instantiate(ScareCrowPrefab, position: new Vector3(50, 0, 20), rotation: Quaternion.Euler(Vector3.zero));
-        scareCrow.transform.parent = PowerupChildren.transform;
+        scareCrowActive = true;
+
+        if (scareCrow == null)
+        {
+            scareCrow = Instantiate(ScareCrowPrefab, position: new Vector3(50, -0.28f, 20), rotation: Quaternion.Euler(Vector3.zero));
+            scareCrow.transform.parent = PowerupChildren.transform;
+        }
+        else
+        {
+            scareCrow.GetComponent<Animator>().SetTrigger("RaiseScareCrow");
+        }
+        scareCrow.GetComponent<NavMeshObstacle>().enabled = enabled;
+        Seagulls.ReppelAllSeagulls();
         MasterFlow.ActivateScareCrow();
         StartCoroutine(DespawnScareCrow());
-        activeScareCrow = scareCrow;
     }
 
-    private void GhostTurtles()
-    {
-        foreach(var turtle in Turtles.GetTurtles())
-        {
-            turtle.GetComponent<TurtleBehaviour>().ToggleGhost(true);
-        }
-    }
-
+ 
     public IEnumerator DespawnScareCrow()
     {
         yield return new WaitForSeconds(ScareCrowLifeTime);
-        Destroy(activeScareCrow);
+        scareCrow.GetComponent<NavMeshObstacle>().enabled = false;
         MasterFlow.DeactivateScareCrow();
+        if (scareCrow != null)
+        scareCrow.GetComponent<Animator>().SetTrigger("LowerScareCrow");
+        scareCrowActive = false;
+        yield return null;
     }
 
 

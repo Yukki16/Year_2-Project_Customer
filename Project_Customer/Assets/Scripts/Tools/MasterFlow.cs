@@ -54,11 +54,21 @@ public class MasterFlow : MonoBehaviour
         SpawnInitialTrash();
 
         StartCoroutine(StartSpawns());
+
+        //StartCoroutine(PingSeagullRate());
     }
 
-    #region SpawnSettings
+    private IEnumerator PingSeagullRate()
+    {
+        Debug.Log(SeagullSpawnDelay);
+        yield return new WaitForSeconds(1);
+        StartCoroutine(PingSeagullRate());
+    }
 
-    private IEnumerator StartSpawns()
+
+        #region SpawnSettings
+
+        private IEnumerator StartSpawns()
     {
         StartCoroutine(StartEggSpawn());
         StartCoroutine(StartHumanSpawn());
@@ -120,7 +130,7 @@ public class MasterFlow : MonoBehaviour
         yield return new WaitForSeconds(ObjSpawnRateIncreaseDelay);
         if (SeagullSpawnDelay > 2)
         {
-            SeagullSpawnDelay -= 1;
+            //SeagullSpawnDelay -= 1;
             StartCoroutine(IncreaseSeagullSpawnRate());
         }
     }
@@ -191,7 +201,7 @@ public class MasterFlow : MonoBehaviour
 
     public void DeactivateScareCrow()
     {
-        spawnSeagulls.enabled = true;
+        spawnSeagulls.EnableSpawning = true;
     }
 
     private GameObject randomTrash()
