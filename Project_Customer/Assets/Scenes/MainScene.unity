@@ -1169,6 +1169,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 07564704e273c724c8632d6f4de0fb4c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  tutorial: {fileID: 1721337287}
   pauseCanvas: {fileID: 168279894}
   settingsCanvas: {fileID: 1501959048}
   loadingCanvas: {fileID: 1792437539}
@@ -2054,7 +2055,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8784558139364103899, guid: db8e9d1d74f0ffe4e8451f98f994e1f7, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: db8e9d1d74f0ffe4e8451f98f994e1f7, type: 3}
