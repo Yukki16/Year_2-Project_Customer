@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class PowerupEvent : MonoBehaviour
 {
@@ -11,10 +12,10 @@ public class PowerupEvent : MonoBehaviour
     [SerializeField] SpawnSeagulls Seagulls;
     [SerializeField] int trashThreshold;
     private GameObject PowerupChildren;
-    private GameObject activeScareCrow;
-
+    GameObject scareCrow;
 
     [SerializeField] float ScareCrowLifeTime;
+    private bool scareCrowActive;
 
 
     private void Start()
@@ -37,16 +38,17 @@ public class PowerupEvent : MonoBehaviour
 
     public IEnumerator RandomEvent()
     {
+        yield return new WaitForSeconds(1);
         switch(Random.Range(0, 2))
         {
             case 0:
-                if (!MasterFlow.spawnSeagulls.enabled)
+                if (MasterFlow.spawnSeagulls.enabled && !scareCrowActive)
                 {
-                    GhostTurtles();
+                    SpawnScareCrow();
                 }
                 else
                 {
-                    SpawnScareCrow();
+                    GhostTurtles();
                 }
                    
                 break;
@@ -56,7 +58,16 @@ public class PowerupEvent : MonoBehaviour
                 break;
 
         }
-        yield return null;
+
+        yield return new WaitForFixedUpdate();
+    }
+   private void GhostTurtles()
+    {
+        foreach(var turtle in Turtles.GetTurtles())
+        {
+            if (turtle == null) return; 
+            turtle.GetComponent<TurtleBehaviour>().ToggleInvincible(true);
+        }
     }
 
     private void SpawnScareCrow()
@@ -85,16 +96,26 @@ public class PowerupEvent : MonoBehaviour
             }
             turtle.GetComponent<TurtleBehaviour>().ToggleGhost(true);
         }
+        else
+        {
+            scareCrow.GetComponent<Animator>().SetTrigger("RaiseScareCrow");
+        }
+        scareCrow.GetComponent<NavMeshObstacle>().enabled = enabled;
+        Seagulls.ReppelAllSeagulls();
+        MasterFlow.ActivateScareCrow();
+        StartCoroutine(DespawnScareCrow());
     }
 
-    public IEnumerator DespawnScareCrow(GameObject scareCrow)
+ 
+    public IEnumerator DespawnScareCrow()
     {
         yield return new WaitForSeconds(ScareCrowLifeTime);
+        scareCrow.GetComponent<NavMeshObstacle>().enabled = false;
         MasterFlow.DeactivateScareCrow();
+        if (scareCrow != null)
         scareCrow.GetComponent<Animator>().SetTrigger("LowerScareCrow");
-        yield return new WaitForSeconds(1f);
-        Destroy(scareCrow);
-       
+        scareCrowActive = false;
+        yield return null;
     }
 
 

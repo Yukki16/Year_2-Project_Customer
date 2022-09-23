@@ -39,7 +39,7 @@ public class CrabBehaviour : MonoBehaviour
     }
 
 
-    private void OnTriggerEnter (Collider collision)
+    private void OnTriggerStay (Collider collision)
     {
         if (!entered) return;
         if (triggered) return;
@@ -63,7 +63,7 @@ public class CrabBehaviour : MonoBehaviour
 
     IEnumerator EntryDelay()
     {
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(3f);
         entered = true;
     }
 
@@ -72,6 +72,7 @@ public class CrabBehaviour : MonoBehaviour
         //wait until excecution animation is played
         triggered = true;
         yield return new WaitForSeconds(0.23f);
+        if (collision.gameObject != null)
         Destroy(collision.gameObject);
         animator.SetTrigger("ShrinkHill");
         yield return new WaitForSeconds(0.33f);
@@ -84,7 +85,7 @@ public class CrabBehaviour : MonoBehaviour
         triggered = true;
         animator.SetTrigger("DetectTurtle");
         TurtleBehaviour tb = collision.gameObject.GetComponent<TurtleBehaviour>();
-        if (!tb.GetGhostMode())
+        if (!tb.GetInvincibleMode())
         {
             tb.animator.SetTrigger("CrabDeath");
             tb.StartCoroutine(tb.MoveTowards(transform.position));
@@ -94,7 +95,7 @@ public class CrabBehaviour : MonoBehaviour
             yield return new WaitForSeconds(0.53f);
             animator.SetTrigger("ShrinkHill");
             yield return new WaitForSeconds(0.33f);
-            StartCoroutine(livesSystem.UpdateLives());
+            //StartCoroutine(livesSystem.UpdateLives());
             Destroy(gameObject);
         }
         else

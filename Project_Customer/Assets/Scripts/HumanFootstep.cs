@@ -5,12 +5,13 @@ using UnityEngine;
 public class HumanFootstep : MonoBehaviour
 {
     AudioManager am;
-    public void Start()
+    public void Awake()
     {
         am = FindObjectOfType<AudioManager>();
     }
     public void FootStep()
     {
-        am.PlayRandom(new string[] {"Step1", "Step2", "Step3", "Step4", "Step5", "Step6", "Step7"}, true);
+        if (am != null)
+        am.PlayRandom(new string[] { "Step1", "Step2", "Step3", "Step4", "Step5", "Step6", "Step7"}, true);
     }
 }

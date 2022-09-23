@@ -21,18 +21,31 @@ public class SpawnSeagulls : MonoBehaviour
         Seagulls.transform.SetParent(gameObject.transform);
 
         StartCoroutine(spawnSeagulls());
+
+        StartCoroutine(pingSeagulls());
+
     }
 
     public void ReppelAllSeagulls()
     {
         foreach (var seagull in seagullList)
         {
+            if (seagull == null) return;
             seagull.GetComponent<Seagull>().EarlyExit();
         }
     }
 
     IEnumerator spawnSeagulls()
-    {
+    {       
+        if (!EnableSpawning)
+        {
+            yield return new WaitForSeconds(3);
+            StartCoroutine(spawnSeagulls());
+        }
+
+        GameObject newSeagull = Instantiate(SeagullPrefab);
+        seagullList.Add(newSeagull);
+        newSeagull.transform.parent = Seagulls.transform;
         yield return new WaitForSeconds(masterFlow.GetSeagullSpawnRate());
         if (EnableSpawning)
         {
@@ -51,6 +64,13 @@ public class SpawnSeagulls : MonoBehaviour
     public List<GameObject> GetSeagulls()
     {
         return seagullList;
+    }
+
+    IEnumerator pingSeagulls()
+    {
+        //Debug.Log(seagullList.Count);
+        yield return new WaitForSeconds(1);
+        StartCoroutine(pingSeagulls());
     }
 
     private void Update()

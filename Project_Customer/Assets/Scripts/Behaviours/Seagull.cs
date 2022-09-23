@@ -121,16 +121,21 @@ public class Seagull : MonoBehaviour
 
     public void RemoveFromList()
     {
-        List<GameObject> list = GameObject.FindGameObjectWithTag("SeagullSpawner").GetComponent<SpawnSeagulls>().GetSeagulls();
+        List<GameObject> list = GameObject.FindObjectOfType<SpawnSeagulls>().GetSeagulls();
 
         if (list.Contains(gameObject))
             list.Remove(gameObject);
     }
 
+    //Called when a scarecrow is in play
     public void EarlyExit()
     {
         currentState = SeagullState.EarlyExit;
-        //animator.SetTrigger("Pickup");
+        if (targetTurtle != null)
+        {
+            targetTurtle.GetComponent<TurtleBehaviour>().DisableOutline();
+            targetTurtle = null;
+        }
     }
 
     //Checks whether the seagull is eligible and detects a draggable object's collider
@@ -211,7 +216,7 @@ public class Seagull : MonoBehaviour
                 targetTurtle = ReturnClosestTurtle();
         }
 
-        if (!targetTurtle.GetComponent<TurtleBehaviour>().GetGhostMode())
+        if (!targetTurtle.GetComponent<TurtleBehaviour>().GetInvincibleMode())
         targetTurtle.GetComponent<TurtleBehaviour>().EnableOutline();   
 
         foundTurtle = true;
@@ -293,7 +298,7 @@ public class Seagull : MonoBehaviour
         TurtleBehaviour tb = targetTurtle.GetComponent<TurtleBehaviour>();
         animator.SetTrigger("Pickup");
         TurtleTaken = true;
-        if (!tb.GetGhostMode())
+        if (!tb.GetInvincibleMode())
         {
             tb.DisableOutline();
             tb.DisableTurtle();
@@ -335,9 +340,9 @@ public class Seagull : MonoBehaviour
     //Checks the world area's bounds
     private void DetectAreaExit()
     {
-        if (transform.position.x >= playArea.terrainData.size.x || transform.position.x <= playArea.transform.position.x || transform.position.y > 50)
+        if (transform.position.x >= playArea.terrainData.size.x || transform.position.x <= playArea.transform.position.x || transform.position.y > 20)
         {
-            StartCoroutine(livesSystem.UpdateLives());
+            //StartCoroutine(livesSystem.UpdateLives());
             DestroySeagull();
         }
     }
@@ -350,6 +355,7 @@ public class Seagull : MonoBehaviour
             if (targetTurtle != null)
                 targetTurtle.GetComponent<TurtleBehaviour>().DestroyTurtle();
         }
+        RemoveFromList();
         Object.Destroy(gameObject);
     }
 
@@ -369,8 +375,8 @@ public class Seagull : MonoBehaviour
 
     private void OnDrawGizmos()
     {
-        Gizmos.color = Color.red;
-        Gizmos.DrawRay(visualTransfom.position, visualTransfom.forward * 10);
+        //sGizmos.color = Color.red;
+        //Gizmos.DrawRay(visualTransfom.position, visualTransfom.forward * 10);
     }
 
     #endregion

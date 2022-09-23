@@ -46,8 +46,8 @@ public class AudioManager : MonoBehaviour
                 {
                     sound.source.pitch = 1;
                     sound.source.pitch += UnityEngine.Random.Range(-0.1f, 0.1f);
-                }
-
+                }               
+                if (sound != null)
                 sound.source.Play();
             }
         }
