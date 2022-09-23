@@ -19,6 +19,14 @@ public class AudioManager : MonoBehaviour
         }
     }
 
+    public void ChangeVolume(float volume)
+    {
+        foreach (Sound s in sounds)
+        {
+            s.source.volume = volume;
+        }
+    }
+
     public void Play(string name, bool randomizePitch = false)
     {
         foreach (var sound in sounds)

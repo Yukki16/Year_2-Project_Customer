@@ -19,6 +19,8 @@ public class ButtonScripts : MonoBehaviour
     public Slider loadingBar = null;
     public GameObject currentCanvas = null;
 
+    [SerializeField] private AudioManager audioManager;
+
     #endregion
     // Update is called once per frame
     void Update()
@@ -101,4 +103,8 @@ public class ButtonScripts : MonoBehaviour
         previousCanvas.gameObject.SetActive(true);
     }
 
+    public void ChangeVolume(Slider slider)
+    {
+        audioManager.ChangeVolume(slider.value / 10);
+    }
 }
