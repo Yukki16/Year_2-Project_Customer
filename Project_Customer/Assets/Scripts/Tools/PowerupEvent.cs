@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class PowerupEvent : MonoBehaviour
 {
@@ -38,7 +39,7 @@ public class PowerupEvent : MonoBehaviour
     public IEnumerator RandomEvent()
     {
         yield return new WaitForSeconds(1);
-        switch(Random.Range(0, 1))
+        switch(Random.Range(0, 2))
         {
             case 0:
                 if (MasterFlow.spawnSeagulls.enabled && !scareCrowActive)
@@ -65,7 +66,7 @@ public class PowerupEvent : MonoBehaviour
         foreach(var turtle in Turtles.GetTurtles())
         {
             if (turtle == null) return; 
-            turtle.GetComponent<TurtleBehaviour>().ToggleGhost(true);
+            turtle.GetComponent<TurtleBehaviour>().ToggleInvincible(true);
         }
     }
 
@@ -82,7 +83,7 @@ public class PowerupEvent : MonoBehaviour
         {
             scareCrow.GetComponent<Animator>().SetTrigger("RaiseScareCrow");
         }
-
+        scareCrow.GetComponent<NavMeshObstacle>().enabled = enabled;
         Seagulls.ReppelAllSeagulls();
         MasterFlow.ActivateScareCrow();
         StartCoroutine(DespawnScareCrow());
@@ -92,6 +93,7 @@ public class PowerupEvent : MonoBehaviour
     public IEnumerator DespawnScareCrow()
     {
         yield return new WaitForSeconds(ScareCrowLifeTime);
+        scareCrow.GetComponent<NavMeshObstacle>().enabled = false;
         MasterFlow.DeactivateScareCrow();
         if (scareCrow != null)
         scareCrow.GetComponent<Animator>().SetTrigger("LowerScareCrow");

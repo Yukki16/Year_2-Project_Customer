@@ -169,7 +169,7 @@ PrefabInstance:
     - target: {fileID: -7511558181221131132, guid: 45914fec6a01de14090abf2b8ead0d0b, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 3173aa409b2a38e40b3985c5379d90a9, type: 2}
+      objectReference: {fileID: 2100000, guid: 549a3a9f67aa2d0479f3a2cae6d7f396, type: 2}
     - target: {fileID: 919132149155446097, guid: 45914fec6a01de14090abf2b8ead0d0b, type: 3}
       propertyPath: m_Name
       value: Egg
@@ -247,7 +247,7 @@ PrefabInstance:
     - target: {fileID: -7511558181221131132, guid: 45914fec6a01de14090abf2b8ead0d0b, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 3173aa409b2a38e40b3985c5379d90a9, type: 2}
+      objectReference: {fileID: 2100000, guid: 549a3a9f67aa2d0479f3a2cae6d7f396, type: 2}
     - target: {fileID: 919132149155446097, guid: 45914fec6a01de14090abf2b8ead0d0b, type: 3}
       propertyPath: m_Name
       value: Egg (2)
@@ -325,7 +325,7 @@ PrefabInstance:
     - target: {fileID: -7511558181221131132, guid: 45914fec6a01de14090abf2b8ead0d0b, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 3173aa409b2a38e40b3985c5379d90a9, type: 2}
+      objectReference: {fileID: 2100000, guid: 549a3a9f67aa2d0479f3a2cae6d7f396, type: 2}
     - target: {fileID: 919132149155446097, guid: 45914fec6a01de14090abf2b8ead0d0b, type: 3}
       propertyPath: m_Name
       value: Egg (3)
@@ -403,7 +403,7 @@ PrefabInstance:
     - target: {fileID: -7511558181221131132, guid: 45914fec6a01de14090abf2b8ead0d0b, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 3173aa409b2a38e40b3985c5379d90a9, type: 2}
+      objectReference: {fileID: 2100000, guid: 549a3a9f67aa2d0479f3a2cae6d7f396, type: 2}
     - target: {fileID: 919132149155446097, guid: 45914fec6a01de14090abf2b8ead0d0b, type: 3}
       propertyPath: m_Name
       value: Egg (1)

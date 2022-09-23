@@ -127,11 +127,15 @@ public class Seagull : MonoBehaviour
             list.Remove(gameObject);
     }
 
+    //Called when a scarecrow is in play
     public void EarlyExit()
     {
-        Debug.Log("attempt");
         currentState = SeagullState.EarlyExit;
-        //animator.SetTrigger("Pickup");
+        if (targetTurtle != null)
+        {
+            targetTurtle.GetComponent<TurtleBehaviour>().DisableOutline();
+            targetTurtle = null;
+        }
     }
 
     //Checks whether the seagull is eligible and detects a draggable object's collider
@@ -212,7 +216,7 @@ public class Seagull : MonoBehaviour
                 targetTurtle = ReturnClosestTurtle();
         }
 
-        if (!targetTurtle.GetComponent<TurtleBehaviour>().GetGhostMode())
+        if (!targetTurtle.GetComponent<TurtleBehaviour>().GetInvincibleMode())
         targetTurtle.GetComponent<TurtleBehaviour>().EnableOutline();   
 
         foundTurtle = true;
@@ -294,7 +298,7 @@ public class Seagull : MonoBehaviour
         TurtleBehaviour tb = targetTurtle.GetComponent<TurtleBehaviour>();
         animator.SetTrigger("Pickup");
         TurtleTaken = true;
-        if (!tb.GetGhostMode())
+        if (!tb.GetInvincibleMode())
         {
             tb.DisableOutline();
             tb.DisableTurtle();
@@ -336,7 +340,7 @@ public class Seagull : MonoBehaviour
     //Checks the world area's bounds
     private void DetectAreaExit()
     {
-        if (transform.position.x >= playArea.terrainData.size.x || transform.position.x <= playArea.transform.position.x || transform.position.y > 50)
+        if (transform.position.x >= playArea.terrainData.size.x || transform.position.x <= playArea.transform.position.x || transform.position.y > 20)
         {
             //StartCoroutine(livesSystem.UpdateLives());
             DestroySeagull();

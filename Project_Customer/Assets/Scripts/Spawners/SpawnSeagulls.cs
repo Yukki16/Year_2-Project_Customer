@@ -57,7 +57,7 @@ public class SpawnSeagulls : MonoBehaviour
 
     IEnumerator pingSeagulls()
     {
-        Debug.Log(seagullList.Count);
+        //Debug.Log(seagullList.Count);
         yield return new WaitForSeconds(1);
         StartCoroutine(pingSeagulls());
     }

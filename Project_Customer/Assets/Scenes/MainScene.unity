@@ -2774,8 +2774,8 @@ MonoBehaviour:
   MasterFlow: {fileID: 40324730}
   Turtles: {fileID: 1660498962}
   Seagulls: {fileID: 767454734}
-  trashThreshold: 2
-  ScareCrowLifeTime: 3
+  trashThreshold: 15
+  ScareCrowLifeTime: 15
 --- !u!1 &853775216
 GameObject:
   m_ObjectHideFlags: 0
