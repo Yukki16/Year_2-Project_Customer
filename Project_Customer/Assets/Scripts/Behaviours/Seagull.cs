@@ -33,6 +33,9 @@ public class Seagull : MonoBehaviour
     private bool foundTurtle;
     private bool hasShrank;
     private bool TurtleTaken;
+    private bool trashCanceled;
+    private bool pursueNoise;
+    private bool randomSquawk;
 
     private Transform visualTransfom;
     private Terrain playArea;
@@ -41,7 +44,8 @@ public class Seagull : MonoBehaviour
     private GameObject targetTurtle;
     private Animator animator;
     private SpawnTurtles turtleSpawner;
-    private bool trashCanceled;
+    private AudioManager am;
+    
 
     private LivesSystem livesSystem;
     private Highscore highscore;
@@ -49,6 +53,7 @@ public class Seagull : MonoBehaviour
 
     void Start()
     {
+        am = FindObjectOfType<AudioManager>();
         livesSystem = FindObjectOfType<LivesSystem>();
         highscore = FindObjectOfType<Highscore>();
         turtleSpawner = GameObject.FindGameObjectWithTag("TurtleSpawner").GetComponent<SpawnTurtles>();
@@ -184,9 +189,29 @@ public class Seagull : MonoBehaviour
     //Rotates the seagull in a circular motion around a specific area and points it forward
     private void CircleLoop()
     {
+        if (!randomSquawk)
+            StartCoroutine(RandomSquawk());
+
         RotateForward();
         CircularMotion();
     }
+
+    private IEnumerator RandomSquawk()
+    {
+        randomSquawk = true;
+        am.PlayRandom(new string[] { "Gull1", "Gull2", "Gull3" }, true);
+        yield return new WaitForSeconds(Random.Range(8, 13));
+        randomSquawk = false;
+    }
+
+    private IEnumerator PursueNoise()
+    {
+        pursueNoise = true;
+        am.PlayRandom(new string[] { "GullPursue1", "GullPursue2", "GullPursue3" }, true);
+        yield return new WaitForSeconds(5);
+    }
+
+
 
     //Checks whether the seagull is eligible, then targets the closest turtle once the targetting timer has reached the threshold.
     private void TargetTurtle()
@@ -362,6 +387,11 @@ public class Seagull : MonoBehaviour
     //Called after patrol (circling) as a pre warning animation before the seagull's pursuit
     private void Detection()
     {
+        if (!pursueNoise)
+        {
+            StartCoroutine(PursueNoise());
+        }
+
         RemoveFromTurtles(targetTurtle);
         visualTransfom.LookAt(targetTurtle.transform);
         animator.SetTrigger("Detect");
