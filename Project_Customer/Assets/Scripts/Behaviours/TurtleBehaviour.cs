@@ -95,6 +95,11 @@ public class TurtleBehaviour : MonoBehaviour
         if (collision.gameObject.tag is "Draggable" && !ghostMode)
         {
             DisableTurtle();
+            if (masterFlow.tutorial.turtle == null)
+            {
+                masterFlow.tutorial.turtle = this.gameObject;
+                StartCoroutine(masterFlow.tutorial.TurtleTutorial(masterFlow.tutorial.turtle));
+            }
             RemoveFromList();
 
             if (tween != null && tween.active)

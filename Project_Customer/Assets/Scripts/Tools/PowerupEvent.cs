@@ -63,6 +63,11 @@ public class PowerupEvent : MonoBehaviour
     {
         GameObject scareCrow = Instantiate(ScareCrowPrefab, position: new Vector3(50, -0.28f, 20), rotation: Quaternion.Euler(Vector3.zero));
         scareCrow.transform.parent = PowerupChildren.transform;
+        if(!MasterFlow.tutorial.scarecowTutorial)
+        {
+            MasterFlow.tutorial.powerup = scareCrow;
+            StartCoroutine(MasterFlow.tutorial.ScareCrowTutorial(MasterFlow.tutorial.powerup));
+        }
         Seagulls.ReppelAllSeagulls();
         MasterFlow.ActivateScareCrow();
         activeScareCrow = scareCrow;
@@ -71,8 +76,13 @@ public class PowerupEvent : MonoBehaviour
 
     private void GhostTurtles()
     {
-        foreach(var turtle in Turtles.GetTurtles())
+        foreach (var turtle in Turtles.GetTurtles())
         {
+            if (!MasterFlow.tutorial.shieldTutorial)
+            {
+                MasterFlow.tutorial.powerup = turtle;
+                StartCoroutine(MasterFlow.tutorial.ShildedTutorial(MasterFlow.tutorial.powerup));
+            }
             turtle.GetComponent<TurtleBehaviour>().ToggleGhost(true);
         }
     }

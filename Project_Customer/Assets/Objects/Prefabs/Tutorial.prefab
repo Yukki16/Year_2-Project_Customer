@@ -45,6 +45,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cam: {fileID: 0}
+  camSpeed: 10000
   trash: {fileID: 0}
   bin: {fileID: 0}
   seagul: {fileID: 0}
