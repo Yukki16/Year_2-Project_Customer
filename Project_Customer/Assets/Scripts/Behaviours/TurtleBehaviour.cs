@@ -27,7 +27,7 @@ public class TurtleBehaviour : MonoBehaviour
 
     private int direction = 1;
 
-    int EndDistanceFromTop = 15;
+    int EndDistanceFromTop = 10;
 
     private MasterFlow masterFlow;
 
@@ -190,7 +190,7 @@ public class TurtleBehaviour : MonoBehaviour
 
         if (Vector3.Distance(transform.position, targetObj.transform.position) < 1 && !excecution)
         {
-            StartCoroutine(highscore.AddScore());
+            //StartCoroutine(highscore.AddScore());
             DestroyTurtle();
         }
     }
