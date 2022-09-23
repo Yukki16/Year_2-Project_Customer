@@ -9,7 +9,7 @@ public class MasterFlow : MonoBehaviour
     public SpawnHumans spawnHumans;
     public SpawnSeagulls spawnSeagulls;
     public SpawnTurtles spawnTurtles;
-    [SerializeField] public Tutorial tutorial;
+    public Tutorial tutorial;
     public GameObject trashPrefab;
     public GameObject draggablesParent;
     public int intlTrashPieces;
@@ -39,7 +39,6 @@ public class MasterFlow : MonoBehaviour
 
     private bool scareCrowActive;
 
-
     private bool preloadCheck { get; }
 
     void Start()
@@ -68,15 +67,14 @@ public class MasterFlow : MonoBehaviour
     }
 
 
-        #region SpawnSettings
+    #region SpawnSettings
 
-        private IEnumerator StartSpawns()
+    private IEnumerator StartSpawns()
     {
         StartCoroutine(StartEggSpawn());
         StartCoroutine(StartHumanSpawn());
         StartCoroutine(StartCrabSpawn());
         StartCoroutine(StartSeagullSpawn());
-
         yield return null;
     }
 
@@ -104,7 +102,7 @@ public class MasterFlow : MonoBehaviour
     private IEnumerator StartCrabSpawn()
     {
         yield return new WaitForSeconds(intlSpawnCrabDelay);
-        spawnCrabs.enabled = true;  
+        spawnCrabs.enabled = true;
         StartCoroutine(IncreaseCrabSpawnRate());
     }
 
@@ -163,7 +161,7 @@ public class MasterFlow : MonoBehaviour
 
     public int ReturnHumanDropRate()
     {
-        return (Random.Range(hmnDropRateMin, hmnDropRateMax)); 
+        return (Random.Range(hmnDropRateMin, hmnDropRateMax));
     }
 
     public int ReturnTurtleDeathTime()
@@ -231,11 +229,6 @@ public class MasterFlow : MonoBehaviour
             playArea.transform.position.y + 5, Random.Range(playArea.transform.position.z + intlTrashMinBottomDistance,
             playArea.transform.position.z + intlTrashMaxBottomDistance));
             GameObject newTrash = Instantiate(randomTrash(), trashSpot.transform);
-            if(tutorial.trash == null)
-            {
-                tutorial.trash = newTrash;
-                StartCoroutine(tutorial.TrashTutorial(tutorial.trash));
-            }
             newTrash.transform.SetParent(draggablesParent.transform);
         }
     }

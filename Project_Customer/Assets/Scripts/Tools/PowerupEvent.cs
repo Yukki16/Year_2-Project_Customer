@@ -43,7 +43,7 @@ public class PowerupEvent : MonoBehaviour
     public IEnumerator RandomEvent()
     {
         yield return new WaitForSeconds(1);
-        switch(Random.Range(0, 3))
+        switch (Random.Range(2, 3))
         {
             case 0:
                 if (MasterFlow.spawnSeagulls.enabled && !scareCrowActive)
@@ -55,7 +55,7 @@ public class PowerupEvent : MonoBehaviour
                     StartCoroutine(RandomEvent());
                     yield return null;
                 }
-                   
+
                 break;
 
             case 1:
@@ -69,6 +69,14 @@ public class PowerupEvent : MonoBehaviour
         }
 
         yield return new WaitForFixedUpdate();
+    }
+    private void GhostTurtles()
+    {
+        foreach (var turtle in Turtles.GetTurtles())
+        {
+            if (turtle == null) return;
+            turtle.GetComponent<TurtleBehaviour>().ToggleInvincible(true);
+        }
     }
 
     private void SpawnIceCream()
@@ -99,7 +107,7 @@ public class PowerupEvent : MonoBehaviour
         if (iceCreamTruck != null)
             iceCreamTruck.GetComponentInChildren<Animator>().SetTrigger("PullOut");
         iceCreamTruckActive = false;
-        yield return null;       
+        yield return null;
     }
 
 
@@ -110,11 +118,6 @@ public class PowerupEvent : MonoBehaviour
         if (scareCrow == null)
         {
             scareCrow = Instantiate(ScareCrowPrefab, position: new Vector3(50, -0.28f, 20), rotation: Quaternion.Euler(Vector3.zero));
-            if (!MasterFlow.tutorial.scarecowTutorial)
-            {
-                MasterFlow.tutorial.powerup = scareCrow;
-                StartCoroutine(MasterFlow.tutorial.ScareCrowTutorial(MasterFlow.tutorial.powerup));
-            }
             scareCrow.transform.parent = PowerupChildren.transform;
         }
         else
@@ -127,20 +130,7 @@ public class PowerupEvent : MonoBehaviour
         StartCoroutine(DespawnScareCrow());
     }
 
-    private void GhostTurtles()
-    {
-        foreach (var turtle in Turtles.GetTurtles())
-        {
-            if (!MasterFlow.tutorial.shieldTutorial)
-            {
-                MasterFlow.tutorial.powerup = turtle;
-                StartCoroutine(MasterFlow.tutorial.ShildedTutorial(MasterFlow.tutorial.powerup));
-            }
-            turtle.GetComponent<TurtleBehaviour>().ToggleInvincible(true);
-        }
-    }
 
- 
     private IEnumerator DespawnScareCrow()
     {
         yield return new WaitForSeconds(ScareCrowLifeTime);
