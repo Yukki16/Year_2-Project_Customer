@@ -20,7 +20,7 @@ public class SpawnHumans : MonoBehaviour
     private void Start()
     {
         masterFlow = FindObjectOfType<MasterFlow>();
-
+        EnableSpawning = true;
         spawnPoints = new List<GameObject>();
 
         humans = new GameObject(name: "Humans");
@@ -71,6 +71,7 @@ public class SpawnHumans : MonoBehaviour
 
     IEnumerator spawnHumans()
     {
+        yield return new WaitUntil(() => EnableSpawning == true);
         GameObject newHuman = Instantiate(HumanPrefab, spawnPoints[Random.Range(0, spawnPoints.Count - 1)].transform);
         newHuman.transform.parent = humans.transform;
         yield return new WaitForSeconds(masterFlow.GetHumanSpawnRate());
@@ -79,15 +80,7 @@ public class SpawnHumans : MonoBehaviour
 
     private void Update()
     {
-        if (!EnableSpawning)
-        {
-            crRunning = false;
-            StopCoroutine(spawnHumans());
-        }
+       
 
-        if (crRunning && EnableSpawning)
-        {
-            StartCoroutine(spawnHumans());
-        }
     }
 }

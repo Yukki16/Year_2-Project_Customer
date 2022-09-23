@@ -43,7 +43,7 @@ public class PowerupEvent : MonoBehaviour
     public IEnumerator RandomEvent()
     {
         yield return new WaitForSeconds(1);
-        switch(Random.Range(0, 3))
+        switch(Random.Range(2, 3))
         {
             case 0:
                 if (MasterFlow.spawnSeagulls.enabled && !scareCrowActive)

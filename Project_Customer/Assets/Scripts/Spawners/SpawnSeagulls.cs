@@ -37,7 +37,8 @@ public class SpawnSeagulls : MonoBehaviour
     }
 
     IEnumerator spawnSeagulls()
-    {           
+    {
+        yield return new WaitUntil(() => EnableSpawning == true);
         GameObject newSeagull = Instantiate(SeagullPrefab);
         seagullList.Add(newSeagull);
         newSeagull.transform.parent = Seagulls.transform;
@@ -52,24 +53,13 @@ public class SpawnSeagulls : MonoBehaviour
 
     IEnumerator pingSeagulls()
     {
-        //Debug.Log(seagullList.Count);
         yield return new WaitForSeconds(1);
         StartCoroutine(pingSeagulls());
     }
 
     private void Update()
     {
-        if (!EnableSpawning)
-        {
-            crRunning = false;
-            StopCoroutine(spawnSeagulls());
-        }
-
-        if (crRunning && EnableSpawning)
-        {
-            StartCoroutine(spawnSeagulls());
-        }
-
+      
         if (SpawnSeagull)
         {
             GameObject newSeagull = Instantiate(SeagullPrefab);
