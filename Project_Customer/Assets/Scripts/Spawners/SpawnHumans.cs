@@ -14,7 +14,9 @@ public class SpawnHumans : MonoBehaviour
     public int MinHeightFromBottom = 10;
     public int MaxHeightFromBottom = 30;
     public int SpawnsPerSide = 5;
-    
+    public bool EnableSpawning;
+    private bool crRunning;
+
     private void Start()
     {
         masterFlow = FindObjectOfType<MasterFlow>();
@@ -73,5 +75,19 @@ public class SpawnHumans : MonoBehaviour
         newHuman.transform.parent = humans.transform;
         yield return new WaitForSeconds(masterFlow.GetHumanSpawnRate());
         StartCoroutine(spawnHumans());
+    }
+
+    private void Update()
+    {
+        if (!EnableSpawning)
+        {
+            crRunning = false;
+            StopCoroutine(spawnHumans());
+        }
+
+        if (crRunning && EnableSpawning)
+        {
+            StartCoroutine(spawnHumans());
+        }
     }
 }

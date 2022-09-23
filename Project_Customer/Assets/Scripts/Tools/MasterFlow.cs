@@ -204,6 +204,16 @@ public class MasterFlow : MonoBehaviour
         spawnSeagulls.EnableSpawning = true;
     }
 
+    public void ActivateIceCream()
+    {
+        spawnHumans.EnableSpawning = false;
+    }
+
+    public void DeactivateIceCream()
+    {
+        spawnHumans.EnableSpawning = true;
+    }
+
     private GameObject randomTrash()
     {
         Transform toGameobject = trashPrefab.transform.GetChild(Random.Range(0, trashPrefab.transform.childCount));

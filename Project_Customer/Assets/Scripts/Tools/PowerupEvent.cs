@@ -6,6 +6,7 @@ using UnityEngine.AI;
 public class PowerupEvent : MonoBehaviour
 {
     Terrain playArea;
+    [SerializeField] GameObject TruckPrefab;
     [SerializeField] GameObject ScareCrowPrefab;
     [SerializeField] MasterFlow MasterFlow;
     [SerializeField] SpawnTurtles Turtles;
@@ -13,9 +14,12 @@ public class PowerupEvent : MonoBehaviour
     [SerializeField] int trashThreshold;
     private GameObject PowerupChildren;
     GameObject scareCrow;
+    GameObject iceCreamTruck;
 
     [SerializeField] float ScareCrowLifeTime;
+    [SerializeField] float IceCreamLifeTime;
     private bool scareCrowActive;
+    private bool iceCreamTruckActive;
 
 
     private void Start()
@@ -39,7 +43,7 @@ public class PowerupEvent : MonoBehaviour
     public IEnumerator RandomEvent()
     {
         yield return new WaitForSeconds(1);
-        switch(Random.Range(0, 2))
+        switch(Random.Range(0, 3))
         {
             case 0:
                 if (MasterFlow.spawnSeagulls.enabled && !scareCrowActive)
@@ -48,13 +52,18 @@ public class PowerupEvent : MonoBehaviour
                 }
                 else
                 {
-                    GhostTurtles();
+                    StartCoroutine(RandomEvent());
+                    yield return null;
                 }
                    
                 break;
 
             case 1:
                 GhostTurtles();
+                break;
+
+            case 2:
+                SpawnIceCream();
                 break;
 
         }
@@ -69,6 +78,38 @@ public class PowerupEvent : MonoBehaviour
             turtle.GetComponent<TurtleBehaviour>().ToggleInvincible(true);
         }
     }
+
+    private void SpawnIceCream()
+    {
+        iceCreamTruckActive = true;
+
+        if (iceCreamTruck == null)
+        {
+            iceCreamTruck = Instantiate(TruckPrefab, position: new Vector3(25, 3.54f, 32.3f), rotation: Quaternion.Euler(0, 90, 0));
+            iceCreamTruck.transform.parent = PowerupChildren.transform;
+        }
+        else
+        {
+            iceCreamTruck.GetComponentInChildren<Animator>().SetTrigger("PullUp");
+        }
+
+        MasterFlow.ActivateIceCream();
+
+        StartCoroutine(DespawnTruck());
+
+    }
+
+    private IEnumerator DespawnTruck()
+    {
+        yield return new WaitForSeconds(IceCreamLifeTime);
+        //scareCrow.GetComponent<NavMeshObstacle>().enabled = false;
+        MasterFlow.DeactivateIceCream();
+        if (iceCreamTruck != null)
+            iceCreamTruck.GetComponentInChildren<Animator>().SetTrigger("PullOut");
+        iceCreamTruckActive = false;
+        yield return null;       
+    }
+
 
     private void SpawnScareCrow()
     {
@@ -90,13 +131,13 @@ public class PowerupEvent : MonoBehaviour
     }
 
  
-    public IEnumerator DespawnScareCrow()
+    private IEnumerator DespawnScareCrow()
     {
         yield return new WaitForSeconds(ScareCrowLifeTime);
         scareCrow.GetComponent<NavMeshObstacle>().enabled = false;
         MasterFlow.DeactivateScareCrow();
         if (scareCrow != null)
-        scareCrow.GetComponent<Animator>().SetTrigger("LowerScareCrow");
+            scareCrow.GetComponent<Animator>().SetTrigger("LowerScareCrow");
         scareCrowActive = false;
         yield return null;
     }

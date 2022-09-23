@@ -507,6 +507,41 @@ MonoBehaviour:
     volume: 0.5
     pitch: 1
     source: {fileID: 0}
+  - name: Gull1
+    clip: {fileID: 8300000, guid: 8ddf2d8cf51719345bf9ef216d2f9575, type: 3}
+    volume: 0.5
+    pitch: 1
+    source: {fileID: 0}
+  - name: Gull2
+    clip: {fileID: 8300000, guid: c582c004156be784c96bcd6636d14799, type: 3}
+    volume: 0.5
+    pitch: 1
+    source: {fileID: 0}
+  - name: Gull3
+    clip: {fileID: 8300000, guid: 00d9dab173565554abfecafa46ecef82, type: 3}
+    volume: 0.5
+    pitch: 1
+    source: {fileID: 0}
+  - name: Gull4
+    clip: {fileID: 8300000, guid: 74933c976c110814d89abf169d8068d3, type: 3}
+    volume: 0.5
+    pitch: 1
+    source: {fileID: 0}
+  - name: GullPursue1
+    clip: {fileID: 8300000, guid: 04d6908bfa4af41499f0a9859b28b3ab, type: 3}
+    volume: 0.5
+    pitch: 1
+    source: {fileID: 0}
+  - name: GullPursue2
+    clip: {fileID: 8300000, guid: c136d1927b9fbbf448dde7d2240f6db0, type: 3}
+    volume: 0.5
+    pitch: 1
+    source: {fileID: 0}
+  - name: GullPursue3
+    clip: {fileID: 8300000, guid: c652e33364314b34a8fc1264785286ac, type: 3}
+    volume: 0.5
+    pitch: 1
+    source: {fileID: 0}
 --- !u!1 &96250715
 GameObject:
   m_ObjectHideFlags: 0
@@ -541,6 +576,7 @@ MonoBehaviour:
   MinHeightFromBottom: 25
   MaxHeightFromBottom: 30
   SpawnsPerSide: 5
+  EnableSpawning: 0
 --- !u!4 &96250717
 Transform:
   m_ObjectHideFlags: 0
@@ -1222,6 +1258,53 @@ RectTransform:
   m_AnchoredPosition: {x: -0.0013428, y: 0.001091}
   m_SizeDelta: {x: 1919.8, y: 1080.1}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1 &549042268
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 549042269}
+  - component: {fileID: 549042270}
+  m_Layer: 0
+  m_Name: CursorTexture
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &549042269
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 549042268}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 637092362}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &549042270
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 549042268}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d6d5d6c10bc84a44e9b7df4618781c93, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cursorTexture: {fileID: 2800000, guid: 90cae47c0a3938f4a909f8420fb188e8, type: 3}
+  cursorMode: 0
+  hotSpot: {x: 0, y: 0}
 --- !u!1 &607081358
 GameObject:
   m_ObjectHideFlags: 0
@@ -1360,6 +1443,7 @@ Transform:
   - {fileID: 2020898781}
   - {fileID: 50042507}
   - {fileID: 136007769}
+  - {fileID: 549042269}
   m_Father: {fileID: 0}
   m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1681,6 +1765,61 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 719831608}
   m_CullTransparentMesh: 1
+--- !u!1 &809502747
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 809502749}
+  - component: {fileID: 809502748}
+  m_Layer: 0
+  m_Name: Decal Projector
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &809502748
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 809502747}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0777d029ed3dffa4692f417d4aba19ca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 2100000, guid: 31d0dcc6f2dd4e4408d18036a2c93862, type: 2}
+  m_DrawDistance: 1000
+  m_FadeScale: 0.9
+  m_StartAngleFade: 180
+  m_EndAngleFade: 180
+  m_UVScale: {x: 1, y: 1}
+  m_UVBias: {x: 0, y: 0}
+  m_ScaleMode: 0
+  m_Offset: {x: 0, y: 0, z: 0.5}
+  m_Size: {x: 1, y: 1, z: 1}
+  m_FadeFactor: 1
+--- !u!4 &809502749
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 809502747}
+  m_LocalRotation: {x: 0.7071068, y: -0, z: -0, w: 0.7071068}
+  m_LocalPosition: {x: 51.42988, y: -0.2824962, z: 34.348427}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 9
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &825399818
 GameObject:
   m_ObjectHideFlags: 0
@@ -2133,12 +2272,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ab94a075c9dd8f6479b8d2dd7ee2bb78, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  TruckPrefab: {fileID: 3045648228369447441, guid: 48683edaadcbf6e47bc9738e51d72c3f, type: 3}
   ScareCrowPrefab: {fileID: 5730012755707006912, guid: 2fa40a27b9fc4e54d834b5f8a7cc240f, type: 3}
   MasterFlow: {fileID: 1720395503}
   Turtles: {fileID: 226676130}
   Seagulls: {fileID: 1990316875}
-  trashThreshold: 12
+  trashThreshold: 2
   ScareCrowLifeTime: 10
+  IceCreamLifeTime: 5
 --- !u!4 &1415007806
 Transform:
   m_ObjectHideFlags: 0
@@ -2879,7 +3020,7 @@ GameObject:
   - component: {fileID: 1888439394}
   - component: {fileID: 1888439393}
   m_Layer: 0
-  m_Name: Cube
+  m_Name: Ocean
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3587,9 +3728,17 @@ PrefabInstance:
       value: -4.7
       objectReference: {fileID: 0}
     - target: {fileID: 8194897066706620124, guid: d73d9907a9be6564283d312f203ebc3e, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8194897066706620124, guid: d73d9907a9be6564283d312f203ebc3e, type: 3}
       propertyPath: m_MaterialTemplate
       value: 
       objectReference: {fileID: 2100000, guid: 243d68db8d734a546aed54e34b127839, type: 2}
+    - target: {fileID: 8194897066706620125, guid: d73d9907a9be6564283d312f203ebc3e, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8991826845432099496, guid: d73d9907a9be6564283d312f203ebc3e, type: 3}
       propertyPath: m_LocalPosition.y
       value: -0.17

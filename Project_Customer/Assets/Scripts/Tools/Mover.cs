@@ -7,6 +7,7 @@ public class Mover : MonoBehaviour
     GameObject targetObj;
     NavMeshAgent navMeshAgent;
 
+
     public void SetTarget(Transform targetTransform)
     {
         target = targetTransform;
@@ -18,7 +19,7 @@ public class Mover : MonoBehaviour
         targetObj.transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.z);
         navMeshAgent = GetComponent<NavMeshAgent>();
         target = targetObj.transform;
-        Destroy(targetObj.gameObject);
+       // Destroy(targetObj.gameObject);
     }
 
     public void MoveTo(Vector3 destination)
@@ -41,7 +42,7 @@ public class Mover : MonoBehaviour
     {
         Vector3 velocity = navMeshAgent.velocity;
         Vector3 localVelocity = transform.InverseTransformDirection(velocity);
-        if (!navMeshAgent.isStopped)
+        if (!navMeshAgent.isStopped && target != null)
         MoveTo(target.transform.position);
     }
 

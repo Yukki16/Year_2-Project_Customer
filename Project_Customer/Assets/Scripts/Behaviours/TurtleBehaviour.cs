@@ -16,7 +16,6 @@ public class TurtleBehaviour : MonoBehaviour
 
     private GameObject turtleSpawnerParent;
 
-
     GameObject targetObj;
 
     private bool invincibleMode;

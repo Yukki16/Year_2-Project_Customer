@@ -199,7 +199,7 @@ public class Seagull : MonoBehaviour
     private IEnumerator RandomSquawk()
     {
         randomSquawk = true;
-        am.PlayRandom(new string[] { "Gull1", "Gull2", "Gull3" }, true);
+        am.PlayRandom(new string[] { "Gull1", "Gull2", "Gull3", "Gull4" }, true);
         yield return new WaitForSeconds(Random.Range(8, 13));
         randomSquawk = false;
     }
