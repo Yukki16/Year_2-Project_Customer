@@ -15,6 +15,7 @@ TagManager:
   - TurtleSpawner
   - CrabTargets
   - TurtleUntargetable
+  - TurtleFinish
   layers:
   - Default
   - TransparentFX
