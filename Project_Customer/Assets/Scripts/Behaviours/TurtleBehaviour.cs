@@ -71,19 +71,14 @@ public class TurtleBehaviour : MonoBehaviour
     void SpawnTarget()
     {
         targetObj.transform.SetParent(turtleSpawnerParent.transform);
-        targetObjPosition = new Vector3(transform.position.x, transform.position.y, playArea.terrainData.size.z - EndDistanceFromTop);
+        targetObjPosition = new Vector3(transform.position.x, transform.position.y - 2, playArea.terrainData.size.z - EndDistanceFromTop);
         targetObj.transform.position = targetObjPosition;
         mover.SetTarget(targetObj.transform);
     }
 
-    void OnCollisionEnter(Collision collision)
-    {
-        if (collision.gameObject.tag is "TurtleUntargetable")
-        {
-            Debug.Log("removed");
-            RemoveFromList();
-        }
-    }
+    
+        
+    
 
     private DG.Tweening.Core.TweenerCore<Color, Color, DG.Tweening.Plugins.Options.ColorOptions> tween;
     private Tween tweenTo;
@@ -95,6 +90,18 @@ public class TurtleBehaviour : MonoBehaviour
 
     private void OnTriggerEnter(Collider collision)
     {
+        if (collision.gameObject.tag is "TurtleUntargetable")
+        {
+            RemoveFromList();
+        }
+
+        if (collision.gameObject.tag is "TurtleFinish")
+        {
+            Debug.Log("finish");
+            //StartCoroutine(highscore.AddScore());
+            DestroyTurtle();
+        }
+
         if (collision.gameObject.tag is "Draggable" && !invincibleMode)
         {
             DisableTurtle();
