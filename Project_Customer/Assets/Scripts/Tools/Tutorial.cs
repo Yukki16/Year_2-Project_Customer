@@ -53,6 +53,7 @@ public class Tutorial : MonoBehaviour
         {
             tutorialPlaying = true;
             yield return new WaitForSecondsRealtime(3f);
+            cam.GetComponent<Camera>().orthographic = false;
             yield return new WaitUntil(() => paused == false);
             Time.timeScale = 0f;
             trashTutorial = true;
@@ -115,6 +116,7 @@ public class Tutorial : MonoBehaviour
             trashText.gameObject.SetActive(false);
             Time.timeScale = 1f;
             tutorialPlaying = false;
+            cam.GetComponent<Camera>().orthographic = true;
         }
         yield return null;
     }
@@ -128,6 +130,7 @@ public class Tutorial : MonoBehaviour
             tutorialPlaying = true;
             yield return new WaitForSecondsRealtime(8f);
             yield return new WaitUntil(() => paused == false);
+            cam.GetComponent<Camera>().orthographic = false;
             Time.timeScale = 0f;
             seagulTutorial = true;
             seagulText.gameObject.SetActive(true);
@@ -162,6 +165,7 @@ public class Tutorial : MonoBehaviour
             seagulText.gameObject.SetActive(false);
             Time.timeScale = 1f;
             tutorialPlaying = false;
+            cam.GetComponent<Camera>().orthographic = true;
         }
         yield return null;
     }
@@ -175,6 +179,7 @@ public class Tutorial : MonoBehaviour
             tutorialPlaying = true;
             yield return new WaitForSecondsRealtime(2f);
             yield return new WaitUntil(() => paused == false);
+            cam.GetComponent<Camera>().orthographic = false;
             Time.timeScale = 0f;
             crabTutorial = true;
 
@@ -211,6 +216,7 @@ public class Tutorial : MonoBehaviour
             crabText.gameObject.SetActive(false);
             Time.timeScale = 1f;
             tutorialPlaying = false;
+            cam.GetComponent<Camera>().orthographic = true;
         }
         yield return null;
     }
@@ -224,6 +230,7 @@ public class Tutorial : MonoBehaviour
             tutorialPlaying = true;
             yield return new WaitForSecondsRealtime(2f);
             yield return new WaitUntil(() => paused == false);
+            cam.GetComponent<Camera>().orthographic = false;
             Time.timeScale = 0f;
             turtleInTrashTutorial = true;
 
@@ -260,6 +267,7 @@ public class Tutorial : MonoBehaviour
             turtleText.gameObject.SetActive(false);
             Time.timeScale = 1f;
             tutorialPlaying = false;
+            cam.GetComponent<Camera>().orthographic = true;
         }
         yield return null;
     }
@@ -273,6 +281,7 @@ public class Tutorial : MonoBehaviour
             tutorialPlaying = true;
             yield return new WaitForSecondsRealtime(2f);
             yield return new WaitUntil(() => paused == false);
+            cam.GetComponent<Camera>().orthographic = false;
             Time.timeScale = 0f;
             scarecowTutorial = true;
 
@@ -310,6 +319,7 @@ public class Tutorial : MonoBehaviour
             scareCrowText.gameObject.SetActive(false);
             Time.timeScale = 1f;
             tutorialPlaying = false;
+            cam.GetComponent<Camera>().orthographic = true;
         }
         yield return null;
     }
@@ -323,6 +333,8 @@ public class Tutorial : MonoBehaviour
             tutorialPlaying = true;
             shieldTutorial = true;
             yield return new WaitForSecondsRealtime(2f);
+            yield return new WaitUntil(() => paused == false);
+            cam.GetComponent<Camera>().orthographic = false;
             Time.timeScale = 0f;
 
             shieldText.gameObject.SetActive(true);
@@ -337,6 +349,7 @@ public class Tutorial : MonoBehaviour
             towardsObject = true;
 
             yield return new WaitUntil(() => towardsObject == false);
+            yield return new WaitUntil(() => paused == false);
             yield return new WaitForSecondsRealtime(5f);
             DisableOutline();
 
@@ -350,12 +363,14 @@ public class Tutorial : MonoBehaviour
             towardsObject = true;
 
             yield return new WaitUntil(() => towardsObject == false);
+            yield return new WaitUntil(() => paused == false);
             DisableOutline();
 
             cam.transform.rotation = defaultCamSettings.transform.rotation;
             shieldText.gameObject.SetActive(false);
             Time.timeScale = 1f;
             tutorialPlaying = false;
+            cam.GetComponent<Camera>().orthographic = true;
         }
         yield return null;
     }
