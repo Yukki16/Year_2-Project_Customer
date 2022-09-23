@@ -215,7 +215,7 @@ public class MasterFlow : MonoBehaviour
         for (int i = 0; i < intlTrashPieces; i++)
         {
             trashSpot.transform.position = new Vector3(playArea.terrainData.size.x / 2 + Random.Range(-maxDistanceFromCenter, maxDistanceFromCenter),
-            playArea.transform.position.y + 3, Random.Range(playArea.transform.position.z + intlTrashMinBottomDistance,
+            playArea.transform.position.y + 5, Random.Range(playArea.transform.position.z + intlTrashMinBottomDistance,
             playArea.transform.position.z + intlTrashMaxBottomDistance));
             GameObject newTrash = Instantiate(randomTrash(), trashSpot.transform);
             newTrash.transform.SetParent(draggablesParent.transform);

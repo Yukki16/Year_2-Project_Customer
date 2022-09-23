@@ -308,7 +308,7 @@ public class Seagull : MonoBehaviour
             targetTurtle.GetComponent<TurtleBehaviour>().DisableOutline();
             GameObject.FindGameObjectWithTag("DraggableParent").GetComponent<Dragger>().DisableSelected();
             trashCanceled = true;
-            StartCoroutine(highscore.AddScore());
+            //StartCoroutine(highscore.AddScore());
         }
 
 
