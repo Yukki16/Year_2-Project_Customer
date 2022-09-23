@@ -40,20 +40,14 @@ public class SpawnSeagulls : MonoBehaviour
     {           
         GameObject newSeagull = Instantiate(SeagullPrefab);
         seagullList.Add(newSeagull);
+        if (masterFlow.tutorial.seagul == null)
+        {
+            masterFlow.tutorial.seagul = newSeagull;
+            StartCoroutine(masterFlow.tutorial.SeagulTutorial(masterFlow.tutorial.seagul));
+        }
         newSeagull.transform.parent = Seagulls.transform;
         yield return new WaitForSeconds(masterFlow.GetSeagullSpawnRate());
-        if (EnableSpawning)
-        {
-            GameObject newSeagull = Instantiate(SeagullPrefab);
-            seagullList.Add(newSeagull);
-            if(masterFlow.tutorial.seagul == null)
-            {
-                masterFlow.tutorial.seagul = newSeagull;
-                StartCoroutine(masterFlow.tutorial.SeagulTutorial(masterFlow.tutorial.seagul));
-            }
-            newSeagull.transform.parent = Seagulls.transform;           
-        }      
-        StartCoroutine(spawnSeagulls());
+        StartCoroutine(spawnSeagulls());    
     }
 
     public List<GameObject> GetSeagulls()

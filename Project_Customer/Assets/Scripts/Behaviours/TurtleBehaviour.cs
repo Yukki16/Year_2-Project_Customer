@@ -177,7 +177,7 @@ public class TurtleBehaviour : MonoBehaviour
         animator.SetFloat("WalkSpeed", 1);
         animator.SetTrigger("TrashDeath");
         yield return new WaitForSeconds(5.01f);
-        //StartCoroutine(livesSystem.UpdateLives());
+        StartCoroutine(livesSystem.UpdateLives());
         DestroyTurtle();
     }
 
